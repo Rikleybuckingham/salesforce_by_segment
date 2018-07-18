@@ -9,6 +9,16 @@ include: "sf__*.view"
 # include the dashboards
 include: "sf__*.dashboard"
 
+#include: "sf_usage_base"
+
+view: usage__map {
+  sql_table_name: usage_data.sf_usage_map ;;
+}
+
+#: usage__map {
+#  extends: []
+#}
+
 explore: sf__accounts {
   sql_always_where: NOT ${sf__accounts.is_deleted}
     ;;

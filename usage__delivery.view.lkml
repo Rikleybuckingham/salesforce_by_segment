@@ -155,7 +155,6 @@ view: usage__delivery {
   measure: peering_percentage {
     type: number
     sql: ${peer_bytes_sum} / ${total_bytes_sum} ;;
-    value_format_name: percent_0
   }
 
   measure: total_bytes_sum {

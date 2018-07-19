@@ -23,6 +23,20 @@ view: usage__delivery {
     sql: ${TABLE}."date" ;;
   }
 
+  dimension_group: date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."date"
+  }
+
   dimension: dms {
     type: string
     sql: ${TABLE}.dms ;;
@@ -122,7 +136,55 @@ view: usage__delivery {
   }
 
   measure: count {
+    label: "Delivery Count"
     type: count
-    drill_fields: [delivery_id]
   }
+
+  measure: origin_bytes_sum {
+    label: "Origin Bytes Sum"
+    type: sum
+    sql: ${TABLE}.origin_bytes ;;
+    }
+
+  measure: peer_bytes_sum {
+    label: "Peer Bytes Sum"
+    type: sum
+    sql: ${peer_bytes} ;;
+  }
+
+  measure: peering_percentage {
+    type: number
+    sql: ${peer_bytes_sum} / ${total_bytes_sum} ;;
+    value_format_name: percent_0
+  }
+
+  measure: total_bytes_sum {
+    label: "Total Bytes Sum"
+    type: sum
+    sql: ${total_bytes};;
+  }
+
+  measure: total_gb {
+    label: "Total GB Sum"
+    type:  sum
+    sql: ${total_bytes} / 1e9  ;;
+    value_format_name: decimal_0
+  }
+
+  measure: unique_agent_count {
+    label: "Agent Count"
+    type: count_distinct
+    sql: ${short_node_id} ;;
+    filters: {
+      field: short_node_id
+      value: "-EMPTY"
+    }
+  }
+
+  measure: unique_content {
+    label: "Unique Content Count"
+    type:  count_distinct
+    sql: ${content_moid} ;;
+  }
+
 }

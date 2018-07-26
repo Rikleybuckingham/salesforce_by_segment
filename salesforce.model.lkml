@@ -28,6 +28,12 @@ explore: sf__accounts {
     sql_on: ${sf__accounts.owner_id} = ${owner.id} ;;
     relationship: many_to_one
   }
+
+  join: sf__opportunities {
+    type: left_outer
+    sql_on: ${sf__opportunities.account_id} = ${sf__accounts.id} ;;
+    relationship: many_to_one
+  }
 }
 
 #- explore: sf__campaign_members

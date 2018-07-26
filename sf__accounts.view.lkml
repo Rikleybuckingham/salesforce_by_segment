@@ -6,6 +6,26 @@ view: sf__accounts {
     type: date
   }
 
+  filter: opportunity_id_filter {
+    type: string
+    sql: replace({% parameter opportunity_id_filter %}, '-', '') = ${sf__opportunities.id} ;;
+  }
+
+  filter: account_id_filter {
+    type: string
+    sql: replace({% parameter account_id_filter %}, '-', '') = ${id} ;;
+  }
+
+  dimension: account_name_link {
+    type: string
+    sql: ${TABLE}.name ;;
+    hidden: yes
+    link: {
+      label: "Company Details Dashboard"
+      url: "salesforce/company_details?account_id_filter={{ id._value | url_encode}}&opportunity_id_filter={{ sf__opportunities.id._value | url_encode }}"
+    }
+  }
+
   dimension: is_in_date_filter {
     type: yesno
     sql: {% condition created_date_filter %} ${created_date} {% endcondition %}

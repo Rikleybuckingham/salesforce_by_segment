@@ -44,7 +44,7 @@
     series_types: {}
     single_value_title: Content Count
     listen:
-      Company_usage: usage__map.salesforce_id
+      account_id_filter: usage__map.salesforce_id
     row: 0
     col: 10
     width: 4
@@ -90,7 +90,7 @@
     series_types: {}
     single_value_title: Delivery Count
     listen:
-      Company_usage: usage__map.salesforce_id
+      account_id_filter: usage__map.salesforce_id
     row: 0
     col: 14
     width: 5
@@ -135,7 +135,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      Company: sf__opportunities.id
+      opportunity_id_filter: sf__opportunities.id
     row: 0
     col: 0
     width: 6
@@ -181,7 +181,7 @@
     series_types: {}
     single_value_title: Total GB
     listen:
-      Company_usage: usage__map.salesforce_id
+      account_id_filter: usage__map.salesforce_id
     row: 0
     col: 6
     width: 4
@@ -227,7 +227,7 @@
     series_types: {}
     single_value_title: Agent Count
     listen:
-      Company_usage: usage__map.salesforce_id
+      account_id_filter: usage__map.salesforce_id
     row: 0
     col: 19
     width: 5
@@ -277,7 +277,7 @@
     hidden_fields:
     - sf__opportunities.id
     listen:
-      Company: sf__opportunities.id
+      opportunity_id_filter: sf__opportunities.id
     row: 3
     col: 0
     width: 6
@@ -331,7 +331,7 @@
       usage__delivery.unique_content: "#70b3fc"
     series_types: {}
     listen:
-      Company_usage: usage__map.salesforce_id
+      account_id_filter: usage__map.salesforce_id
     row: 3
     col: 6
     width: 18
@@ -377,7 +377,7 @@
     series_types: {}
     single_value_title: Booking's Value
     listen:
-      Company: sf__opportunities.id
+      opportunity_id_filter: sf__opportunities.id
     row: 9
     col: 0
     width: 6
@@ -425,7 +425,7 @@
     series_types: {}
     single_value_title: Close Date
     listen:
-      Company: sf__opportunities.id
+      opportunity_id_filter: sf__opportunities.id
     row: 6
     col: 0
     width: 6
@@ -433,16 +433,16 @@
 
   filters:
 
-  - name: Company
-    title: Company
+  - name: opportunity_id_filter
+    title: Opportunity ID
     type: string_filter
-    default_value: 0061W00000w077xQAA
+    default_value: "None"
     allow_multiple_values: false
-    required: false
+    required: true
 
-  - name: Company_usage
-    title: Company_usage
+  - name: account_id_filter
+    title: Account ID
     type: string_filter
-    default_value: 0014000000NKS1MAAX
+    default_value: "None"
     allow_multiple_values: false
-    required: false
+    required: true

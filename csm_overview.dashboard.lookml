@@ -10,13 +10,15 @@
     explore: sf__opportunities
     type: table
     fields:
-    - sf__accounts.name
+    - sf__accounts.account_name_link
     - sf__opportunities.opportunity_name
     - opportunity_owners.name
     - sf__opportunities.channel_partner
     - sf__opportunities.bookings_value
     - sf__opportunities.contract_term_months
     - sf__opportunities.close_date
+    - sf__opportunities.id
+    - sf__accounts.id
     filters:
       sf__opportunities.type: Renewal
       sf__opportunities.close_date: after 0 minutes ago
@@ -55,9 +57,18 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
+    series_labels:
+      sf__accounts.account_name_link: Company
+      sf__opportunities.opportunity_name: Opportunity Name
+      opportunity_owners.name: Opportunity Owner Name
+      sf__opportunities.channel_partner: Channel Partner
+      sf__opportunities.bookings_value: Bookings Value
+      sf__opportunities.contract_term_months: Contract Term Months
+      sf__opportunities.close_date: Close Date
     conditional_formatting: []
     listen:
       CSM: opportunity_owners.name
+    hidden fields: [sf__accounts.id, sf__opportunities.id]
     row: 10
     col: 0
     width: 24

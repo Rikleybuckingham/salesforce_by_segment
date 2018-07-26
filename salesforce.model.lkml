@@ -8,7 +8,7 @@ include: "sf__*.view"
 
 # include the dashboards
 include: "sf__*.dashboard"
-
+include: "*.dashboard"
 #include: "sf_usage_base"
 
 view: usage__map {

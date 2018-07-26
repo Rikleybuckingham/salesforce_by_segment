@@ -40,7 +40,7 @@ view: sf__opportunities {
     sql: ${TABLE}.pipeline_date_c ;;
   }
 
-  dimension: company_name {
+  dimension: opportunity_name {
     type: string
     sql:  ${TABLE}.name;;
   }

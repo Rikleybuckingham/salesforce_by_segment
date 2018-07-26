@@ -83,6 +83,16 @@ view: sfbase__accounts {
     sql: ${TABLE}.name ;;
   }
 
+  dimension: name_hidden {
+    type: string
+    sql: ${TABLE}.name ;;
+    link: {
+      label: "Company Insights"
+      url: "company_usage::company_details?company={{ content_moid._value | url_encode }}"
+    }
+    hidden: yes
+  }
+
   measure: count {
     type: count
     drill_fields: [id, events.count, opportunities.count, tasks.count]

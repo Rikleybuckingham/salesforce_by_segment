@@ -35,11 +35,6 @@ view: sf__opportunities {
       }
   }
 
-  dimension: active_opportunity {
-    type: date
-    sql: ${TABLE}.pipeline_date_c ;;
-  }
-
   dimension: opportunity_name {
     type: string
     sql:  ${TABLE}.name;;
@@ -191,7 +186,7 @@ view: sf__opportunities {
   measure: count_active {
     type: count
     filters: {
-      field: active_opportunity
+      field: active_date
       value: "-null"
     }
   }

@@ -31,6 +31,11 @@ view: sfbase__opportunities {
     sql: ${TABLE}.created_date ;;
   }
 
+  dimension: active_date {
+    type: date
+    sql: ${TABLE}.pipeline_date_c ;;
+  }
+
   dimension: infer_3_score_index_c {
     type: number
     sql: ${TABLE}.infer_3_score_index_c ;;
@@ -123,11 +128,18 @@ view: sfbase__opportunities {
     sql: ${TABLE}.upsell_c ;;
   }
 
+  measure: average_active_velocity {
+    label: "Average Active Velocity"
+    type: average
+    sql: datediff(days, ${created_date}, ${TABLE}.pipeline_date_c) ;;
+    value_format: "#"
+  }
+
   measure: average_won_velocity {
     label: "Average Won Velocity"
     type: average
     drill_fields: [detail*]
-    sql: datediff(days, ${created_date}, ${close_date}) ;;
+    sql: datediff(days, ${TABLE}.pipeline_date_c, ${close_date}) ;;
     value_format: "#"
 
     filters: {
@@ -140,7 +152,7 @@ view: sfbase__opportunities {
     label: "Average Lost Velocity"
     type: average
     drill_fields: [detail*]
-    sql: datediff(days, ${created_date}, ${close_date}) ;;
+    sql: datediff(days, ${active_date}, ${close_date}) ;;
     value_format: "#"
 
     filters: {

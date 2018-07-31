@@ -407,7 +407,7 @@
     explore: sf__leads
     type: single_value
     fields:
-    - sf__leads.average_mql_velocity
+    - sf__leads.mql_velocity
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen

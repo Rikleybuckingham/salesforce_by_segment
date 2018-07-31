@@ -68,7 +68,7 @@
     conditional_formatting: []
     listen:
       CSM: opportunity_owners.name
-    hidden fields: [sf__accounts.id, sf__opportunities.id]
+    hidden_fields: [sf__accounts.id, sf__opportunities.id]
     row: 10
     col: 0
     width: 24
@@ -272,6 +272,8 @@
     totals_color: "#808080"
     series_types: {}
     single_value_title: Average Won Deal Size
+    listen:
+      CSM: opportunity_owners.name
     row: 0
     col: 19
     width: 5
@@ -318,6 +320,8 @@
     totals_color: "#808080"
     series_types: {}
     single_value_title: Renewal Win Percentage
+    listen:
+      CSM: opportunity_owners.name
     row: 0
     col: 14
     width: 5
@@ -365,6 +369,8 @@
     totals_color: "#808080"
     series_types: {}
     single_value_title: Quarterly Pipeline
+    listen:
+      CSM: opportunity_owners.name
     row: 0
     col: 0
     width: 5

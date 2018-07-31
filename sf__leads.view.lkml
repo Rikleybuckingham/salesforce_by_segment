@@ -7,24 +7,6 @@ view: sf__leads {
     sql: replace({% parameter lead_id_filter %}, '-', '') = ${lead_id} ;;
   }
 
-  dimension: created {
-    #X# Invalid LookML inside "dimension": {"timeframes":["time","date","week","month","raw"]}
-  }
-
-  dimension: mql_date_dev {
-    type: date
-    sql:CASE
-    WHEN ${TABLE}.marketing_qualified_date_c is not null THEN ${TABLE}.marketing_qualified_date_c
-    WHEN ${TABLE}.mkto_71_acquisition_program_c = 'WF Trial-Video Form'  THEN ${TABLE}.mkto_71_acquisition_date_c
-    WHEN ${TABLE}.mkto_71_acquisition_program_c = 'WF Trial-SCCM Free Form'  THEN ${TABLE}.mkto_71_acquisition_date_c
-    WHEN ${TABLE}.mkto_71_acquisition_program_c = 'WF Trial-Platform Form'  THEN ${TABLE}.mkto_71_acquisition_date_c
-    WHEN ${TABLE}.mkto_71_acquisition_program_c = 'WF Trial Request Form'  THEN ${TABLE}.mkto_71_acquisition_date_c
-    WHEN ${TABLE}.mkto_71_acquisition_program_c = 'WF Contact Form'  THEN ${TABLE}.mkto_71_acquisition_date_c
-    ELSE null
-    END
-    ;;
-  }
-
   dimension: mql_date {
     type: date
     sql: ${TABLE}.marketing_qualified_date_c ;;
@@ -80,6 +62,11 @@ view: sf__leads {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.mkto_si_last_interesting_moment_date_c ;;
+  }
+
+  dimension: mql_velocity {
+    type: number
+    sql: datediff(days, ${created_date}, ${mql_date}) ;;
   }
 
   measure:  currently_active_leads_count{
@@ -149,7 +136,7 @@ view: sf__leads {
     label: "Average Opportunity Velocity"
     type: average
     drill_fields: [detail*]
-    sql: datediff(days, ${created_date}, ${converted_date}) ;;
+    sql: datediff(days, ${mql_date}, ${converted_date}) ;;
 
     filters: {
       field: converted_opportunity_id
@@ -157,39 +144,14 @@ view: sf__leads {
     }
   }
 
-  measure: average_contact_velocity {
-    label: "Average Contact Velocity"
-    type: average
-    drill_fields: [detail*]
-    sql: datediff(days, ${created_date}, ${converted_date}) ;;
-
-    filters: {
-      field: converted_contact_id
-      value: "-null"
-    }
-  }
-
-  measure: average_account_velocity {
-    label: "Average Account Velocity"
-    type: average
-    drill_fields: [detail*]
-    sql: datediff(days, ${created_date}, ${converted_date}) ;;
-
-    filters: {
-      field: converted_account_id
-      value: "-null"
-    }
-  }
-
   measure: average_mql_velocity {
     label: "Average MQL Velocity"
     type: average
-    drill_fields: [detail*]
     sql: datediff(days, ${created_date}, ${mql_date}) ;;
 
     filters: {
-      field: mql_date
-      value: "-null"
+      field: mql_velocity
+      value: ">0"
     }
   }
 

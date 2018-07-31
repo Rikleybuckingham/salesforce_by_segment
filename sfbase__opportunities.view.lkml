@@ -129,14 +129,14 @@ view: sfbase__opportunities {
   }
 
   measure: average_active_velocity {
-    label: "Average Active Velocity"
+    label: "Active Opportunity Velocity"
     type: average
     sql: datediff(days, ${created_date}, ${TABLE}.pipeline_date_c) ;;
     value_format: "#"
   }
 
   measure: average_won_velocity {
-    label: "Average Won Velocity"
+    label: "Won Opportunity Velocity"
     type: average
     drill_fields: [detail*]
     sql: datediff(days, ${TABLE}.pipeline_date_c, ${close_date}) ;;
@@ -149,7 +149,7 @@ view: sfbase__opportunities {
   }
 
   measure: average_lost_velocity {
-    label: "Average Lost Velocity"
+    label: "Lost Opportunity Velocity"
     type: average
     drill_fields: [detail*]
     sql: datediff(days, ${active_date}, ${close_date}) ;;

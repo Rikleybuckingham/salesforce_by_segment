@@ -96,7 +96,7 @@
     explore: sf__leads
     type: single_value
     fields:
-    - sf__leads.net_active_leads_count
+    - sf__leads.currently_active_leads_count
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen

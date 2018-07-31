@@ -72,23 +72,22 @@ view: sf__leads {
 
   dimension_group: marketing_qualified_timestamp {
     type: time
-    hidden: yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.marketing_qualified_date_c ;;
   }
 
-#  measure: net_new_leads_count {
-#    type: count
-#    drill_fields: [detail*]
-#    filters: {
-#      field: net_new_lead_timestamp
-#      value: "-null"
-#    }
-#  }
+  dimension_group: interesting_moment_timestamp {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.mkto_si_last_interesting_moment_date_c ;;
+  }
 
-  measure:  net_active_leads_count {
+  measure:  currently_active_leads_count{
     type: count
-    drill_fields: [detail*]
+    filters: {
+      field: interesting_moment_timestamp_date
+      value: "30 days"
+    }
   }
 
   measure: net_mql_count {

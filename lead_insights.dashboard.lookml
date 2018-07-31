@@ -313,11 +313,11 @@
     explore: sf__leads
     type: single_value
     fields:
-    - sf__leads.last_activity_date
+    - sf__leads.interesting_moment_timestamp_date
     fill_fields:
-    - sf__leads.last_activity_date
+    - sf__leads.interesting_moment_timestamp_date
     sorts:
-    - sf__leads.last_activity_date desc
+    - sf__leads.interesting_moment_timestamp_date desc
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen

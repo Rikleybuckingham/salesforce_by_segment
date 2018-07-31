@@ -1215,6 +1215,7 @@
     series_labels:
       lead_owners.name: Lead Owner
       sf__leads.company: Lead Name
+    hidden fields: [sf__leads.lead_id]
     row: 40
     col: 0
     width: 24

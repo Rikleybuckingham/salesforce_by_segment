@@ -2,6 +2,11 @@ include: "sfbase__leads.view.lkml"
 view: sf__leads {
   extends: [sfbase__leads]
 
+  filter: lead_id_filter {
+    type: string
+    sql: replace({% parameter lead_id_filter %}, '-', '') = ${lead_id} ;;
+  }
+
   dimension: created {
     #X# Invalid LookML inside "dimension": {"timeframes":["time","date","week","month","raw"]}
   }
@@ -28,6 +33,10 @@ view: sf__leads {
   dimension: company {
     type: string
     sql: ${TABLE}.company ;;
+    link: {
+      label: "Lead Insights Dashboard"
+      url: "salesforce/lead_insights?lead_id_filter={{ lead_id._value | url_encode}}"
+    }
   }
 
   #  - dimension: number_of_employees_tier
@@ -204,7 +213,7 @@ view: sf__leads {
   }
 
   set: detail {
-    fields: [id,
+    fields: [lead_id,
       #    - company
       #    - name
       #    - title

@@ -1,7 +1,7 @@
 view: sfbase__leads {
   sql_table_name: salesforce.leads ;;
 
-  dimension: id {
+  dimension: lead_id {
     primary_key: yes
     type: string
     sql: ${TABLE}.id ;;
@@ -110,6 +110,6 @@ view: sfbase__leads {
 
   measure: count {
     type: count
-    drill_fields: [id, status, campaign_members.count]
+    drill_fields: [lead_id, status, campaign_members.count]
   }
 }

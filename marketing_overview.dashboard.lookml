@@ -1173,6 +1173,7 @@
     - sf__leads.status
     - sf__leads.acquisition_program
     - sf__leads.mql_date
+    - sf__leads.lead_id
     filters:
       sf__leads.mql_date: NOT NULL
       sf__leads.company: -"{\"session^_key\":\"5.X4COxCPeyJj6CQ.1516399649.13-100014549718341\"^,\"uid\":100014549718341^,\"secret\":\"8ac09772e561517937178ee688f45432\"^,\"access^_token\":\"EAAAAAYsX7TsBADGdXs8yl99fH60gvH64ZBZAlGeVJPL8qNtwwvQROZBHoLm2Yr82mdiKOyzZCjHVw2BDFycXKIIB9ed7hvWWN8a49xcq9v4y"

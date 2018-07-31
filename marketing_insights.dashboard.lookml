@@ -1,34 +1,53 @@
-- dashboard: marketing_insights
-  title: Marketing Insights
+- dashboard: lead_insights
+  title: Lead Insights
   layout: newspaper
+
   elements:
-  - name: YTD Leads to Win
-    title: YTD Leads to Win
+
+  - title: Lead Name
+    name: Lead Name
     model: salesforce
     explore: sf__leads
-    type: looker_column
+    type: single_value
     fields:
-    - sf__leads.count
-    - sf__leads.net_mql_count
-    - sf__leads.converted_to_account_count
-    - sf__leads.converted_to_opportunity_count
-    - sf__opportunities.count_won
-    filters:
-      sf__leads.acquisition_program: "-OP-Lead Lifecycle - New Customer Acquisition,-OP-ABM\
-        \ Product Interest,-OP-Scoring-Inside Sales,-LI 2017 Eloqua Only Records,-LI\
-        \ 2018-04-25 West Brunch Frankfurt,-CRM Lead,-CS 2017-05 Emedia,-ES 2017-10-09\
-        \ Arkadin Kollective Soho Promo,-ES 2018 BT Follow Up,-Pre-Marketo Person,-WF\
-        \ Partner Deal Registration Form,-WF Partner Prospect"
-      sf__leads.created_date: this year
+    - sf__leads.company
+    sorts:
+    - sf__leads.company
     limit: 500
-    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    map_plot_mode: points
+    heatmap_gridlines: false
+    heatmap_gridlines_empty: false
+    heatmap_opacity: 0.5
+    show_region_field: true
+    draw_map_labels_above_data: true
+    map_tile_provider: positron
+    map_position: fit_data
+    map_scale_indicator: 'off'
+    map_pannable: true
+    map_zoomable: true
+    map_marker_type: circle
+    map_marker_icon_name: default
+    map_marker_radius_mode: proportional_value
+    map_marker_units: meters
+    map_marker_proportional_scale_type: linear
+    map_marker_color_mode: fixed
+    show_view_names: true
+    show_legend: true
+    quantize_map_value_colors: false
+    reverse_map_value_colors: false
     stacking: ''
-    show_value_labels: true
+    show_value_labels: false
     label_density: 25
     legend_position: center
     x_axis_gridlines: false
     y_axis_gridlines: true
-    show_view_names: false
     limit_displayed_rows: false
     y_axis_combined: true
     show_y_axis_labels: true
@@ -44,98 +63,443 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    show_dropoff: true
-    colors:
-    - 'palette: Mixed Dark'
-    series_colors: {}
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
     row: 0
     col: 0
-    width: 12
-    height: 8
-  - name: 2017 Leads to Win
-    title: 2017 Leads to Win
+    width: 6
+    height: 3
+
+  - title: Lead Owner
+    name: Lead Owner
     model: salesforce
     explore: sf__leads
-    type: looker_column
-    fields:
-    - sf__leads.count
-    - sf__leads.net_mql_count
-    - sf__leads.converted_to_account_count
-    - sf__leads.converted_to_opportunity_count
-    - sf__opportunities.count_won
-    filters:
-      sf__leads.acquisition_program: "-OP-Lead Lifecycle - New Customer Acquisition,-OP-ABM\
-        \ Product Interest,-OP-Scoring-Inside Sales,-LI 2017 Eloqua Only Records,-LI\
-        \ 2018-04-25 West Brunch Frankfurt,-CRM Lead,-CS 2017-05 Emedia,-ES 2017-10-09\
-        \ Arkadin Kollective Soho Promo,-ES 2018 BT Follow Up,-Pre-Marketo Person,-WF\
-        \ Partner Deal Registration Form,-WF Partner Prospect"
-      sf__leads.created_date: 2017/01/01 to 2017/12/31
-    limit: 500
-    query_timezone: America/Los_Angeles
-    stacking: ''
-    show_value_labels: true
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    show_dropoff: true
-    colors:
-    - 'palette: Mixed Dark'
-    series_colors: {}
-    row: 0
-    col: 12
-    width: 12
-    height: 8
-  - name: Qualified leads Table
-    title: Qualified leads Table
-    model: salesforce
-    explore: sf__leads
-    type: table
+    type: single_value
     fields:
     - lead_owners.name
-    - opportunity_owners.name
-    - sf__leads.company
-    - sf__leads.mql_date
-    - sf__opportunities.created_date
-    - sf__leads.status
-    - sf__leads.average_opportunity_velocity
-    - sf__leads.days_mql_open
-    filters:
-      sf__leads.mql_date: after 2017/06/01
-      sf__leads.status: "-Junk,-Disqualified,-Existing Customer,-Hold for Future Action,-Unqualified\
-        \ Prospect,-Recycled"
-      sf__leads.company: -%"session^_key":"5.X4COxCPeyJj6CQ.1516399649.%
-    sorts:
-    - sf__opportunities.created_date
     limit: 500
-    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
     show_view_names: true
-    show_row_numbers: true
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: editable
     limit_displayed_rows: false
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    row: 8
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 3
     col: 0
-    width: 24
-    height: 9
+    width: 6
+    height: 3
+
+  - title: Lead Status
+    name: Lead Status
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.status
+    sorts:
+    - sf__leads.status
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 0
+    col: 6
+    width: 6
+    height: 3
+
+  - title: Lead Source
+    name: Lead Source
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.lead_source
+    sorts:
+    - sf__leads.lead_source
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 0
+    col: 18
+    width: 6
+    height: 3
+
+  - title: Acquisition Program
+    name: Acquisition Program
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.acquisition_program
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 0
+    col: 12
+    width: 6
+    height: 3
+
+  - title: Created Date
+    name: Created Date
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.created_date
+    fill_fields:
+    - sf__leads.created_date
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_labels:
+      sf__leads.average_mql_velocity: Days until MQL
+      sf__leads.average_opportunity_velocity: Days until Opportunity
+      sf__opportunities.average_active_velocity: Days until Active Op.
+      sf__opportunities.average_won_velocity: Days until Won
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 3
+    col: 6
+    width: 6
+    height: 3
+
+  - title: Last Activity Date
+    name: Last Activity Date
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.last_activity_date
+    fill_fields:
+    - sf__leads.last_activity_date
+    sorts:
+    - sf__leads.last_activity_date desc
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 3
+    col: 12
+    width: 6
+    height: 3
+
+  - title: Days MQL Open
+    name: Days MQL Open
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.days_mql_open
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 6
+    col: 12
+    width: 12
+    height: 3
+
+  - title: MQL Velocity
+    name: MQL Velocity
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.average_mql_velocity
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 6
+    col: 0
+    width: 12
+    height: 3
+
+  - title: MQL Date
+    name: MQL Date
+    model: salesforce
+    explore: sf__leads
+    type: single_value
+    fields:
+    - sf__leads.mql_date
+    fill_fields:
+    - sf__leads.mql_date
+    sorts:
+    - sf__leads.mql_date desc
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      lead_id_filter: sf__leads.lead_id
+    row: 3
+    col: 18
+    width: 6
+    height: 3
+
+  filters:
+
+  - name: lead_id_filter
+    title: Lead ID
+    type: string_filter
+    default_value: "None"
+    allow_multiple_values: false
+    required: true

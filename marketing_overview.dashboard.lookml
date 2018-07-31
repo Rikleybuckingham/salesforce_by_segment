@@ -646,15 +646,15 @@
     width: 4
     height: 2
 
-  - title: Prospect Form
-    name: Prospect Form
+  - title: Sales Generated
+    name: Sales Generated
     model: salesforce
     explore: sf__leads
     type: single_value
     fields:
     - sf__leads.count
     filters:
-      sf__leads.acquisition_program: WF Prospect Form
+      sf__leads.acquisition_program: Sales Generated
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen

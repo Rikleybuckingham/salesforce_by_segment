@@ -739,7 +739,7 @@
       fill_fields:
       - sf__opportunities.close_month
       filters:
-        sf__opportunities.close_date: 6 months ago for 9 months
+        sf__opportunities.close_date: 9 months ago for 12 months
         sf__opportunities.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
         sf__opportunities.type: Renewal
       sorts:

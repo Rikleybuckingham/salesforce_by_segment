@@ -1,7 +1,9 @@
 - dashboard: executive_overview
   title: Executive Overview
   layout: newspaper
+
   elements:
+
   - title: Pipeline Forecast
     name: Pipeline Forecast
     model: salesforce
@@ -72,6 +74,7 @@
     col: 0
     width: 12
     height: 8
+
   - title: This Quarter Lead to Win Funnel
     name: This Quarter Lead to Win Funnel
     model: salesforce
@@ -132,6 +135,7 @@
     col: 0
     width: 12
     height: 8
+
   - title: Last Year Lead to Win Funnel
     name: Last Year Lead to Win Funnel
     model: salesforce
@@ -192,6 +196,7 @@
     col: 12
     width: 12
     height: 8
+
   - title: This Year Lead to Win Funnel
     name: This Year Lead to Win Funnel
     model: salesforce
@@ -252,6 +257,7 @@
     col: 0
     width: 12
     height: 8
+
   - title: Last Quarter Lead to Win Funnel
     name: Last Quarter Lead to Win Funnel
     model: salesforce
@@ -346,6 +352,7 @@
     col: 0
     width: 6
     height: 2
+
   - title: New Opportunities Lost YTD
     name: New Opportunities Lost YTD
     model: salesforce
@@ -362,6 +369,7 @@
     col: 6
     width: 6
     height: 2
+
   - title: Current Customers
     name: Current Customers
     model: salesforce
@@ -379,6 +387,7 @@
     col: 0
     width: 8
     height: 2
+
   - title: Renewal Opportunities Won YTD
     name: Renewal Opportunities Won YTD
     model: salesforce
@@ -395,6 +404,7 @@
     col: 12
     width: 6
     height: 2
+
   - title: Renewal Opportunities Lost YTD
     name: Renewal Opportunities Lost YTD
     model: salesforce
@@ -411,6 +421,7 @@
     col: 18
     width: 6
     height: 2
+
   - title: Total Revenue Closed QTD
     name: Total Revenue Closed QTD
     model: salesforce
@@ -429,6 +440,7 @@
     col: 8
     width: 8
     height: 2
+
   - title: Revenue Won by Quarter
     name: Revenue Won by Quarter
     model: salesforce
@@ -485,6 +497,7 @@
     col: 12
     width: 12
     height: 8
+
   - title: Current Opportunities Table
     name: Current Opportunities Table
     model: salesforce
@@ -541,6 +554,7 @@
     col: 0
     width: 24
     height: 10
+
   - name: Company Status
     type: text
     title_text: Company Status
@@ -548,6 +562,7 @@
     col: 0
     width: 24
     height: 2
+
   - name: Sales Status
     type: text
     title_text: Sales Status
@@ -555,6 +570,7 @@
     col: 0
     width: 24
     height: 2
+
   - name: Marketing Status
     type: text
     title_text: Marketing Status
@@ -562,6 +578,7 @@
     col: 0
     width: 24
     height: 2
+
   - title: Deals Won by Quarter
     name: Deals Won by Quarter
     model: salesforce
@@ -618,6 +635,7 @@
     col: 0
     width: 12
     height: 8
+
   - title: Deals Lost by Quarter
     name: Deals Lost by Quarter
     model: salesforce
@@ -677,6 +695,7 @@
     col: 12
     width: 12
     height: 8
+
   - name: Current Opportunity Details
     type: text
     title_text: Current Opportunity Details
@@ -684,6 +703,7 @@
     col: 0
     width: 24
     height: 2
+
   - title: Agent Count
     name: Agent Count
     model: company_usage
@@ -726,6 +746,7 @@
     col: 0
     width: 6
     height: 2
+
   - title: Delivery Count
     name: Delivery Count
     model: company_usage
@@ -768,6 +789,7 @@
     col: 6
     width: 6
     height: 2
+
   - title: Unique Content Count
     name: Unique Content Count
     model: company_usage
@@ -810,6 +832,7 @@
     col: 12
     width: 6
     height: 2
+
   - title: Global Peering Percentage
     name: Global Peering Percentage
     model: company_usage

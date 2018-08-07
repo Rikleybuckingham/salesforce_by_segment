@@ -318,6 +318,7 @@
     col: 12
     width: 12
     height: 8
+
   - title: Total Revenue Closed YTD
     name: Total Revenue Closed YTD
     model: salesforce
@@ -519,7 +520,7 @@
     sorts:
     - sf__opportunities.close_date
     limit: 500
-    show_view_names: true
+    show_view_names: false
     show_row_numbers: true
     truncate_column_names: false
     hide_totals: false
@@ -531,6 +532,7 @@
     conditional_formatting_include_nulls: false
     stacking: ''
     show_value_labels: false
+    table_theme: gray
     label_density: 25
     legend_position: center
     x_axis_gridlines: false
@@ -552,7 +554,7 @@
     series_types: {}
     row: 46
     col: 0
-    width: 24
+    width: 12
     height: 10
 
   - name: Company Status
@@ -696,9 +698,10 @@
     width: 12
     height: 8
 
-  - name: Current Opportunity Details
+  - name: Current Opportunities and Sales Rep Roster
     type: text
-    title_text: Current Opportunity Details
+    title_text: Current Opportunities and Sales Rep Roster
+    subtitle_text: Click on a sales representative name to view their detailed metrics
     row: 44
     col: 0
     width: 24
@@ -889,3 +892,46 @@
     col: 18
     width: 6
     height: 2
+
+  - title: Rep Roster
+    name: rep_roster
+    type: table
+    model: salesforce
+    explore: sf__opportunities
+    dimensions: [opportunity_owners.name]
+    measures: [sf__opportunities.average_revenue_won, sf__opportunities.average_revenue_lost, sf__opportunities.total_pipeline_revenue,
+      sf__opportunities.win_percentage]
+    listen:
+    filters:
+      opportunity_owners.name: -NULL
+      sf__opportunities.count_won: '>0'
+    sorts:
+      - sf__opportunities.total_pipeline_revenue desc
+    #query_timezone: America/Los_Angeles
+    stacking: ''
+    colors: ['#635189', '#b3a0dd']
+    show_value_labels: true
+    table_theme: gray
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    show_view_names: false
+    x_padding_right: 15
+    y_axis_combined: false
+    show_y_axis_labels: false
+    show_y_axis_ticks: false
+    y_axis_tick_density: default
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_orientation: [right]
+    x_axis_label_rotation: 0
+    show_null_labels: false
+    y_axis_gridlines: true
+    y_axis_tick_density_custom: 5
+    ordering: none
+    show_row_numbers: true
+    row: 46
+    col: 12
+    width: 12
+    height: 10

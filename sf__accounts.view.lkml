@@ -21,8 +21,8 @@ view: sf__accounts {
     sql: ${TABLE}.name ;;
     hidden: yes
     link: {
-      label: "Company Details Dashboard"
-      url: "salesforce/company_details?account_id_filter={{ id._value | url_encode}}&opportunity_id_filter={{ sf__opportunities.id._value | url_encode }}"
+      label: "Company Insights Dashboard"
+      url: "salesforce/company_insights?account_id_filter={{ id._value | url_encode}}&opportunity_id_filter={{ sf__opportunities.id._value | url_encode }}"
     }
   }
 

@@ -15,6 +15,10 @@ view: sfbase__users {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+    link: {
+      label: "Sales Rep Insights Dashboard"
+      url: "salesforce/sales_rep_insights?sales_rep_filter={{ name._value | url_encode}}"
+    }
   }
 
   dimension: title {

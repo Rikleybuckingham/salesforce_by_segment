@@ -1,4 +1,4 @@
-- dashboard: company_details
+- dashboard: company_insights
   title: Company Details
   layout: newspaper
 

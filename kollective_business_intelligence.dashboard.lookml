@@ -146,11 +146,19 @@
       width: 10
       height: 6
 
+    - name: divider_1
+      type: text
+      title_text: <font color="#F7F7F7">Kollective Business Intelligence</font>
+      row: 6
+      col: 0
+      height: 2
+      width: 24
+
     - name: sales_overview_dashboard
       type: text
       title_text: <p><a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::sales_overview?Opportunity%20Owner=&filter_config=%7B%22Opportunity%20Owner%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">Sales Overview</a></p>
       subtitle_text: Quarter to Date
-      row: 6
+      row: 8
       col: 0
       height: 6
       width: 4
@@ -190,7 +198,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: NEW - Forecast
-      row: 6
+      row: 8
       col: 4
       width: 5
       height: 3
@@ -230,7 +238,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: UPSELL - Forecast
-      row: 6
+      row: 8
       col: 9
       width: 5
       height: 3
@@ -270,7 +278,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: RENEWAL - Forecast
-      row: 6
+      row: 8
       col: 14
       width: 5
       height: 3
@@ -309,7 +317,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: TOTAL - Forecast
-      row: 6
+      row: 8
       col: 19
       width: 5
       height: 3
@@ -349,7 +357,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: NEW - Actual
-      row: 9
+      row: 11
       col: 4
       width: 5
       height: 3
@@ -389,7 +397,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: UPSELL - Actual
-      row: 9
+      row: 11
       col: 9
       width: 5
       height: 3
@@ -429,7 +437,7 @@
       label_type: labPer
       series_types: {}
       single_value_title: RENEWAL - Actual
-      row: 9
+      row: 11
       col: 14
       width: 5
       height: 3
@@ -468,15 +476,24 @@
       label_type: labPer
       series_types: {}
       single_value_title: TOTAL - Actual
-      row: 9
+      row: 11
       col: 19
       width: 5
       height: 3
 
+    - name: divider_2
+      type: text
+      title_text: <font color="#F7F7F7">Kollective Business Intelligence</font>
+      row: 14
+      col: 0
+      height: 2
+      width: 24
+
+
     - name: marketing_overview_dashboard
       type: text
       title_text: <p><a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::marketing_overview">Marketing Overview</a></p>
-      row: 12
+      row: 16
       col: 0
       height: 6
       width: 4
@@ -556,7 +573,7 @@
         - id: sf__leads.net_mql_count
           name: MQLs
           axisId: sf__leads.net_mql_count
-      row: 12
+      row: 16
       col: 4
       width: 10
       height: 6
@@ -619,15 +636,24 @@
         - id: sf__opportunities.count_won
           name: Count Won
           axisId: sf__opportunities.count_won
-      row: 12
+      row: 16
       col: 14
       width: 10
       height: 6
 
+    - name: divider_3
+      type: text
+      title_text: <font color="#F7F7F7">Kollective Business Intelligence</font>
+      row: 22
+      col: 0
+      height: 2
+      width: 24
+
+
     - name: csm_overview_dashboard
       type: text
       title_text: <p><a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::csm_overview?CSM=&filter_config=%7B%22CSM%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">CSM Overview</a></p>
-      row: 18
+      row: 24
       col: 0
       height: 6
       width: 4
@@ -673,7 +699,7 @@
       totals_color: "#808080"
       series_types: {}
       single_value_title: Open Renewals
-      row: 18
+      row: 24
       col: 4
       width: 5
       height: 3
@@ -720,7 +746,7 @@
       totals_color: "#808080"
       series_types: {}
       single_value_title: Renewal's Won YTD
-      row: 21
+      row: 27
       col: 4
       width: 5
       height: 3
@@ -779,7 +805,7 @@
         05 - Commit: "#9ae3cc"
         06 - Closed Won: "#5eb297"
         07 - Closed Lost: "#d75c44"
-      row: 18
+      row: 24
       col: 14
       width: 10
       height: 6
@@ -827,7 +853,7 @@
       totals_color: "#808080"
       series_types: {}
       single_value_title: Average Won Deal Size YTD
-      row: 18
+      row: 24
       col: 9
       width: 5
       height: 3
@@ -874,7 +900,7 @@
       totals_color: "#808080"
       series_types: {}
       single_value_title: Renewal Win Percentage YTD
-      row: 21
+      row: 27
       col: 9
       width: 5
       height: 3

@@ -93,6 +93,177 @@ view: sfbase__accounts {
     hidden: yes
   }
 
+  dimension: annual_recurring_revenue {
+    type: number
+    sql: ${TABLE}.arr_c ;;
+  }
+
+  dimension: seats_licensed {
+    type: number
+    sql: ${TABLE}.seats_licensed_c ;;
+  }
+
+  dimension: renewal_date {
+    type: date
+    sql: ${TABLE}.renewal_date_c ;;
+  }
+
+  dimension: webcaster {
+    case:{
+      when:{
+        sql: ${TABLE}.webcaster_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.webcaster_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: video_center {
+    case:{
+      when:{
+        sql: ${TABLE}.video_center_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.video_center_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: admin_center {
+    case:{
+      when:{
+        sql: ${TABLE}.admin_center_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.admin_center_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: clientless_streaming {
+    case:{
+      when:{
+        sql: ${TABLE}.clientless_streaming_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.clientless_streaming_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: ecdn {
+    case:{
+      when:{
+        sql: ${TABLE}.e_cdn_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.e_cdn_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: live {
+    case:{
+      when:{
+        sql: ${TABLE}.live_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.live_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: media_center {
+    case:{
+      when:{
+        sql: ${TABLE}.media_center_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.media_center_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: media_center_live_streaming {
+    case:{
+      when:{
+        sql: ${TABLE}.media_center_live_streaming_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.media_center_live_streaming_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: network_readiness_tester {
+    case:{
+      when:{
+        sql: ${TABLE}.network_readiness_tester_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.network_readiness_tester_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: saml {
+    case:{
+      when:{
+        sql: ${TABLE}.saml_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.saml_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: share_point {
+    case:{
+      when:{
+        sql: ${TABLE}.share_point_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.share_point_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: skype_meeting_broadcast {
+    case:{
+      when:{
+        sql: ${TABLE}.smb_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.smb_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, events.count, opportunities.count, tasks.count]

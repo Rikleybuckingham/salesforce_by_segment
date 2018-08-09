@@ -12,7 +12,7 @@ include: "*.dashboard"
 #include: "sf_usage_base"
 
 view: usage__map {
-  sql_table_name: usage_data.sf_usage_map ;;
+  sql_table_name: public.company_id_map ;;
 }
 
 #: usage__map {

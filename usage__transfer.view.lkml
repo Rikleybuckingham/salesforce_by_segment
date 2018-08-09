@@ -1,5 +1,5 @@
 view: usage__transfer {
-  sql_table_name: usage_data.transfer ;;
+  sql_table_name: public.transfer ;;
   suggestions: no
 
   dimension: bytes {

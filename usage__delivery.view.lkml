@@ -1,5 +1,5 @@
 view: usage__delivery {
-  sql_table_name: usage_data.delivery ;;
+  sql_table_name: public.delivery ;;
   suggestions: no
 
   dimension: delivery_id {
@@ -18,28 +18,19 @@ view: usage__delivery {
     sql: ${TABLE}.content_moid ;;
   }
 
-  dimension: date {
+  dimension: composite_id {
     type: string
-    sql: ${TABLE}."date" ;;
+    sql: ${TABLE}.company_id || '-' || ${TABLE}.source_env ;;
   }
 
-  dimension_group: date {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}."date"
+  dimension: date {
+    type: string
+    sql: ${TABLE}.date ;;
   }
 
   dimension: dms {
     type: string
-    sql: ${TABLE}.dms ;;
+    sql: ${TABLE}.source_env ;;
   }
 
   dimension_group: end {

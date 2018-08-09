@@ -1,5 +1,5 @@
 view: usage__map {
-  sql_table_name: usage_data.sf_usage_map ;;
+  sql_table_name: public.company_id_map ;;
   suggestions: no
 
   dimension: company_id {
@@ -20,6 +20,11 @@ view: usage__map {
   dimension: salesforce_id {
     type: string
     sql: ${TABLE}.salesforce_id ;;
+  }
+
+  dimension: composite_id {
+    type: string
+    sql: ${TABLE}.company_id || '-' || lower(${TABLE}.dms) ;;
   }
 
   measure: count {

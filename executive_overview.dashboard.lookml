@@ -505,7 +505,7 @@
     explore: sf__opportunities
     type: table
     fields:
-    - sf__accounts.name
+    - sf__accounts.account_name_link
     - sf__opportunities.opportunity_name
     - opportunity_owners.name
     - sf__opportunities.stage_name
@@ -552,6 +552,9 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
+    series_labels: {
+      sf__accounts.account_name_link: 'Company'
+    }
     row: 46
     col: 0
     width: 12

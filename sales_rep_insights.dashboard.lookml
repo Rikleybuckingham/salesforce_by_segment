@@ -473,13 +473,43 @@
     width: 12
     height: 7
 
+  - name: current_mql_details
+    title: Current MQL Details
+    model: salesforce
+    explore: sf__leads
+    type: table
+    fields: [sf__leads.company, lead_owners.name, sf__leads.acquisition_program, sf__leads.lead_source,
+      sf__leads.status, sf__leads.mql_date]
+    filters:
+      sf__leads.marketing_qualified_timestamp_date: NOT NULL
+      sf__leads.status: New,Qualified,Working
+    sorts: [sf__leads.mql_date desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    listen:
+      sales_rep_filter: lead_owners.name
+    row: 17
+    col: 0
+    width: 12
+    height: 7
+
   - title: Yearly Opportunities
     name: Yearly Opportunities
     model: salesforce
     explore: sf__opportunities
     type: table
     fields:
-    - sf__accounts.name
+    - sf__accounts.account_name_link
     - sf__opportunities.opportunity_name
     - sf__opportunities.type
     - sf__opportunities.stage_name
@@ -526,12 +556,12 @@
     totals_color: "#808080"
     series_types: {}
     series_labels:
-      sf__accounts.name: Company
+      sf__accounts.account_name_link: Company
     listen:
       sales_rep_filter: opportunity_owners.name
     row: 17
-    col: 0
-    width: 24
+    col: 12
+    width: 12
     height: 7
 
   filters:
@@ -539,7 +569,7 @@
   - name: sales_rep_filter
     title: Sales Rep
     type: field_filter
-    default_value: Kyle French
+    default_value: "None"
     allow_multiple_values: true
     required: false
     model: salesforce

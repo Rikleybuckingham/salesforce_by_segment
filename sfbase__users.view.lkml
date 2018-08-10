@@ -1,6 +1,10 @@
 view: sfbase__users {
   sql_table_name: salesforce.users ;;
 
+# Create Filters
+
+# Create Dimensions
+
   dimension: id {
     primary_key: yes
     type: string
@@ -25,6 +29,8 @@ view: sfbase__users {
     type: string
     sql: ${TABLE}.title ;;
   }
+
+# Create Measures
 
   measure: count {
     type: count

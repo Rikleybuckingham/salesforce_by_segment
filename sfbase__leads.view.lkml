@@ -42,11 +42,6 @@ view: sfbase__leads {
     sql: ${TABLE}.created_date ;;
   }
 
-  dimension: external_id_c {
-    type: string
-    sql: ${TABLE}.external_id_c ;;
-  }
-
   dimension: is_converted {
     type: yesno
     sql: ${TABLE}.is_converted ;;

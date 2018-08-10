@@ -1,11 +1,16 @@
 include: "sfbase__leads.view.lkml"
 view: sf__leads {
   extends: [sfbase__leads]
+  view_label: "Leads"
+
+# Create Filters
 
   filter: lead_id_filter {
     type: string
     sql: replace({% parameter lead_id_filter %}, '-', '') = ${lead_id} ;;
   }
+
+# Create Dimensions
 
   dimension: mql_date {
     type: date
@@ -20,13 +25,6 @@ view: sf__leads {
       url: "salesforce/lead_insights?lead_id_filter={{ lead_id._value | url_encode}}"
     }
   }
-
-  #  - dimension: number_of_employees_tier
-  #    type: tier
-  #    tiers: [0, 1, 11, 51, 201, 501, 1001, 5001, 10000]
-  #    sql: ${number_of_employees}
-  #    style: integer
-  #    description: "Number of Employees as reported on the Salesforce lead"
 
   dimension: acquisition_program {
     type: string
@@ -47,11 +45,6 @@ view: sf__leads {
     sql: ${TABLE}.statushistory_last_status_updated_c ;;
   }
 
-#  dimension: net_new_lead_timestamp {
-#    type: date
-#    sql: ${TABLE}.new_lead_status_timestamp_c ;;
-#  }
-
   dimension_group: marketing_qualified_timestamp {
     type: time
     timeframes: [time, date, week, month]
@@ -69,6 +62,8 @@ view: sf__leads {
     sql: datediff(days, ${created_date}, ${mql_date}) ;;
   }
 
+# Create Measures
+
   measure:  currently_active_leads_count{
     type: count
     filters: {
@@ -79,7 +74,6 @@ view: sf__leads {
 
   measure: net_mql_count {
     type: count
-    drill_fields: [detail*]
     filters: {
       field: mql_date
       value: "-null"
@@ -88,8 +82,6 @@ view: sf__leads {
 
   measure: converted_to_contact_count {
     type: count
-    drill_fields: [detail*]
-
     filters: {
       field: converted_contact_id
       value: "-null"
@@ -98,8 +90,6 @@ view: sf__leads {
 
   measure: converted_to_account_count {
     type: count
-    drill_fields: [detail*]
-
     filters: {
       field: converted_account_id
       value: "-null"
@@ -108,8 +98,6 @@ view: sf__leads {
 
   measure: converted_to_opportunity_count {
     type: count
-    drill_fields: [detail*]
-
     filters: {
       field: converted_opportunity_id
       value: "-null"
@@ -120,12 +108,10 @@ view: sf__leads {
     label: "Days MQL Open"
     type: average
     sql: datediff(days, ${mql_date}, getdate()) ;;
-
     filters: {
       field: mql_date
       value: "-null"
     }
-
     filters: {
       field: converted_opportunity_id
       value: "null"
@@ -135,7 +121,6 @@ view: sf__leads {
   measure: average_opportunity_velocity {
     label: "Average Opportunity Velocity"
     type: average
-    drill_fields: [detail*]
     sql: datediff(days, ${mql_date}, ${converted_date}) ;;
 
     filters: {
@@ -174,12 +159,6 @@ view: sf__leads {
   }
 
   set: detail {
-    fields: [lead_id,
-      #    - company
-      #    - name
-      #    - title
-      #    - phone
-      #    - email
-      status]
+    fields: [lead_id, status]
   }
 }

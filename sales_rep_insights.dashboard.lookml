@@ -367,7 +367,7 @@
     type: looker_column
     fields:
     - sf__opportunities.count
-    - sf__opportunities.count_active
+    - sf__opportunities.count_sql
     - sf__opportunities.count_won
     filters:
       sf__opportunities.created_date: this year
@@ -399,7 +399,7 @@
     show_dropoff: true
     series_colors:
       sf__opportunities.count: "#4281c3"
-      sf__opportunities.count_active: "#70b3fc"
+      sf__opportunities.count_sql: "#70b3fc"
       sf__opportunities.count_won: "#5eb297"
     listen:
       sales_rep_filter: opportunity_owners.name

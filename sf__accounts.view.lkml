@@ -1,10 +1,9 @@
 include: "sfbase__accounts.view.lkml"
 view: sf__accounts {
   extends: [sfbase__accounts]
+  view_label: "Accounts"
 
-  filter: created_date_filter {
-    type: date
-  }
+# Create Filters
 
   filter: opportunity_id_filter {
     type: string
@@ -16,7 +15,9 @@ view: sf__accounts {
     sql: replace({% parameter account_id_filter %}, '-', '') = ${id} ;;
   }
 
-  dimension: account_name_link {
+# Create Dimensions
+
+  dimension: account_name_link { # This is used if you want to click the account name to go to Company Insights Dashboard
     type: string
     sql: ${TABLE}.name ;;
     hidden: yes
@@ -26,29 +27,7 @@ view: sf__accounts {
     }
   }
 
-  dimension: is_in_date_filter {
-    type: yesno
-    sql: {% condition created_date_filter %} ${created_date} {% endcondition %}
-      ;;
-  }
-
-  dimension: created {
-    #X# Invalid LookML inside "dimension": {"timeframes":["date","week","month","raw"]}
-  }
-
-  measure: customer_created_in_date_filter {
-    type: count
-
-    filters: {
-      field: is_in_date_filter
-      value: "yes"
-    }
-  }
-
-  measure: percent_of_accounts {
-    type: percent_of_total
-    sql: ${count} ;;
-  }
+# Create Measures
 
   measure: count_customers {
     type: count

@@ -1,39 +1,11 @@
 include: "sfbase__opportunities.view.lkml"
 view: sf__opportunities {
   extends: [sfbase__opportunities]
+  view_label: "Opportunities"
 
-  dimension: probability_group {
-      case:{
-        when:{
-          sql: ${TABLE}.probability = 100;;
-          label: "Won"
-        }
-        when:{
-          sql: ${TABLE}.probability > 80;;
-          label: "Above 80%"
-        }
-        when: {
-          sql: ${TABLE}.probability > 60;;
-          label: "60 - 80%"
-        }
-        when: {
-          sql: ${TABLE}.probability > 40;;
-          label: "40 - 60%"
-        }
-        when: {
-          sql: ${TABLE}.probability > 20;;
-          label: "20 - 40%"
-        }
-        when: {
-          sql: ${TABLE}.probability > 0;;
-          label: "Under 20%"
-        }
-        when: {
-          sql: ${TABLE}.probability = 0;;
-          label: "Lost"
-        }
-      }
-  }
+# Create Filters
+
+# Create Dimensions
 
   dimension: opportunity_name {
     type: string
@@ -42,11 +14,13 @@ view: sf__opportunities {
 
   dimension: created_raw {
     type:  date_raw
+    hidden: yes
     sql: ${TABLE}.created_date ;;
   }
 
   dimension: close_raw {
     type:  date_raw
+    hidden: yes
     sql: ${TABLE}.close_date ;;
   }
 
@@ -58,12 +32,6 @@ view: sf__opportunities {
   dimension: days_open {
     type: number
     sql: datediff(days, ${created_raw}, coalesce(${close_raw}, current_date) ) ;;
-  }
-
-  dimension: created_to_closed_in_60 {
-    hidden: yes
-    type: yesno
-    sql: ${days_open} <=60 AND ${is_closed} = 'yes' AND ${is_won} = 'yes' ;;
   }
 
   dimension: type {
@@ -91,7 +59,7 @@ view: sf__opportunities {
     sql: ${TABLE}.currency_iso_code ;;
   }
 
-  # measures #
+# Create Measures
 
   measure: sum_of_bookings_value {
     type: sum
@@ -108,55 +76,47 @@ view: sf__opportunities {
   measure: average_revenue_won {
     label: "Average Revenue (Closed/Won)"
     type: average
-    sql: ${total_value_c} ;;
-
+    sql: ${bookings_value} ;;
     filters: {
       field: is_won
       value: "Yes"
     }
-
     value_format: "$#,##0"
   }
 
   measure: average_revenue_lost {
     label: "Average Revenue (Closed/Lost)"
     type: average
-    sql: ${total_value_c} ;;
-
+    sql: ${bookings_value} ;;
     filters: {
       field: is_lost
       value: "Yes"
     }
-
     value_format: "$#,##0"
   }
 
   measure: total_pipeline_revenue {
     type: sum
-    sql: ${total_value_c} ;;
-
+    sql: ${bookings_value} ;;
     filters: {
       field: is_closed
       value: "No"
     }
-
     value_format: "[>=1000000]0.00,,\"M\";[>=1000]0.00,\"K\";$0.00"
   }
 
   measure: average_deal_size {
     type: average
-    sql: ${total_value_c} ;;
+    sql: ${bookings_value} ;;
     value_format: "$#,##0"
   }
 
   measure: count_won {
     type: count
-
     filters: {
       field: is_won
       value: "Yes"
     }
-
     drill_fields: [sf__opportunity.id, sf__account.id]
   }
 
@@ -167,7 +127,6 @@ view: sf__opportunities {
 
   measure: count_closed {
     type: count
-
     filters: {
       field: is_closed
       value: "Yes"
@@ -176,34 +135,31 @@ view: sf__opportunities {
 
   measure: count_open {
     type: count
-
     filters: {
       field: is_closed
       value: "No"
     }
   }
 
-  measure: count_active {
+  measure: count_sql {
     type: count
+    label: "SQL Count"
     filters: {
-      field: active_date
+      field: sql_date
       value: "-null"
     }
   }
 
   measure: count_lost {
     type: count
-
     filters: {
       field: is_closed
       value: "Yes"
     }
-
     filters: {
       field: is_won
       value: "No"
     }
-
     drill_fields: [sf__opportunity.id, sd__account.id]
   }
 
@@ -219,18 +175,3 @@ view: sf__opportunities {
     value_format: "#0.00\%"
   }
 }
-
-## For use with opportunities.type
-#  - measure: count_new_business_won
-#    type: count
-#    filters:
-#      is_won: Yes
-#      sf__opportunity.type: '"New Business"'
-#    drill_fields: [sf__opportunity.id, sf__account.id, type]
-
-## For use with opportunities.type
-#  - measure: count_new_business
-#    type: count
-#    filters:
-#      sf__opportunity.type: '"New Business"'
-#    drill_fields: [sf__opportunity.id, sd__account.name, type]

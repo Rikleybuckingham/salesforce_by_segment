@@ -2,6 +2,10 @@ view: usage__map {
   sql_table_name: public.company_id_map ;;
   suggestions: no
 
+# Create Filters
+
+# Create Dimensions
+
   dimension: company_id {
     type: number
     sql: ${TABLE}.company_id ;;
@@ -25,7 +29,10 @@ view: usage__map {
   dimension: composite_id {
     type: string
     sql: ${TABLE}.company_id || '-' || lower(${TABLE}.dms) ;;
+    hidden: yes
   }
+
+# Create Measures
 
   measure: count {
     type: count

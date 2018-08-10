@@ -2,6 +2,10 @@ view: usage__delivery {
   sql_table_name: public.delivery ;;
   suggestions: no
 
+# Create Filters
+
+# Create Dimensions
+
   dimension: delivery_id {
     primary_key: yes
     type: number
@@ -125,6 +129,8 @@ view: usage__delivery {
     type: number
     sql: ${TABLE}.wans ;;
   }
+
+# Create Measures
 
   measure: count {
     label: "Delivery Count"

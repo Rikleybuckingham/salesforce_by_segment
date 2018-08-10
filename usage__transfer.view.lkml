@@ -2,6 +2,10 @@ view: usage__transfer {
   sql_table_name: public.transfer ;;
   suggestions: no
 
+# Create Filters
+
+# Create Dimensions
+
   dimension: bytes {
     type: number
     sql: ${TABLE}.bytes ;;
@@ -74,6 +78,8 @@ view: usage__transfer {
     ]
     sql: ${TABLE}.start_time ;;
   }
+
+# Create Measures
 
   measure: count {
     type: count

@@ -1,6 +1,10 @@
 view: sfbase__opportunities {
   sql_table_name: salesforce.opportunities ;;
 
+# Create Filters
+
+# Create Dimensions
+
   dimension: id {
     primary_key: yes
     type: string
@@ -31,7 +35,8 @@ view: sfbase__opportunities {
     sql: ${TABLE}.created_date ;;
   }
 
-  dimension: active_date {
+  dimension: sql_date {
+    label: "SQL Date"
     type: date
     sql: ${TABLE}.pipeline_date_c ;;
   }
@@ -97,11 +102,6 @@ view: sfbase__opportunities {
     sql: ${TABLE}.owner_id ;;
   }
 
-  dimension: plan_c {
-    type: string
-    sql: ${TABLE}.plan_c ;;
-  }
-
   dimension_group: received {
     type: time
     timeframes: [time, date, week, month]
@@ -128,6 +128,8 @@ view: sfbase__opportunities {
     sql: ${TABLE}.upsell_c ;;
   }
 
+# Create Measures
+
   measure: average_active_velocity {
     label: "Active Opportunity Velocity"
     type: average
@@ -141,7 +143,6 @@ view: sfbase__opportunities {
     drill_fields: [detail*]
     sql: datediff(days, ${TABLE}.pipeline_date_c, ${close_date}) ;;
     value_format: "#"
-
     filters: {
       field: is_won
       value: "Yes"
@@ -152,14 +153,20 @@ view: sfbase__opportunities {
     label: "Lost Opportunity Velocity"
     type: average
     drill_fields: [detail*]
-    sql: datediff(days, ${active_date}, ${close_date}) ;;
+    sql: datediff(days, ${sql_date}}, ${close_date}) ;;
     value_format: "#"
-
     filters: {
       field: is_lost
       value: "Yes"
     }
   }
+
+  measure: count {
+    type: count
+    drill_fields: [id, stage_name, accounts.id]
+  }
+
+# Sets
 
   set: detail {
     fields: [id,
@@ -169,10 +176,5 @@ view: sfbase__opportunities {
       #    - phone
       #    - email
       is_won, total_value_c, owner_id]
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [id, stage_name, accounts.id]
   }
 }

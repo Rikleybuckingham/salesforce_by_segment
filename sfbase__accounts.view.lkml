@@ -1,6 +1,10 @@
 view: sfbase__accounts {
   sql_table_name: salesforce.accounts ;;
 
+# Create Filters
+
+# Create Dimensions
+
   dimension: id {
     primary_key: yes
     type: string
@@ -11,16 +15,6 @@ view: sfbase__accounts {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_date ;;
-  }
-
-  dimension: external_id_c {
-    type: string
-    sql: ${TABLE}.external_id_c ;;
-  }
-
-  dimension: industry {
-    type: string
-    sql: ${TABLE}.industry ;;
   }
 
   dimension: is_deleted {
@@ -54,11 +48,6 @@ view: sfbase__accounts {
   dimension: owner_id {
     type: string
     sql: ${TABLE}.owner_id ;;
-  }
-
-  dimension: plan_c {
-    type: string
-    sql: ${TABLE}.plan_c ;;
   }
 
   dimension_group: received {
@@ -264,8 +253,9 @@ view: sfbase__accounts {
     }
   }
 
+# Create Measures
+
   measure: count {
     type: count
-    drill_fields: [id, events.count, opportunities.count, tasks.count]
   }
 }

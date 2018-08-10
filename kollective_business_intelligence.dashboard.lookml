@@ -94,7 +94,7 @@
       - sf__leads.count
       - sf__leads.net_mql_count
       - sf__leads.converted_to_opportunity_count
-      - sf__opportunities.count_active
+      - sf__opportunities.count_sql
       - sf__opportunities.count_won
       filters:
         sf__leads.created_date: this year
@@ -117,7 +117,7 @@
         sf__opportunities.count_new_business_won: Won Opportunities
         sf__leads.net_mql_count: MQLs
         sf__leads.converted_to_opportunity_count: Opportunities
-        sf__opportunities.count_active: Active Opportunities
+        sf__opportunities.count_sql: SQLs
         sf__opportunities.count_won: Won Opportunities
       y_axis_combined: true
       show_y_axis_labels: true
@@ -130,7 +130,7 @@
       show_dropoff: true
       series_colors:
         sf__opportunities.count_won: "#5eb297"
-        sf__opportunities.count_active: "#9ae3cc"
+        sf__opportunities.count_sql: "#9ae3cc"
         sf__leads.count: "#435978"
         sf__leads.net_mql_count: "#4281c3"
         sf__leads.converted_to_opportunity_count: "#70b3fc"

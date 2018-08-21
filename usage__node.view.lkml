@@ -163,6 +163,7 @@ view: usage__node {
   }
 
   dimension: source_env {
+    label: "Dms"
     type: string
     sql: ${TABLE}.source_env ;;
   }

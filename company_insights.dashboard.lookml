@@ -45,6 +45,7 @@
     single_value_title: Content Count
     listen:
       account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
     row: 0
     col: 10
     width: 4
@@ -91,6 +92,7 @@
     single_value_title: Delivery Count
     listen:
       account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
     row: 0
     col: 14
     width: 5
@@ -182,6 +184,7 @@
     single_value_title: Total GB
     listen:
       account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
     row: 0
     col: 6
     width: 4
@@ -228,6 +231,7 @@
     single_value_title: Agent Count
     listen:
       account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
     row: 0
     col: 19
     width: 5
@@ -289,16 +293,14 @@
     explore: usage__map
     type: looker_area
     fields:
-    - usage__delivery.end_month
+    - usage__delivery.start_month
     - usage__delivery.total_gb
     - usage__delivery.unique_agent_count
     - usage__delivery.unique_content
     fill_fields:
-    - usage__delivery.end_month
-    filters:
-      usage__delivery.end_date: 12 months
+    - usage__delivery.start_month
     sorts:
-    - usage__delivery.end_month desc
+    - usage__delivery.start_month desc
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -332,6 +334,7 @@
     series_types: {}
     listen:
       account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
     row: 3
     col: 6
     width: 18
@@ -446,3 +449,10 @@
     default_value: "None"
     allow_multiple_values: false
     required: true
+
+  - name: usage_date_filter
+    title: Usage Date
+    type: date_filter
+    default_value:
+    allow_multiple_values: true
+    required: false

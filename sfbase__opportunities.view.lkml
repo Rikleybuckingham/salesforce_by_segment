@@ -131,7 +131,7 @@ view: sfbase__opportunities {
 # Create Measures
 
   measure: average_active_velocity {
-    label: "Active Opportunity Velocity"
+    label: "SQL Velocity"
     type: average
     sql: datediff(days, ${created_date}, ${TABLE}.pipeline_date_c) ;;
     value_format: "#"
@@ -175,6 +175,6 @@ view: sfbase__opportunities {
       #    - title
       #    - phone
       #    - email
-      is_won, total_value_c, owner_id]
+      is_won, owner_id]
   }
 }

@@ -163,8 +163,8 @@ view: usage__delivery {
   measure: total_gb {
     label: "Total GB Sum"
     type:  sum
-    sql: ${total_bytes} / 1e9  ;;
-    value_format_name: decimal_0
+    sql: ${total_bytes} * 1e-9  ;;
+    value_format: "#,##0"
   }
 
   measure: unique_agent_count {

@@ -190,6 +190,7 @@ view: usage__play {
   }
 
   dimension: source_env {
+    label: "Dms"
     type: string
     sql: ${TABLE}.source_env ;;
   }

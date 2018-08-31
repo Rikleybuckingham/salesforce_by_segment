@@ -938,6 +938,6 @@
       conditional_formatting_include_nulls: false
       series_types: {}
       row: 32
-      col: 0
-      width: 24
+      col: 4
+      width: 20
       height: 12

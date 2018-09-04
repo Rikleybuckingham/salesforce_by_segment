@@ -72,14 +72,14 @@ view: sfbase__accounts {
     sql: ${TABLE}.name ;;
   }
 
-  dimension: name_hidden {
+  dimension: account_name_link { # This is used if you want to click the account name to go to Company Insights Dashboard
     type: string
     sql: ${TABLE}.name ;;
+    hidden: no
     link: {
-      label: "Company Insights"
-      url: "company_usage::company_details?company={{ content_moid._value | url_encode }}"
+      label: "Company Insights Dashboard"
+      url: "salesforce/company_insights?account_id_filter={{ id._value | url_encode}}"
     }
-    hidden: yes
   }
 
   dimension: annual_recurring_revenue {

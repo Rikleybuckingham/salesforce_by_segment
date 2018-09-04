@@ -1,58 +1,11 @@
 - dashboard: company_insights
-  title: Company Details
+  title: Company Insights
   layout: newspaper
 
   elements:
 
-  - title: Content Count
-    name: content_count
-    model: company_usage
-    explore: usage__map
-    type: single_value
-    fields:
-    - usage__delivery.unique_content
-    limit: 500
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    single_value_title: Content Count
-    listen:
-      account_id_filter: usage__map.salesforce_id
-      usage_date_filter: usage__delivery.start_date
-    row: 0
-    col: 10
-    width: 4
-    height: 3
-
   - title: Delivery Count
-    name: delivery_count
+    name: Delivery Count
     model: company_usage
     explore: usage__map
     type: single_value
@@ -98,100 +51,8 @@
     width: 5
     height: 3
 
-  - title: Name
-    name: name
-    model: salesforce
-    explore: sf__opportunities
-    type: single_value
-    fields:
-    - sf__accounts.name
-    limit: 500
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    listen:
-      opportunity_id_filter: sf__opportunities.id
-    row: 0
-    col: 0
-    width: 6
-    height: 3
-
-  - title: Total GB
-    name: total_gb
-    model: company_usage
-    explore: usage__map
-    type: single_value
-    fields:
-    - usage__delivery.total_gb
-    limit: 500
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    single_value_title: Total GB
-    listen:
-      account_id_filter: usage__map.salesforce_id
-      usage_date_filter: usage__delivery.start_date
-    row: 0
-    col: 6
-    width: 4
-    height: 3
-
   - title: Agent Count
-    name: agent_count
+    name: Agent Count
     model: company_usage
     explore: usage__map
     type: single_value
@@ -237,16 +98,13 @@
     width: 5
     height: 3
 
-  - title: Stage Name
-    name: stage_name
+  - title: ARR
+    name: ARR
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__accounts
     type: single_value
     fields:
-    - sf__opportunities.id
-    - sf__opportunities.stage_name
-    sorts:
-    - sf__opportunities.stage_name
+    - sf__accounts.annual_recurring_revenue
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -272,23 +130,130 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
     ordering: none
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    hidden_fields:
-    - sf__opportunities.id
     listen:
-      opportunity_id_filter: sf__opportunities.id
+      account_id_filter: sf__accounts.id
     row: 3
     col: 0
     width: 6
     height: 3
 
+  - title: Products
+    name: Products
+    model: salesforce
+    explore: sf__accounts
+    type: table
+    fields:
+    - sf__accounts.admin_center
+    - sf__accounts.clientless_streaming
+    - sf__accounts.ecdn
+    - sf__accounts.live
+    - sf__accounts.media_center
+    - sf__accounts.media_center_live_streaming
+    - sf__accounts.network_readiness_tester
+    - sf__accounts.saml
+    - sf__accounts.share_point
+    - sf__accounts.skype_meeting_broadcast
+    - sf__accounts.webcaster
+    sorts:
+    - sf__accounts.admin_center
+    limit: 500
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      account_id_filter: sf__accounts.id
+    row: 12
+    col: 0
+    width: 24
+    height: 2
+
+  - title: Seats Licensed
+    name: Seats Licensed
+    model: salesforce
+    explore: sf__accounts
+    type: single_value
+    fields:
+    - sf__accounts.seats_licensed
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      account_id_filter: sf__accounts.id
+    row: 6
+    col: 0
+    width: 6
+    height: 3
+
   - title: Monthly Usage
-    name: monthly_usage
+    name: Monthly Usage
     model: company_usage
     explore: usage__map
     type: looker_area
@@ -340,13 +305,15 @@
     width: 18
     height: 9
 
-  - title: Booking's Value
-    name: bookings_value
+  - title: Renewal Date
+    name: Renewal Date
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__accounts
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__accounts.renewal_date
+    fill_fields:
+    - sf__accounts.renewal_date
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -372,29 +339,28 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
     ordering: none
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    single_value_title: Booking's Value
     listen:
-      opportunity_id_filter: sf__opportunities.id
+      account_id_filter: sf__accounts.id
     row: 9
     col: 0
     width: 6
     height: 3
 
-  - title: Close Date
-    name: close_date
-    model: salesforce
-    explore: sf__opportunities
+  - title: Total GB
+    name: Total GB
+    model: company_usage
+    explore: usage__map
     type: single_value
     fields:
-    - sf__opportunities.close_date
-    fill_fields:
-    - sf__opportunities.close_date
+    - usage__delivery.total_gb
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -426,27 +392,172 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    single_value_title: Close Date
+    single_value_title: Total GB
     listen:
-      opportunity_id_filter: sf__opportunities.id
-    row: 6
+      account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
+    row: 0
+    col: 6
+    width: 4
+    height: 3
+
+  - title: Company
+    name: Company
+    model: salesforce
+    explore: sf__accounts
+    type: single_value
+    fields:
+    - sf__accounts.name
+    sorts:
+    - sf__accounts.name
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      account_id_filter: sf__accounts.id
+    row: 0
     col: 0
     width: 6
     height: 3
 
+  - title: Content Count
+    name: Content Count
+    model: company_usage
+    explore: usage__map
+    type: single_value
+    fields:
+    - usage__delivery.unique_content
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    single_value_title: Content Count
+    listen:
+      account_id_filter: usage__map.salesforce_id
+      usage_date_filter: usage__delivery.start_date
+    row: 0
+    col: 10
+    width: 4
+    height: 3
+
+  - title: Open Opportunities
+    name: Open Opportunities
+    model: salesforce
+    explore: sf__opportunities
+    type: table
+    fields:
+    - sf__opportunities.opportunity_name
+    - sf__opportunities.bookings_value
+    - sf__opportunities.type
+    - sf__opportunities.stage_name
+    - sf__opportunities.channel_partner
+    - sf__opportunities.contract_term_months
+    - sf__opportunities.close_date
+    filters:
+      sf__opportunities.is_closed: 'No'
+    limit: 500
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    listen:
+      account_id_filter: sf__accounts.id
+    row: 14
+    col: 0
+    width: 24
+    height: 4
+
   filters:
-
-  - name: opportunity_id_filter
-    title: Opportunity ID
-    type: string_filter
-    default_value: "None"
-    allow_multiple_values: false
-    required: true
-
   - name: account_id_filter
     title: Account ID
     type: string_filter
-    default_value: "None"
+    default_value:
     allow_multiple_values: false
     required: true
 

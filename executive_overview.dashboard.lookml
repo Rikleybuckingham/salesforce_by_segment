@@ -938,3 +938,46 @@
     col: 12
     width: 12
     height: 10
+
+  - name: Current Customers spacer
+    type: text
+    title_text: Current Customers
+    subtitle_text: Click on a Company name to view details
+    row: 56
+    col: 0
+    width: 24
+    height: 2
+
+  - name: current_customer_table
+    title: Current Customers
+    model: company_usage
+    explore: usage__map
+    type: table
+    fields:
+    - sf__accounts.account_name_link
+    - sf__accounts.dms
+    - sf__accounts.annual_recurring_revenue
+    - sf__accounts.renewal_date
+    - usage__node.count
+    filters:
+      sf__accounts.type: Customer
+    sorts: [sf__accounts.account_name_link]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    series_labels:
+      -
+    row: 58
+    col: 0
+    width: 24
+    height: 10

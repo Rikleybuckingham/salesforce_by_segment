@@ -19,7 +19,7 @@ view: sfbase__opportunities {
 
   dimension_group: close {
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, year, fiscal_quarter]
     sql: ${TABLE}.close_date ;;
   }
 
@@ -31,7 +31,7 @@ view: sfbase__opportunities {
 
   dimension_group: created {
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, fiscal_quarter]
     sql: ${TABLE}.created_date ;;
   }
 

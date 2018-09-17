@@ -371,19 +371,31 @@
     width: 6
     height: 2
 
-  - title: Current Customers
-    name: Current Customers
+  - name: Current Customers
+    title: Current Customers
     model: salesforce
     explore: sf__accounts
     type: single_value
-    fields:
-    - sf__accounts.count
+    fields: [sf__accounts.name, owner.name, sf__accounts.seats_licensed, sf__accounts.annual_recurring_revenue,
+      sf__accounts.renewal_date]
     filters:
-      sf__accounts.type: '"Customer"'
-    sorts:
-    - sf__accounts.count desc
+      sf__accounts.type: Customer
+    sorts: [sf__accounts.name]
+    limit: 1000
+    column_limit: 50
+    dynamic_fields:
+    - table_calculation: count
+      label: Count
+      expression: count(${sf__accounts.name})
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: dimension
+      _type_hint: number
     font_size: medium
     text_color: "#49719a"
+    hidden_fields: [sf__accounts.name, sf__accounts.seats_licensed, sf__accounts.renewal_date,
+      sf__accounts.annual_recurring_revenue, owner.name]
+    single_value_title: Current Customers
     row: 2
     col: 0
     width: 8

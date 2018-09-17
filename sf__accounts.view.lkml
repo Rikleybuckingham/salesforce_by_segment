@@ -19,12 +19,4 @@ view: sf__accounts {
 
 # Create Measures
 
-  measure: count_customers {
-    type: count
-
-    filters: {
-      field: sf__accounts.type
-      value: "\"Customer\""
-    }
-  }
 }

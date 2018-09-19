@@ -38,7 +38,7 @@ view: sfbase__leads {
 
   dimension_group: created {
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, year, fiscal_quarter]
     sql: ${TABLE}.created_date ;;
   }
 

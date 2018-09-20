@@ -8,7 +8,7 @@
 
     - name: executive_overview_dashboard
       type: text
-      title_text: <p> <a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::executive_overview">Executive Overview</a></p>
+      title_text: <p> <a href="https://looker.data.kollective.com/dashboards/salesforce::executive_overview">Executive Overview</a></p>
       row: 0
       col: 0
       height: 6
@@ -156,7 +156,7 @@
 
     - name: sales_overview_dashboard
       type: text
-      title_text: <p><a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::sales_overview?Opportunity%20Owner=&filter_config=%7B%22Opportunity%20Owner%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">Sales Overview</a></p>
+      title_text: <p><a href="https://looker.data.kollective.com/dashboards/salesforce::sales_overview?Opportunity%20Owner=&filter_config=%7B%22Opportunity%20Owner%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">Sales Overview</a></p>
       subtitle_text: Quarter to Date
       row: 8
       col: 0
@@ -492,7 +492,7 @@
 
     - name: marketing_overview_dashboard
       type: text
-      title_text: <p><a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::marketing_overview">Marketing Overview</a></p>
+      title_text: <p><a href="https://looker.data.kollective.com/dashboards/salesforce::marketing_overview">Marketing Overview</a></p>
       row: 16
       col: 0
       height: 6
@@ -652,7 +652,7 @@
 
     - name: csm_overview_dashboard
       type: text
-      title_text: <p><a href="https://ec2-35-162-161-116.us-west-2.compute.amazonaws.com:9999/dashboards/salesforce::csm_overview?CSM=&filter_config=%7B%22CSM%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">CSM Overview</a></p>
+      title_text: <p><a href="https://looker.data.kollective.com/dashboards/salesforce::csm_overview?CSM=&filter_config=%7B%22CSM%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">CSM Overview</a></p>
       row: 24
       col: 0
       height: 6

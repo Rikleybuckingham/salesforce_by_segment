@@ -570,27 +570,21 @@
     width: 24
     height: 2
 
-  - title: Customer Running Total
-    name: Customer Running Total
+  - name: Customer Running Total
+    title: Customer Running Total
     model: salesforce
     explore: sf__opportunities
     type: looker_line
-    fields:
-    - sf__opportunities.close_year
-    - sf__opportunities.count_won
-    - sf__opportunities.count_lost
-    - sf__opportunities.type
-    pivots:
-    - sf__opportunities.type
-    fill_fields:
-    - sf__opportunities.close_year
+    fields: [sf__opportunities.close_year, sf__opportunities.count_won, sf__opportunities.count_lost,
+      sf__opportunities.type]
+    pivots: [sf__opportunities.type]
+    fill_fields: [sf__opportunities.close_year]
     filters:
       sf__opportunities.close_year: before 0 minutes ago
       sf__opportunities.is_closed: 'Yes'
       sf__opportunities.type: New,Renewal
-    sorts:
-    - sf__opportunities.close_year
-    - sf__opportunities.type 0
+      sf__opportunities.contract_term_months: ">=3"
+    sorts: [sf__opportunities.close_year, sf__opportunities.type 0]
     limit: 500
     dynamic_fields:
     - table_calculation: won
@@ -649,12 +643,8 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    hidden_fields:
-    - sf__opportunities.count_won
-    - sf__opportunities.count_lost
-    - won
-    - lost
-    - yearly_net_customer_growth
+    hidden_fields: [sf__opportunities.count_won, sf__opportunities.count_lost, won,
+      lost, yearly_net_customer_growth]
     series_colors:
       customer_running_total: "#559be6"
     limit_displayed_rows_values:

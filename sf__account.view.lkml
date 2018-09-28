@@ -10,78 +10,6 @@ view: sf__account {
 
 # Create Dimensions
 
-  dimension: dms {
-    type: string
-    sql: ${TABLE}.environment_c ;;
-  }
-
-  dimension: id {
-    primary_key: yes
-    type: string
-    sql: ${TABLE}.id ;;
-  }
-
-  dimension_group: created {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.created_date ;;
-  }
-
-  dimension: is_deleted {
-    type: yesno
-    sql: ${TABLE}.is_deleted ;;
-  }
-
-  dimension: last_modified_by_id {
-    type: string
-    sql: ${TABLE}.last_modified_by_id ;;
-  }
-
-  dimension_group: last_modified {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.last_modified_date ;;
-  }
-
-  dimension_group: last_referenced {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.last_referenced_date ;;
-  }
-
-  dimension_group: last_viewed {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.last_viewed_date ;;
-  }
-
-  dimension: owner_id {
-    type: string
-    sql: ${TABLE}.owner_id ;;
-  }
-
-  dimension_group: received {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.received_at ;;
-  }
-
-  dimension_group: system_modstamp {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.system_modstamp ;;
-  }
-
-  dimension: type {
-    type: string
-    sql: ${TABLE}.type ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${TABLE}.name ;;
-  }
-
   dimension: account_name_link { # This is used if you want to click the account name to go to Company Insights Dashboard
     type: string
     sql: ${TABLE}.name ;;
@@ -89,47 +17,6 @@ view: sf__account {
     link: {
       label: "Company Insights Dashboard"
       url: "salesforce/company_insights?account_id_filter={{ id._value | url_encode}}"
-    }
-  }
-
-  dimension: annual_recurring_revenue {
-    type: number
-    sql: ${TABLE}.arr_c ;;
-  }
-
-  dimension: seats_licensed {
-    type: number
-    sql: ${TABLE}.seats_licensed_c ;;
-  }
-
-  dimension: renewal_date {
-    type: date
-    sql: ${TABLE}.renewal_date_c ;;
-  }
-
-  dimension: webcaster {
-    case:{
-      when:{
-        sql: ${TABLE}.webcaster_c = true;;
-        label: "Yes"
-      }
-      when: {
-        sql: ${TABLE}.webcaster_c= false ;;
-        label: "No"
-      }
-    }
-  }
-
-  dimension: video_center {
-    case:{
-      when:{
-        sql: ${TABLE}.video_center_c = true;;
-        label: "Yes"
-      }
-      when: {
-        sql: ${TABLE}.video_center_c= false ;;
-        label: "No"
-      }
     }
   }
 
@@ -146,6 +33,11 @@ view: sf__account {
     }
   }
 
+  dimension: annual_recurring_revenue {
+    type: number
+    sql: ${TABLE}.arr_c ;;
+  }
+
   dimension: clientless_streaming {
     case:{
       when:{
@@ -159,6 +51,17 @@ view: sf__account {
     }
   }
 
+  dimension_group: created {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.created_date ;;
+  }
+
+  dimension: dms {
+    type: string
+    sql: ${TABLE}.environment_c ;;
+  }
+
   dimension: ecdn {
     case:{
       when:{
@@ -170,6 +73,40 @@ view: sf__account {
         label: "No"
       }
     }
+  }
+
+  dimension: id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension: is_deleted {
+    type: yesno
+    sql: ${TABLE}.is_deleted ;;
+  }
+
+  dimension_group: last_modified {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.last_modified_date ;;
+  }
+
+  dimension: last_modified_by_id {
+    type: string
+    sql: ${TABLE}.last_modified_by_id ;;
+  }
+
+  dimension_group: last_referenced {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.last_referenced_date ;;
+  }
+
+  dimension_group: last_viewed {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.last_viewed_date ;;
   }
 
   dimension: live {
@@ -211,6 +148,11 @@ view: sf__account {
     }
   }
 
+  dimension: name {
+    type: string
+    sql: ${TABLE}.name ;;
+  }
+
   dimension: network_readiness_tester {
     case:{
       when:{
@@ -224,6 +166,22 @@ view: sf__account {
     }
   }
 
+  dimension: owner_id {
+    type: string
+    sql: ${TABLE}.owner_id ;;
+  }
+
+  dimension_group: received {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.received_at ;;
+  }
+
+  dimension: renewal_date {
+    type: date
+    sql: ${TABLE}.renewal_date_c ;;
+  }
+
   dimension: saml {
     case:{
       when:{
@@ -235,6 +193,11 @@ view: sf__account {
         label: "No"
       }
     }
+  }
+
+  dimension: seats_licensed {
+    type: number
+    sql: ${TABLE}.seats_licensed_c ;;
   }
 
   dimension: share_point {
@@ -258,6 +221,43 @@ view: sf__account {
       }
       when: {
         sql: ${TABLE}.smb_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension_group: system_modstamp {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.system_modstamp ;;
+  }
+
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
+  }
+
+  dimension: video_center {
+    case:{
+      when:{
+        sql: ${TABLE}.video_center_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.video_center_c= false ;;
+        label: "No"
+      }
+    }
+  }
+
+  dimension: webcaster {
+    case:{
+      when:{
+        sql: ${TABLE}.webcaster_c = true;;
+        label: "Yes"
+      }
+      when: {
+        sql: ${TABLE}.webcaster_c= false ;;
         label: "No"
       }
     }

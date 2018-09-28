@@ -101,10 +101,10 @@
   - title: ARR
     name: ARR
     model: salesforce
-    explore: sf__accounts
+    explore: sf__account
     type: single_value
     fields:
-    - sf__accounts.annual_recurring_revenue
+    - sf__account.annual_recurring_revenue
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -139,7 +139,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__accounts.id
+      account_id_filter: sf__account.id
     row: 3
     col: 0
     width: 6
@@ -148,22 +148,22 @@
   - title: Products
     name: Products
     model: salesforce
-    explore: sf__accounts
+    explore: sf__account
     type: table
     fields:
-    - sf__accounts.admin_center
-    - sf__accounts.clientless_streaming
-    - sf__accounts.ecdn
-    - sf__accounts.live
-    - sf__accounts.media_center
-    - sf__accounts.media_center_live_streaming
-    - sf__accounts.network_readiness_tester
-    - sf__accounts.saml
-    - sf__accounts.share_point
-    - sf__accounts.skype_meeting_broadcast
-    - sf__accounts.webcaster
+    - sf__account.admin_center
+    - sf__account.clientless_streaming
+    - sf__account.ecdn
+    - sf__account.live
+    - sf__account.media_center
+    - sf__account.media_center_live_streaming
+    - sf__account.network_readiness_tester
+    - sf__account.saml
+    - sf__account.share_point
+    - sf__account.skype_meeting_broadcast
+    - sf__account.webcaster
     sorts:
-    - sf__accounts.admin_center
+    - sf__account.admin_center
     limit: 500
     show_view_names: false
     show_row_numbers: false
@@ -199,7 +199,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__accounts.id
+      account_id_filter: sf__account.id
     row: 12
     col: 0
     width: 24
@@ -208,10 +208,10 @@
   - title: Seats Licensed
     name: Seats Licensed
     model: salesforce
-    explore: sf__accounts
+    explore: sf__account
     type: single_value
     fields:
-    - sf__accounts.seats_licensed
+    - sf__account.seats_licensed
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -246,7 +246,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__accounts.id
+      account_id_filter: sf__account.id
     row: 6
     col: 0
     width: 6
@@ -308,12 +308,12 @@
   - title: Renewal Date
     name: Renewal Date
     model: salesforce
-    explore: sf__accounts
+    explore: sf__account
     type: single_value
     fields:
-    - sf__accounts.renewal_date
+    - sf__account.renewal_date
     fill_fields:
-    - sf__accounts.renewal_date
+    - sf__account.renewal_date
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -348,7 +348,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__accounts.id
+      account_id_filter: sf__account.id
     row: 9
     col: 0
     width: 6
@@ -404,12 +404,12 @@
   - title: Company
     name: Company
     model: salesforce
-    explore: sf__accounts
+    explore: sf__account
     type: single_value
     fields:
-    - sf__accounts.name
+    - sf__account.name
     sorts:
-    - sf__accounts.name
+    - sf__account.name
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -444,7 +444,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__accounts.id
+      account_id_filter: sf__account.id
     row: 0
     col: 0
     width: 6
@@ -500,18 +500,18 @@
   - title: Open Opportunities
     name: Open Opportunities
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: table
     fields:
-    - sf__opportunities.opportunity_name
-    - sf__opportunities.bookings_value
-    - sf__opportunities.type
-    - sf__opportunities.stage_name
-    - sf__opportunities.channel_partner
-    - sf__opportunities.contract_term_months
-    - sf__opportunities.close_date
+    - sf__opportunity.opportunity_name
+    - sf__opportunity.bookings_value
+    - sf__opportunity.type
+    - sf__opportunity.stage_name
+    - sf__opportunity.channel_partner
+    - sf__opportunity.contract_term_months
+    - sf__opportunity.close_date
     filters:
-      sf__opportunities.is_closed: 'No'
+      sf__opportunity.is_closed: 'No'
     limit: 500
     show_view_names: false
     show_row_numbers: true
@@ -547,7 +547,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__accounts.id
+      account_id_filter: sf__account.id
     row: 14
     col: 0
     width: 24

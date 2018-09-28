@@ -7,14 +7,14 @@
   - title: Current FQ - New Forecast
     name: Current FQ - New Forecast
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won,04 - Forecast,05 - Commit
-      sf__opportunities.type: New
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won,04 - Forecast,05 - Commit
+      sf__opportunity.type: New
     sorts:
     - plan desc
     limit: 500
@@ -49,14 +49,14 @@
   - title: Current FQ - Upgrade/Upsell Forecast
     name: Current FQ - Upgrade/Upsell Forecast
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
-      sf__opportunities.type: Upgrade / Upsell
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
+      sf__opportunity.type: Upgrade / Upsell
     sorts:
     - plan desc
     limit: 500
@@ -91,14 +91,14 @@
   - title: Current FQ - Renewal Forecast
     name: Current FQ - Renewal Forecast
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
-      sf__opportunities.type: Renewal
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
+      sf__opportunity.type: Renewal
     sorts:
     - plan desc
     limit: 500
@@ -133,13 +133,13 @@
   - title: Current FQ - Total Forecast
     name: Current FQ - Total Forecast
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
     sorts:
     - plan desc
     limit: 500
@@ -174,14 +174,14 @@
   - title: Current FQ - New Forecast - Closed/Won
     name: Current FQ - New Forecast - Closed/Won
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: New
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: New
     sorts:
     - plan desc
     limit: 500
@@ -216,14 +216,14 @@
   - title: Current FQ - Upgrade/Upsell Forecast - Closed/Won
     name: Current FQ - Upgrade/Upsell Forecast - Closed/Won
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: Upgrade / Upsell
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: Upgrade / Upsell
     sorts:
     - plan desc
     limit: 500
@@ -258,14 +258,14 @@
   - title: Current FQ - Renewal Forecast - Closed/Won
     name: Current FQ - Renewal Forecast - Closed/Won
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: Renewal
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: Renewal
     sorts:
     - plan desc
     limit: 500
@@ -300,13 +300,13 @@
   - title: Current FQ - Total Forecast - Closed/Won
     name: Current FQ - Total Forecast - Closed/Won
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.sum_of_bookings_value
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.close_date: this quarter
-      sf__opportunities.stage_name: 06 - Closed Won
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 06 - Closed Won
     sorts:
     - plan desc
     limit: 500
@@ -341,16 +341,16 @@
   - title: New - Closed/Won Opportunities QTD
     name: New - Closed/Won Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: New
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: New
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -390,7 +390,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#5eb297"
+      sf__opportunity.sum_of_bookings_value: "#5eb297"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 8
@@ -401,16 +401,16 @@
   - title: Upgrade/Upsell - Closed/Won Opportunities QTD
     name: Upgrade/Upsell - Closed/Won Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: Upgrade / Upsell
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: Upgrade / Upsell
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -450,7 +450,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#5eb297"
+      sf__opportunity.sum_of_bookings_value: "#5eb297"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 22
@@ -461,16 +461,16 @@
   - title: Renewal - Closed/Won Opportunities QTD
     name: Renewal - Closed/Won Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: Renewal
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: Renewal
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -510,7 +510,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#5eb297"
+      sf__opportunity.sum_of_bookings_value: "#5eb297"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 36
@@ -521,16 +521,16 @@
   - title: Current FQ - Renewal and Upsell - Closed
     name: Current FQ - Renewal and Upsell - Closed
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
-    - sf__opportunities.sum_of_bookings_value
-    - sf__accounts.name
+    - sf__opportunity.sum_of_bookings_value
+    - sf__account.name
     - opportunity_owners.name
     filters:
-      sf__opportunities.type: Renewal,Upgrade / Upsell
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.type: Renewal,Upgrade / Upsell
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -569,7 +569,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#5eb297"
+      sf__opportunity.sum_of_bookings_value: "#5eb297"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 56
@@ -580,16 +580,16 @@
   - title: New - Commit Opportunities QTD
     name: New - Commit Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 05 - Commit
-      sf__opportunities.type: New
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 05 - Commit
+      sf__opportunity.type: New
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -629,7 +629,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#9ae3cc"
+      sf__opportunity.sum_of_bookings_value: "#9ae3cc"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 8
@@ -640,16 +640,16 @@
   - title: Upgrade/Upsell - Commit Opportunities QTD
     name: Upgrade/Upsell - Commit Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 05 - Commit
-      sf__opportunities.type: Upgrade / Upsell
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 05 - Commit
+      sf__opportunity.type: Upgrade / Upsell
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -689,7 +689,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#9ae3cc"
+      sf__opportunity.sum_of_bookings_value: "#9ae3cc"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 22
@@ -700,16 +700,16 @@
   - title: Renewal - Commit Opportunities QTD
     name: Renewal - Commit Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 05 - Commit
-      sf__opportunities.type: Renewal
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 05 - Commit
+      sf__opportunity.type: Renewal
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -749,7 +749,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#9ae3cc"
+      sf__opportunity.sum_of_bookings_value: "#9ae3cc"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 36
@@ -760,16 +760,16 @@
   - title: New - Forecast Opportunities QTD
     name: New - Forecast Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 04 - Forecast
-      sf__opportunities.type: New
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 04 - Forecast
+      sf__opportunity.type: New
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -809,7 +809,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#4281c3"
+      sf__opportunity.sum_of_bookings_value: "#4281c3"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 15
@@ -820,16 +820,16 @@
   - title: Upgrade/Upsell - Forecast Opportunities QTD
     name: Upgrade/Upsell - Forecast Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 04 - Forecast
-      sf__opportunities.type: Upgrade / Upsell
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 04 - Forecast
+      sf__opportunity.type: Upgrade / Upsell
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -869,7 +869,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#4281c3"
+      sf__opportunity.sum_of_bookings_value: "#4281c3"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 29
@@ -880,16 +880,16 @@
   - title: Renewal - Forecast Opportunities QTD
     name: Renewal - Forecast Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 04 - Forecast
-      sf__opportunities.type: Renewal
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 04 - Forecast
+      sf__opportunity.type: Renewal
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -929,7 +929,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#4281c3"
+      sf__opportunity.sum_of_bookings_value: "#4281c3"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 49
@@ -940,16 +940,16 @@
   - title: New - Upside Opportunities QTD
     name: New - Upside Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 03 - Upside
-      sf__opportunities.type: New
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 03 - Upside
+      sf__opportunity.type: New
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -989,7 +989,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#70b3fc"
+      sf__opportunity.sum_of_bookings_value: "#70b3fc"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 15
@@ -1000,16 +1000,16 @@
   - title: Upgrade/Upsell - Upside Opportunities QTD
     name: Upgrade/Upsell - Upside Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 03 - Upside
-      sf__opportunities.type: Upgrade / Upsell
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 03 - Upside
+      sf__opportunity.type: Upgrade / Upsell
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -1049,7 +1049,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#70b3fc"
+      sf__opportunity.sum_of_bookings_value: "#70b3fc"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 29
@@ -1060,16 +1060,16 @@
   - title: Renewal - Upside Opportunities QTD
     name: Renewal - Upside Opportunities QTD
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_bar
     fields:
     - opportunity_owners.name
-    - sf__accounts.name
-    - sf__opportunities.sum_of_bookings_value
+    - sf__account.name
+    - sf__opportunity.sum_of_bookings_value
     filters:
-      sf__opportunities.stage_name: 03 - Upside
-      sf__opportunities.type: Renewal
-      sf__opportunities.close_date: 1 quarters
+      sf__opportunity.stage_name: 03 - Upside
+      sf__opportunity.type: Renewal
+      sf__opportunity.close_date: 1 quarters
     sorts:
     - opportunity_owners.name
     limit: 500
@@ -1109,7 +1109,7 @@
     colors:
     - 'palette: Default'
     series_colors:
-      sf__opportunities.sum_of_bookings_value: "#70b3fc"
+      sf__opportunity.sum_of_bookings_value: "#70b3fc"
     listen:
       Opportunity Owner: opportunity_owners.name
     row: 49
@@ -1124,7 +1124,7 @@
     type: field_filter
     default_value: ''
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     field: opportunity_owners.name
     listens_to_filters: []
     allow_multiple_values: true

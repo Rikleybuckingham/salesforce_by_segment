@@ -1,9 +1,19 @@
-view: sfbase__accounts {
+view: sf__account {
   sql_table_name: salesforce.accounts ;;
 
 # Create Filters
 
+  filter: account_id_filter {
+    type: string
+    sql: replace({% parameter account_id_filter %}, '-', '') = ${id} ;;
+  }
+
 # Create Dimensions
+
+  dimension: dms {
+    type: string
+    sql: ${TABLE}.environment_c ;;
+  }
 
   dimension: id {
     primary_key: yes

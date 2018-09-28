@@ -1,7 +1,11 @@
-view: sfbase__users {
+view: sf__user {
   sql_table_name: salesforce.users ;;
 
 # Create Filters
+
+  filter: name_select {
+    suggest_dimension: name
+  }
 
 # Create Dimensions
 

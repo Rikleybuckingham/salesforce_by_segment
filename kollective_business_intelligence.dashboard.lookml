@@ -17,23 +17,23 @@
     - title: Pipeline Forecast
       name: Pipeline Forecast
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: looker_column
       fields:
-      - sf__opportunities.close_month
-      - sf__opportunities.total_revenue
-      - sf__opportunities.stage_name
+      - sf__opportunity.close_month
+      - sf__opportunity.total_revenue
+      - sf__opportunity.stage_name
       pivots:
-      - sf__opportunities.stage_name
+      - sf__opportunity.stage_name
       fill_fields:
-      - sf__opportunities.close_month
+      - sf__opportunity.close_month
       filters:
-        sf__opportunities.close_month: 9 months ago for 12 months
-        sf__opportunities.stage_name: 02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+        sf__opportunity.close_month: 9 months ago for 12 months
+        sf__opportunity.stage_name: 02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
           - Closed Won,07 - Closed Lost
       sorts:
-      - sf__opportunities.close_month
-      - sf__opportunities.stage_name
+      - sf__opportunity.close_month
+      - sf__opportunity.stage_name
       query_timezone: America/Los_Angeles
       stacking: normal
       hidden_series: []
@@ -48,12 +48,12 @@
       series_labels:
         '0': Lost
         100 or Above: Won
-        02 - Pipeline - sf__opportunities.total_revenue: Pipeline
-        03 - Upside - sf__opportunities.total_revenue: Upside
-        04 - Forecast - sf__opportunities.total_revenue: Forecast
-        05 - Commit - sf__opportunities.total_revenue: Commit
-        06 - Closed Won - sf__opportunities.total_revenue: Closed Won
-        07 - Closed Lost - sf__opportunities.total_revenue: Closed Lost
+        02 - Pipeline - sf__opportunity.total_revenue: Pipeline
+        03 - Upside - sf__opportunity.total_revenue: Upside
+        04 - Forecast - sf__opportunity.total_revenue: Forecast
+        05 - Commit - sf__opportunity.total_revenue: Commit
+        06 - Closed Won - sf__opportunity.total_revenue: Closed Won
+        07 - Closed Lost - sf__opportunity.total_revenue: Closed Lost
       y_axis_combined: true
       show_y_axis_labels: true
       show_y_axis_ticks: true
@@ -68,12 +68,12 @@
       ordering: none
       show_null_labels: false
       series_colors:
-        06 - Closed Won - sf__opportunities.total_revenue: "#5eb297"
-        05 - Commit - sf__opportunities.total_revenue: "#9ae3cc"
-        07 - Closed Lost - sf__opportunities.total_revenue: "#d75c44"
-        04 - Forecast - sf__opportunities.total_revenue: "#70b3fc"
-        03 - Upside - sf__opportunities.total_revenue: "#4281c3"
-        02 - Pipeline - sf__opportunities.total_revenue: "#435978"
+        06 - Closed Won - sf__opportunity.total_revenue: "#5eb297"
+        05 - Commit - sf__opportunity.total_revenue: "#9ae3cc"
+        07 - Closed Lost - sf__opportunity.total_revenue: "#d75c44"
+        04 - Forecast - sf__opportunity.total_revenue: "#70b3fc"
+        03 - Upside - sf__opportunity.total_revenue: "#4281c3"
+        02 - Pipeline - sf__opportunity.total_revenue: "#435978"
       limit_displayed_rows: false
       y_axis_tick_density_custom: 5
       y_axis_scale_mode: linear
@@ -88,18 +88,18 @@
     - title: YTD Lead to Win Funnel
       name: This Year Lead to Win Funnel
       model: salesforce
-      explore: sf__leads
+      explore: sf__lead
       type: looker_column
       fields:
-      - sf__leads.count
-      - sf__leads.net_mql_count
-      - sf__leads.converted_to_opportunity_count
-      - sf__opportunities.count_sql
-      - sf__opportunities.count_won
+      - sf__lead.count
+      - sf__lead.net_mql_count
+      - sf__lead.converted_to_opportunity_count
+      - sf__opportunity.count_sql
+      - sf__opportunity.count_won
       filters:
-        sf__leads.created_date: this year
+        sf__lead.created_date: this year
       sorts:
-      - sf__leads.count desc
+      - sf__lead.count desc
       limit: 500
       stacking: ''
       colors:
@@ -112,13 +112,13 @@
       y_axis_gridlines: true
       show_view_names: false
       series_labels:
-        sf__leads.count: Leads
-        sf__opportunities.count_new_business: Opportunities
-        sf__opportunities.count_new_business_won: Won Opportunities
-        sf__leads.net_mql_count: MQLs
-        sf__leads.converted_to_opportunity_count: Opportunities
-        sf__opportunities.count_sql: SQLs
-        sf__opportunities.count_won: Won Opportunities
+        sf__lead.count: Leads
+        sf__opportunity.count_new_business: Opportunities
+        sf__opportunity.count_new_business_won: Won Opportunities
+        sf__lead.net_mql_count: MQLs
+        sf__lead.converted_to_opportunity_count: Opportunities
+        sf__opportunity.count_sql: SQLs
+        sf__opportunity.count_won: Won Opportunities
       y_axis_combined: true
       show_y_axis_labels: true
       show_y_axis_ticks: true
@@ -129,11 +129,11 @@
       show_null_labels: false
       show_dropoff: true
       series_colors:
-        sf__opportunities.count_won: "#5eb297"
-        sf__opportunities.count_sql: "#9ae3cc"
-        sf__leads.count: "#435978"
-        sf__leads.net_mql_count: "#4281c3"
-        sf__leads.converted_to_opportunity_count: "#70b3fc"
+        sf__opportunity.count_won: "#5eb297"
+        sf__opportunity.count_sql: "#9ae3cc"
+        sf__lead.count: "#435978"
+        sf__lead.net_mql_count: "#4281c3"
+        sf__lead.converted_to_opportunity_count: "#70b3fc"
       limit_displayed_rows: false
       y_axis_tick_density_custom: 5
       y_axis_scale_mode: linear
@@ -166,14 +166,14 @@
     - title: Current FQ - New Forecast
       name: Current FQ - New Forecast
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won,04 - Forecast,05 - Commit
-        sf__opportunities.type: New
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won,04 - Forecast,05 - Commit
+        sf__opportunity.type: New
       sorts:
       - plan desc
       limit: 500
@@ -206,14 +206,14 @@
     - title: Current FQ - Upgrade/Upsell Forecast
       name: Current FQ - Upgrade/Upsell Forecast
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
-        sf__opportunities.type: Upgrade / Upsell
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
+        sf__opportunity.type: Upgrade / Upsell
       sorts:
       - plan desc
       limit: 500
@@ -246,14 +246,14 @@
     - title: Current FQ - Renewal Forecast
       name: Current FQ - Renewal Forecast
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
-        sf__opportunities.type: Renewal
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
+        sf__opportunity.type: Renewal
       sorts:
       - plan desc
       limit: 500
@@ -286,13 +286,13 @@
     - title: Current FQ - Total Forecast
       name: Current FQ - Total Forecast
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won,05 - Commit,04 - Forecast
       sorts:
       - plan desc
       limit: 500
@@ -325,14 +325,14 @@
     - title: Current FQ - New Forecast - Closed/Won
       name: Current FQ - New Forecast - Closed/Won
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won
-        sf__opportunities.type: New
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won
+        sf__opportunity.type: New
       sorts:
       - plan desc
       limit: 500
@@ -365,14 +365,14 @@
     - title: Current FQ - Upgrade/Upsell Forecast - Closed/Won
       name: Current FQ - Upgrade/Upsell Forecast - Closed/Won
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won
-        sf__opportunities.type: Upgrade / Upsell
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won
+        sf__opportunity.type: Upgrade / Upsell
       sorts:
         - plan desc
       limit: 500
@@ -405,14 +405,14 @@
     - title: Current FQ - Renewal Forecast - Closed/Won
       name: Current FQ - Renewal Forecast - Closed/Won
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won
-        sf__opportunities.type: Renewal
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won
+        sf__opportunity.type: Renewal
       sorts:
       - plan desc
       limit: 500
@@ -445,13 +445,13 @@
     - title: Current FQ - Total Forecast - Closed/Won
       name: Current FQ - Total Forecast - Closed/Won
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.sum_of_bookings_value
+      - sf__opportunity.sum_of_bookings_value
       filters:
-        sf__opportunities.close_date: this quarter
-        sf__opportunities.stage_name: 06 - Closed Won
+        sf__opportunity.close_date: this quarter
+        sf__opportunity.stage_name: 06 - Closed Won
       sorts:
       - plan desc
       limit: 500
@@ -501,16 +501,16 @@
     - title: Leads by Acquisition Program QTD
       name: Leads by Acquisition Program
       model: salesforce
-      explore: sf__leads
+      explore: sf__lead
       type: looker_column
       fields:
-      - sf__leads.count
-      - sf__leads.acquisition_program
-      - sf__leads.net_mql_count
+      - sf__lead.count
+      - sf__lead.acquisition_program
+      - sf__lead.net_mql_count
       sorts:
-      - sf__leads.count desc
+      - sf__lead.count desc
       filters:
-        sf__leads.created_date: this quarter
+        sf__lead.created_date: this quarter
       limit: 500
       stacking: ''
       show_value_labels: false
@@ -535,13 +535,13 @@
       show_silhouette: false
       totals_color: "#808080"
       series_colors:
-        sf__leads.count: "#4281c3"
-        sf__leads.net_mql_count: "#70b3fc"
-        sf__opportunities.count: "#9ae3cc"
-        sf__opportunities.count_won: "#5eb297"
+        sf__lead.count: "#4281c3"
+        sf__lead.net_mql_count: "#70b3fc"
+        sf__opportunity.count: "#9ae3cc"
+        sf__opportunity.count_won: "#5eb297"
       series_labels:
-        sf__leads.net_mql_count: MQLs
-        sf__leads.count: Leads
+        sf__lead.net_mql_count: MQLs
+        sf__lead.count: Leads
       y_axes:
       - label: Lead Count
         maxValue:
@@ -555,9 +555,9 @@
         unpinAxis: false
         valueFormat:
         series:
-        - id: sf__leads.count
+        - id: sf__lead.count
           name: Leads
-          axisId: sf__leads.count
+          axisId: sf__lead.count
       - label: ''
         maxValue:
         minValue:
@@ -570,9 +570,9 @@
         unpinAxis: false
         valueFormat:
         series:
-        - id: sf__leads.net_mql_count
+        - id: sf__lead.net_mql_count
           name: MQLs
-          axisId: sf__leads.net_mql_count
+          axisId: sf__lead.net_mql_count
       row: 16
       col: 4
       width: 10
@@ -581,16 +581,16 @@
     - title: Opportunities by Channel Partner QTD
       name: Opportunities by Channel Partner
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: looker_column
       fields:
-      - sf__opportunities.channel_partner
-      - sf__opportunities.count
-      - sf__opportunities.count_won
+      - sf__opportunity.channel_partner
+      - sf__opportunity.count
+      - sf__opportunity.count_won
       sorts:
-      - sf__opportunities.count desc
+      - sf__opportunity.count desc
       filters:
-        sf__opportunities.created_date: this quarter
+        sf__opportunity.created_date: this quarter
       limit: 500
       stacking: ''
       show_value_labels: false
@@ -615,8 +615,8 @@
       show_silhouette: false
       totals_color: "#808080"
       series_colors:
-        sf__opportunities.count: "#4281c3"
-        sf__opportunities.count_won: "#5eb297"
+        sf__opportunity.count: "#4281c3"
+        sf__opportunity.count_won: "#5eb297"
       y_axes:
       - label: Opportunity Count
         maxValue:
@@ -630,12 +630,12 @@
         unpinAxis: false
         valueFormat:
         series:
-        - id: sf__opportunities.count
+        - id: sf__opportunity.count
           name: Sf Opportunities
-          axisId: sf__opportunities.count
-        - id: sf__opportunities.count_won
+          axisId: sf__opportunity.count
+        - id: sf__opportunity.count_won
           name: Count Won
-          axisId: sf__opportunities.count_won
+          axisId: sf__opportunity.count_won
       row: 16
       col: 14
       width: 10
@@ -661,12 +661,12 @@
     - title: Open Renewals
       name: open_renewals
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.count_open
+      - sf__opportunity.count_open
       filters:
-        sf__opportunities.type: Renewal
+        sf__opportunity.type: Renewal
       limit: 500
       custom_color_enabled: false
       custom_color: "#224f8b"
@@ -707,13 +707,13 @@
     - title: Won Renewals YTD
       name: won_renewals
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.count_won
+      - sf__opportunity.count_won
       filters:
-        sf__opportunities.type: Renewal
-        sf__opportunities.close_date: this year
+        sf__opportunity.type: Renewal
+        sf__opportunity.close_date: this year
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -754,23 +754,23 @@
     - title: Renewal Pipeline
       name: current_pipeline
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: looker_column
       fields:
-      - sf__opportunities.close_month
-      - sf__opportunities.sum_of_bookings_value
-      - sf__opportunities.stage_name
+      - sf__opportunity.close_month
+      - sf__opportunity.sum_of_bookings_value
+      - sf__opportunity.stage_name
       pivots:
-      - sf__opportunities.stage_name
+      - sf__opportunity.stage_name
       fill_fields:
-      - sf__opportunities.close_month
+      - sf__opportunity.close_month
       filters:
-        sf__opportunities.close_date: 9 months ago for 12 months
-        sf__opportunities.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
-        sf__opportunities.type: Renewal
+        sf__opportunity.close_date: 9 months ago for 12 months
+        sf__opportunity.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
+        sf__opportunity.type: Renewal
       sorts:
-      - sf__opportunities.close_month
-      - sf__opportunities.stage_name 0
+      - sf__opportunity.close_month
+      - sf__opportunity.stage_name 0
       limit: 500
       stacking: normal
       show_value_labels: false
@@ -813,14 +813,14 @@
     - title: Average Deal Size YTD
       name: average_deal_size
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.average_deal_size
+      - sf__opportunity.average_deal_size
       filters:
-        sf__opportunities.stage_name: 06 - Closed Won
-        sf__opportunities.type: Renewal
-        sf__opportunities.close_date: this year
+        sf__opportunity.stage_name: 06 - Closed Won
+        sf__opportunity.type: Renewal
+        sf__opportunity.close_date: this year
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -861,13 +861,13 @@
     - title: Renewal Win Percentage
       name: renewal_win_percentage
       model: salesforce
-      explore: sf__opportunities
+      explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunities.win_percentage
+      - sf__opportunity.win_percentage
       filters:
-        sf__opportunities.type: Renewal
-        sf__opportunities.close_date: this year
+        sf__opportunity.type: Renewal
+        sf__opportunity.close_date: this year
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen

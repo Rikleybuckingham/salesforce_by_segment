@@ -7,24 +7,24 @@
   - title: Upcoming Renewals Table
     name: upcoming_renewals
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: table
     fields:
-    - sf__accounts.account_name_link
-    - sf__opportunities.opportunity_name
+    - sf__account.account_name_link
+    - sf__opportunity.opportunity_name
     - opportunity_owners.name
-    - sf__opportunities.channel_partner
-    - sf__opportunities.bookings_value
-    - sf__opportunities.contract_term_months
-    - sf__opportunities.close_date
-    - sf__opportunities.id
-    - sf__accounts.id
+    - sf__opportunity.channel_partner
+    - sf__opportunity.bookings_value
+    - sf__opportunity.contract_term_months
+    - sf__opportunity.close_date
+    - sf__opportunity.id
+    - sf__account.id
     filters:
-      sf__opportunities.type: Renewal
-      sf__opportunities.close_date: after 0 minutes ago
+      sf__opportunity.type: Renewal
+      sf__opportunity.close_date: after 0 minutes ago
       opportunity_owners.name: ''
     sorts:
-    - sf__opportunities.close_date
+    - sf__opportunity.close_date
     limit: 500
     show_view_names: false
     show_row_numbers: true
@@ -58,17 +58,17 @@
     totals_color: "#808080"
     series_types: {}
     series_labels:
-      sf__accounts.account_name_link: Company
-      sf__opportunities.opportunity_name: Opportunity Name
+      sf__account.account_name_link: Company
+      sf__opportunity.opportunity_name: Opportunity Name
       opportunity_owners.name: Opportunity Owner Name
-      sf__opportunities.channel_partner: Channel Partner
-      sf__opportunities.bookings_value: Bookings Value
-      sf__opportunities.contract_term_months: Contract Term Months
-      sf__opportunities.close_date: Close Date
+      sf__opportunity.channel_partner: Channel Partner
+      sf__opportunity.bookings_value: Bookings Value
+      sf__opportunity.contract_term_months: Contract Term Months
+      sf__opportunity.close_date: Close Date
     conditional_formatting: []
     listen:
       CSM: opportunity_owners.name
-    hidden_fields: [sf__accounts.id, sf__opportunities.id]
+    hidden_fields: [sf__account.id, sf__opportunity.id]
     row: 10
     col: 0
     width: 24
@@ -77,12 +77,12 @@
   - title: Open Renewals
     name: open_renewals
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.count_open
+    - sf__opportunity.count_open
     filters:
-      sf__opportunities.type: Renewal
+      sf__opportunity.type: Renewal
     limit: 500
     custom_color_enabled: false
     custom_color: "#224f8b"
@@ -125,12 +125,12 @@
   - title: Won Renewals
     name: won_renewals
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.count_won
+    - sf__opportunity.count_won
     filters:
-      sf__opportunities.type: Renewal
+      sf__opportunity.type: Renewal
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -173,23 +173,23 @@
   - title: Current Pipeline
     name: current_pipeline
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: looker_column
     fields:
-    - sf__opportunities.close_month
-    - sf__opportunities.sum_of_bookings_value
-    - sf__opportunities.stage_name
+    - sf__opportunity.close_month
+    - sf__opportunity.sum_of_bookings_value
+    - sf__opportunity.stage_name
     pivots:
-    - sf__opportunities.stage_name
+    - sf__opportunity.stage_name
     fill_fields:
-    - sf__opportunities.close_month
+    - sf__opportunity.close_month
     filters:
-      sf__opportunities.close_date: 3 months ago for 6 months
-      sf__opportunities.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
-      sf__opportunities.type: Renewal
+      sf__opportunity.close_date: 3 months ago for 6 months
+      sf__opportunity.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
+      sf__opportunity.type: Renewal
     sorts:
-    - sf__opportunities.close_month
-    - sf__opportunities.stage_name 0
+    - sf__opportunity.close_month
+    - sf__opportunity.stage_name 0
     limit: 500
     stacking: normal
     show_value_labels: false
@@ -233,13 +233,13 @@
   - title: Average Deal Size
     name: average_deal_size
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.average_deal_size
+    - sf__opportunity.average_deal_size
     filters:
-      sf__opportunities.stage_name: 06 - Closed Won
-      sf__opportunities.type: Renewal
+      sf__opportunity.stage_name: 06 - Closed Won
+      sf__opportunity.type: Renewal
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -282,12 +282,12 @@
   - title: Renewal Win Percentage
     name: renewal_win_percentage
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.win_percentage
+    - sf__opportunity.win_percentage
     filters:
-      sf__opportunities.type: Renewal
+      sf__opportunity.type: Renewal
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -330,13 +330,13 @@
   - title: Quarterly Pipeline Revenue
     name: quarterly_pipeline_revenue
     model: salesforce
-    explore: sf__opportunities
+    explore: sf__opportunity
     type: single_value
     fields:
-    - sf__opportunities.total_pipeline_revenue
+    - sf__opportunity.total_pipeline_revenue
     filters:
-      sf__opportunities.type: Renewal
-      sf__opportunities.close_date: this quarter
+      sf__opportunity.type: Renewal
+      sf__opportunity.close_date: this quarter
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen

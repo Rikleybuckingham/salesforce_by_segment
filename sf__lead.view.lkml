@@ -10,9 +10,16 @@ view: sf__lead {
 
 # Create Dimensions
 
-  dimension: mql_date {
-    type: date
-    sql: ${TABLE}.marketing_qualified_date_c ;;
+  dimension_group: acquisition_date {
+    type: time
+    hidden: yes
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.mkto_71_acquisition_date_c ;;
+  }
+
+  dimension: acquisition_program {
+    type: string
+    sql: ${TABLE}.mkto_71_acquisition_program_c ;;
   }
 
   dimension: company {
@@ -24,46 +31,10 @@ view: sf__lead {
     }
   }
 
-  dimension: acquisition_program {
-    type: string
-    sql: ${TABLE}.mkto_71_acquisition_program_c ;;
-  }
-
-  dimension_group: acquisition_date {
-    type: time
-    hidden: yes
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.mkto_71_acquisition_date_c ;;
-  }
-
-  dimension_group: last_status_updated_timestamp {
-    type: time
-    hidden: yes
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.statushistory_last_status_updated_c ;;
-  }
-
-  dimension_group: marketing_qualified_timestamp {
+  dimension_group: converted {
     type: time
     timeframes: [time, date, week, month]
-    sql: ${TABLE}.marketing_qualified_date_c ;;
-  }
-
-  dimension_group: interesting_moment_timestamp {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.mkto_si_last_interesting_moment_date_c ;;
-  }
-
-  dimension: mql_velocity {
-    type: number
-    sql: datediff(days, ${created_date}, ${mql_date}) ;;
-  }
-
-  dimension: lead_id {
-    primary_key: yes
-    type: string
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.converted_date ;;
   }
 
   dimension: converted_account_id {
@@ -76,12 +47,6 @@ view: sf__lead {
     type: string
     hidden: yes
     sql: ${TABLE}.converted_contact_id ;;
-  }
-
-  dimension_group: converted {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.converted_date ;;
   }
 
   dimension: converted_opportunity_id {
@@ -101,6 +66,41 @@ view: sf__lead {
     sql: ${TABLE}.created_date ;;
   }
 
+  dimension_group: interesting_moment_timestamp {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.mkto_si_last_interesting_moment_date_c ;;
+  }
+
+  dimension_group: last_status_updated_timestamp {
+    type: time
+    hidden: yes
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.statushistory_last_status_updated_c ;;
+  }
+
+  dimension: lead_id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension_group: marketing_qualified_timestamp {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.marketing_qualified_date_c ;;
+  }
+
+  dimension: mql_date {
+    type: date
+    sql: ${TABLE}.marketing_qualified_date_c ;;
+  }
+
+  dimension: mql_velocity {
+    type: number
+    sql: datediff(days, ${created_date}, ${mql_date}) ;;
+  }
+
   dimension: is_converted {
     type: yesno
     sql: ${TABLE}.is_converted ;;
@@ -117,15 +117,15 @@ view: sf__lead {
     sql: ${TABLE}.last_activity_date ;;
   }
 
-  dimension: last_modified_by_id {
-    type: string
-    sql: ${TABLE}.last_modified_by_id ;;
-  }
-
   dimension_group: last_modified {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified_date ;;
+  }
+
+  dimension: last_modified_by_id {
+    type: string
+    sql: ${TABLE}.last_modified_by_id ;;
   }
 
   dimension_group: last_referenced {
@@ -164,26 +164,22 @@ view: sf__lead {
 
 # Create Measures
 
-  measure:  currently_active_leads_count{
-    type: count
+  measure: average_mql_velocity {
+    label: "Average MQL Velocity"
+    type: average
+    sql: datediff(days, ${created_date}, ${mql_date}) ;;
     filters: {
-      field: interesting_moment_timestamp_date
-      value: "30 days"
+      field: mql_velocity
+      value: ">0"
     }
   }
 
-  measure: net_mql_count {
-    type: count
+  measure: average_opportunity_velocity {
+    label: "Average Opportunity Velocity"
+    type: average
+    sql: datediff(days, ${mql_date}, ${converted_date}) ;;
     filters: {
-      field: mql_date
-      value: "-null"
-    }
-  }
-
-  measure: converted_to_contact_count {
-    type: count
-    filters: {
-      field: converted_contact_id
+      field: converted_opportunity_id
       value: "-null"
     }
   }
@@ -196,11 +192,27 @@ view: sf__lead {
     }
   }
 
+  measure: converted_to_contact_count {
+    type: count
+    filters: {
+      field: converted_contact_id
+      value: "-null"
+    }
+  }
+
   measure: converted_to_opportunity_count {
     type: count
     filters: {
       field: converted_opportunity_id
       value: "-null"
+    }
+  }
+
+  measure:  currently_active_leads_count{
+    type: count
+    filters: {
+      field: interesting_moment_timestamp_date
+      value: "30 days"
     }
   }
 
@@ -218,44 +230,12 @@ view: sf__lead {
     }
   }
 
-  measure: average_opportunity_velocity {
-    label: "Average Opportunity Velocity"
-    type: average
-    sql: datediff(days, ${mql_date}, ${converted_date}) ;;
-
+  measure: net_mql_count {
+    type: count
     filters: {
-      field: converted_opportunity_id
+      field: mql_date
       value: "-null"
     }
-  }
-
-  measure: average_mql_velocity {
-    label: "Average MQL Velocity"
-    type: average
-    sql: datediff(days, ${created_date}, ${mql_date}) ;;
-
-    filters: {
-      field: mql_velocity
-      value: ">0"
-    }
-  }
-
-  measure: conversion_to_contact_percent {
-    sql: 100.00 * ${converted_to_contact_count} / NULLIF(${count},0) ;;
-    type: number
-    value_format: "0.00\%"
-  }
-
-  measure: conversion_to_account_percent {
-    sql: 100.00 * ${converted_to_account_count} / NULLIF(${count},0) ;;
-    type: number
-    value_format: "0.00\%"
-  }
-
-  measure: conversion_to_opportunity_percent {
-    sql: 100.00 * ${converted_to_opportunity_count} / NULLIF(${count},0) ;;
-    type: number
-    value_format: "0.00\%"
   }
 
   measure: count {

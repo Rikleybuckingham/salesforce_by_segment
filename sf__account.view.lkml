@@ -13,6 +13,7 @@ view: sf__account {
   dimension: account_name_link { # This is used if you want to click the account name to go to Company Insights Dashboard
     type: string
     sql: ${TABLE}.name ;;
+    label: "Account Name"
     hidden: no
     link: {
       label: "Company Insights Dashboard"

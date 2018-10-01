@@ -9,15 +9,15 @@ view: sf__user {
 
 # Create Dimensions
 
+  dimension: email {
+    type: string
+    sql: ${TABLE}.email ;;
+  }
+
   dimension: id {
     primary_key: yes
     type: string
     sql: ${TABLE}.id ;;
-  }
-
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
   }
 
   dimension: name {

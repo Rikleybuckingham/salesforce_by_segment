@@ -5,12 +5,6 @@ view: usage__node {
 
 # Create Dimensions
 
-  dimension: short_node_id {
-    primary_key: yes
-    type: string
-    sql: ${TABLE}.short_node_id ;;
-  }
-
   dimension: arena_id {
     type: number
     sql: ${TABLE}.arena_id ;;
@@ -160,6 +154,12 @@ view: usage__node {
   dimension: route_id {
     type: number
     sql: ${TABLE}.route_id ;;
+  }
+
+  dimension: short_node_id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.short_node_id ;;
   }
 
   dimension: source_env {

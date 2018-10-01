@@ -6,12 +6,6 @@ view: usage__delivery {
 
 # Create Dimensions
 
-  dimension: delivery_id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.delivery_id ;;
-  }
-
   dimension: company_id {
     type: number
     sql: ${TABLE}.company_id ;;
@@ -30,6 +24,12 @@ view: usage__delivery {
   dimension: date {
     type: string
     sql: ${TABLE}.date ;;
+  }
+
+  dimension: delivery_id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.delivery_id ;;
   }
 
   dimension: dms {

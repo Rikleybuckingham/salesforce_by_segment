@@ -5,12 +5,6 @@ view: usage__play {
 
 # Create Dimensions
 
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
-  }
-
   dimension: acl_user {
     type: string
     sql: ${TABLE}.acl_user ;;
@@ -113,6 +107,12 @@ view: usage__play {
       year
     ]
     sql: ${TABLE}.harvest_time ;;
+  }
+
+  dimension: id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.id ;;
   }
 
   dimension: in_progress {

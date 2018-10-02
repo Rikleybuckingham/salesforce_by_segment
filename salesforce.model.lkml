@@ -6,6 +6,8 @@ include: "sf__*.view"
 # include the dashboards
 include: "*.dashboard"
 
+fiscal_month_offset: -9
+
 # Create Accounts Explore
 explore: sf__account {
   label: "Accounts"

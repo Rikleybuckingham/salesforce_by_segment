@@ -1,5 +1,5 @@
-- dashboard: csm_overview
-  title: CSM Overview
+- dashboard: cs_overview
+  title: CS Overview
   layout: newspaper
 
   elements:

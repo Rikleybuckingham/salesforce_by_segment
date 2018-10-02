@@ -194,6 +194,12 @@ view: sf__opportunity {
     value_format: "#"
   }
 
+  measure: avereage_contract_value_sum {
+    label: "ACV Sum"
+    type: sum
+    sql: ${annual_contract_value} ;;
+  }
+
   measure: average_deal_size {
     type: average
     sql: ${bookings_value} ;;

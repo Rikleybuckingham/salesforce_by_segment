@@ -72,35 +72,6 @@ view: sf__lead {
     sql: ${TABLE}.mkto_si_last_interesting_moment_date_c ;;
   }
 
-  dimension_group: last_status_updated_timestamp {
-    type: time
-    hidden: yes
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.statushistory_last_status_updated_c ;;
-  }
-
-  dimension: lead_id {
-    primary_key: yes
-    type: string
-    sql: ${TABLE}.id ;;
-  }
-
-  dimension_group: marketing_qualified_timestamp {
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.marketing_qualified_date_c ;;
-  }
-
-  dimension: mql_date {
-    type: date
-    sql: ${TABLE}.marketing_qualified_date_c ;;
-  }
-
-  dimension: mql_velocity {
-    type: number
-    sql: datediff(days, ${created_date}, ${mql_date}) ;;
-  }
-
   dimension: is_converted {
     type: yesno
     sql: ${TABLE}.is_converted ;;
@@ -134,15 +105,44 @@ view: sf__lead {
     sql: ${TABLE}.last_referenced_date ;;
   }
 
+  dimension_group: last_status_updated_timestamp {
+    type: time
+    hidden: yes
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.statushistory_last_status_updated_c ;;
+  }
+
   dimension_group: last_viewed {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_viewed_date ;;
   }
 
+  dimension: lead_id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.id ;;
+  }
+
   dimension: lead_source {
     type: string
     sql: ${TABLE}.lead_source ;;
+  }
+
+  dimension_group: marketing_qualified_timestamp {
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.marketing_qualified_date_c ;;
+  }
+
+  dimension: mql_date {
+    type: date
+    sql: ${TABLE}.marketing_qualified_date_c ;;
+  }
+
+  dimension: mql_velocity {
+    type: number
+    sql: datediff(days, ${created_date}, ${mql_date}) ;;
   }
 
   dimension: owner_id {

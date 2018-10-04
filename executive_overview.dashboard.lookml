@@ -981,17 +981,6 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    reference_lines:
-    - reference_type: line
-      line_value: '4000000'
-      range_start: max
-      range_end: min
-      margin_top: deviation
-      margin_value: mean
-      margin_bottom: deviation
-      label_position: right
-      color: "#000000"
-      label: Quarterly Goal
     y_axes:
     - label: Total Bookings Value
       orientation: left
@@ -1115,17 +1104,6 @@
       type: linear
     x_axis_reversed: false
     y_axis_reversed: false
-    reference_lines:
-    - reference_type: line
-      line_value: '4000000'
-      range_start: max
-      range_end: min
-      margin_top: deviation
-      margin_value: mean
-      margin_bottom: deviation
-      label_position: right
-      color: "#000000"
-      label: Quarterly Goal
     hidden_series:
     - 02 - Pipeline
     - 03 - Upside
@@ -1216,17 +1194,6 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    reference_lines:
-    - reference_type: line
-      line_value: '1500000'
-      range_start: max
-      range_end: min
-      margin_top: deviation
-      margin_value: mean
-      margin_bottom: deviation
-      label_position: right
-      color: "#000000"
-      label: Quarterly Goal
     y_axes:
     - label: Total Bookings Value
       orientation: left
@@ -1349,17 +1316,6 @@
       type: linear
     x_axis_reversed: false
     y_axis_reversed: false
-    reference_lines:
-    - reference_type: line
-      line_value: '1500000'
-      range_start: max
-      range_end: min
-      margin_top: deviation
-      margin_value: mean
-      margin_bottom: deviation
-      label_position: right
-      color: "#000000"
-      label: Quarterly Goal
     hidden_series:
     - 02 - Pipeline
     - 03 - Upside

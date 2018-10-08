@@ -104,98 +104,25 @@
     width: 8
     height: 2
 
-  - title: New Opportunities Won/Lost
-    name: New Opportunities Won/Lost
+  - title: Average ACV
+    name: Average ACV
     model: salesforce
-    explore: sf__opportunity
-    type: looker_area
-    fields:
-    - sf__opportunity.count
-    - sf__opportunity.close_quarter
-    - sf__opportunity.stage_name
-    pivots:
-    - sf__opportunity.stage_name
-    fill_fields:
-    - sf__opportunity.close_quarter
-    filters:
-      sf__opportunity.close_month: 3 years
-      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost
-      sf__opportunity.type: New
-    sorts:
-    - sf__opportunity.close_quarter desc
-    - sf__opportunity.stage_name
-    limit: 500
-    column_limit: 50
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    show_null_points: true
-    point_style: none
-    interpolation: linear
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    ordering: none
-    show_null_labels: false
-    series_colors:
-      Renewal - sf__opportunity.count: "#7accb2"
-      Upgrade / Upsell - sf__opportunity.count: "#9ae3cc"
-      New - sf__opportunity.count: "#5eb297"
-      06 - Closed Won - sf__opportunity.count: "#7accb2"
-      07 - Closed Lost - sf__opportunity.count: "#ed765f"
-    series_types: {}
-    series_labels:
-      06 - Closed Won - sf__opportunity.count: Won
-      07 - Closed Lost - sf__opportunity.count: Lost
-    row: 24
-    col: 0
-    width: 12
-    height: 8
-
-  - title: AVG Sales Cycle 12mo
-    name: AVG Sales Cycle 12mo
-    model: salesforce
-    explore: sf__opportunity
+    explore: sf__account
     type: single_value
     fields:
     - sf__account.name
-    - sf__opportunity.opportunity_name
-    - sf__opportunity.created_date
-    - sf__opportunity.close_date
+    - sf__account.annual_recurring_revenue
     filters:
-      sf__opportunity.is_lost: 'Yes'
-      sf__opportunity.close_date: 12 months
-      sf__opportunity.type: New
+      sf__account.type: Customer
     sorts:
-    - sf__opportunity.close_date
+    - sf__account.name
     limit: 500
     dynamic_fields:
-    - table_calculation: sales_cycle_days
-      label: Sales Cycle (days)
-      expression: diff_days(${sf__opportunity.created_date},${sf__opportunity.close_date})
+    - table_calculation: average_acv
+      label: Average ACV
+      expression: sum(${sf__account.annual_recurring_revenue})/count(${sf__account.annual_recurring_revenue})
       value_format:
-      value_format_name:
-      _kind_hint: dimension
-      _type_hint: number
-    - table_calculation: avg_sales_cycle
-      label: AVG Sales Cycle
-      expression: sum(${sales_cycle_days})/count(${sf__opportunity.close_date})
-      value_format:
-      value_format_name: decimal_0
+      value_format_name: usd_0
       _kind_hint: dimension
       _type_hint: number
     custom_color_enabled: false
@@ -231,16 +158,74 @@
     totals_color: "#808080"
     series_types: {}
     hidden_fields:
-    - sf__opportunity.close_date
-    - sales_cycle_days
-    - sf__opportunity.created_date
-    - sf__opportunity.opportunity_name
     - sf__account.name
-    single_value_title: AVG Sales Cycle (days) 12mo.
-    row: 16
+    - sf__account.annual_recurring_revenue
+    row: 2
+    col: 16
+    width: 8
+    height: 2
+
+  - title: New Opportunities Won/Lost
+    name: New Opportunities Won/Lost
+    model: salesforce
+    explore: sf__opportunity
+    type: looker_area
+    fields:
+    - sf__opportunity.count
+    - sf__opportunity.close_fiscal_quarter
+    - sf__opportunity.stage_name
+    pivots:
+    - sf__opportunity.stage_name
+    fill_fields:
+    - sf__opportunity.close_fiscal_quarter
+    filters:
+      sf__opportunity.close_fiscal_quarter: 8 fiscal quarters
+      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost
+      sf__opportunity.type: New
+    sorts:
+    - sf__opportunity.close_fiscal_quarter
+    - sf__opportunity.stage_name
+    limit: 500
+    column_limit: 50
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: ordinal
+    y_axis_scale_mode: linear
+    show_null_points: true
+    point_style: none
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    ordering: none
+    show_null_labels: false
+    series_colors:
+      Renewal - sf__opportunity.count: "#7accb2"
+      Upgrade / Upsell - sf__opportunity.count: "#9ae3cc"
+      New - sf__opportunity.count: "#5eb297"
+      06 - Closed Won - sf__opportunity.count: "#7accb2"
+      07 - Closed Lost - sf__opportunity.count: "#ed765f"
+    series_types: {}
+    series_labels:
+      06 - Closed Won - sf__opportunity.count: Won
+      07 - Closed Lost - sf__opportunity.count: Lost
+    row: 24
     col: 0
-    width: 6
-    height: 4
+    width: 12
+    height: 8
 
   - title: Yearly Net Growth
     name: Yearly Net Growth
@@ -305,9 +290,9 @@
     - sf__opportunity.count_lost
     series_colors:
       net_growth: "#559be6"
-    row: 9
-    col: 0
-    width: 24
+    row: 4
+    col: 12
+    width: 12
     height: 5
 
   - title: Churn Rate
@@ -409,8 +394,84 @@
       churn_rate: "#559be6"
     row: 4
     col: 0
-    width: 24
+    width: 12
     height: 5
+
+  - title: AVG Sales Cycle
+    name: AVG Sales Cycle
+    model: salesforce
+    explore: sf__opportunity
+    type: single_value
+    fields:
+    - sf__account.name
+    - sf__opportunity.opportunity_name
+    - sf__opportunity.created_date
+    - sf__opportunity.close_date
+    filters:
+      sf__opportunity.is_won: 'Yes'
+      sf__opportunity.close_date: 12 months
+      sf__opportunity.type: New
+    sorts:
+    - sf__opportunity.close_date
+    limit: 500
+    dynamic_fields:
+    - table_calculation: sales_cycle_days
+      label: Sales Cycle (days)
+      expression: diff_days(${sf__opportunity.created_date},${sf__opportunity.close_date})
+      value_format:
+      value_format_name:
+      _kind_hint: dimension
+      _type_hint: number
+    - table_calculation: avg_sales_cycle
+      label: AVG Sales Cycle
+      expression: sum(${sales_cycle_days})/count(${sf__opportunity.close_date})
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: dimension
+      _type_hint: number
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    hidden_fields:
+    - sf__opportunity.close_date
+    - sales_cycle_days
+    - sf__opportunity.created_date
+    - sf__opportunity.opportunity_name
+    - sf__account.name
+    single_value_title: AVG Sales Cycle (days) Trailing 12mos
+    row: 16
+    col: 0
+    width: 6
+    height: 4
 
   - title: Net New Customers
     name: Net New Customers
@@ -427,7 +488,7 @@
       sf__opportunity.is_closed: 'Yes'
       sf__opportunity.close_date: 1 years
     sorts:
-    - sf__opportunity.close_fiscal_quarter desc
+    - sf__opportunity.close_fiscal_quarter
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -444,7 +505,7 @@
     y_axis_tick_density_custom: 5
     show_x_axis_label: true
     show_x_axis_ticks: true
-    x_axis_scale: auto
+    x_axis_scale: ordinal
     y_axis_scale_mode: linear
     x_axis_reversed: false
     y_axis_reversed: false
@@ -671,8 +732,7 @@
     - sf__lead.created_fiscal_quarter
     filters:
       sf__lead.created_date: 4 quarters
-      sf__lead.lead_source: Home Page Banner#,Kollective,Kollective Website,Home
-        Page Banner,Kontiki Website,Website,Web Form,Web,LinkedIn,Advertisement
+      sf__lead.lead_source: Home Page Banner#,Kollective,Kollective Website,Home Page Banner,Kontiki Website,Website,Web Form,Web,LinkedIn,Advertisement
     sorts:
     - sf__lead.created_fiscal_quarter
     limit: 500
@@ -730,8 +790,8 @@
     width: 12
     height: 8
 
-  - title: Leads by Source YTD
-    name: Leads by Source YTD
+  - title: Leads by Source QTD
+    name: Leads by Source QTD
     model: salesforce
     explore: sf__lead
     type: looker_column
@@ -739,9 +799,7 @@
     - sf__lead.count
     - sf__lead.lead_source
     filters:
-      sf__lead.created_date: this year
-      sf__lead.lead_source: Home Page Banner,Home Page Banner#,Kollective,Kollective
-        Website,Web,Web Form,Website,Kontiki Website,LinkedIn,Advertisement
+      sf__lead.created_fiscal_quarter: this fiscal quarter
     sorts:
     - sf__lead.count desc
     limit: 500
@@ -839,8 +897,8 @@
       sf__opportunity.count_sql: "#4281c3"
       sf__opportunity.count_won: "#5eb297"
     series_labels:
-      sf__opportunity.count_sql: Stage 2 +
-      sf__opportunity.count: SQL
+      sf__opportunity.count_sql: SQLs
+      sf__opportunity.count: Opportunities
     column_spacing_ratio:
     column_group_spacing_ratio:
     row: 34
@@ -848,8 +906,8 @@
     width: 12
     height: 8
 
-  - title: YTD Opportunities by Channel Partner (>10)
-    name: YTD Opportunities by Channel Partner (>10)
+  - title: Opportunities by Channel Partner QTD
+    name: Opportunities by Channel Partner QTD
     model: salesforce
     explore: sf__opportunity
     type: looker_column
@@ -858,8 +916,7 @@
     - sf__opportunity.count
     - sf__opportunity.count_sql
     filters:
-      sf__opportunity.created_date: this year
-      sf__opportunity.count: ">=10"
+      sf__opportunity.created_fiscal_quarter: this fiscal quarter
       sf__opportunity.type: New
     sorts:
     - sf__opportunity.count desc
@@ -890,7 +947,7 @@
     totals_color: "#808080"
     series_labels:
       sf__opportunity.count: Opportunities
-      sf__opportunity.count_sql: Stage 2+
+      sf__opportunity.count_sql: SQLs
       sf__opportunity.count_won: Won
     series_colors:
       sf__opportunity.count_won: "#5eb297"
@@ -917,7 +974,7 @@
     - sf__opportunity.close_fiscal_quarter
     filters:
       sf__opportunity.close_fiscal_quarter: 1 quarter ago for 6 quarters
-      sf__opportunity.stage_name: 02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+      sf__opportunity.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
         - Closed Won,07 - Closed Lost
       sf__opportunity.type: Renewal
     sorts:
@@ -925,7 +982,7 @@
     - sf__opportunity.close_fiscal_quarter
     query_timezone: America/Los_Angeles
     stacking: normal
-    hidden_series: []
+    hidden_series: [01 - Prospect]
     colors:
     - 'palette: Default'
     show_value_labels: false
@@ -935,14 +992,7 @@
     y_axis_gridlines: false
     show_view_names: false
     series_labels:
-      '0': Lost
-      100 or Above: Won
-      02 - Pipeline - sf__opportunity.total_revenue: Pipeline
-      03 - Upside - sf__opportunity.total_revenue: Upside
-      04 - Forecast - sf__opportunity.total_revenue: Forecast
-      05 - Commit - sf__opportunity.total_revenue: Commit
-      06 - Closed Won - sf__opportunity.total_revenue: Closed Won
-      07 - Closed Lost - sf__opportunity.total_revenue: Closed Lost
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
       03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
       04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
@@ -958,17 +1008,11 @@
     show_x_axis_label: true
     x_axis_label: Close Quarter
     show_x_axis_ticks: true
-    x_axis_datetime_label: "%b %y"
     x_axis_scale: ordinal
     ordering: none
     show_null_labels: false
     series_colors:
-      06 - Closed Won - sf__opportunity.total_revenue: "#5eb297"
-      05 - Commit - sf__opportunity.total_revenue: "#9ae3cc"
-      07 - Closed Lost - sf__opportunity.total_revenue: "#d75c44"
-      04 - Forecast - sf__opportunity.total_revenue: "#70b3fc"
-      03 - Upside - sf__opportunity.total_revenue: "#4281c3"
-      02 - Pipeline - sf__opportunity.total_revenue: "#435978"
+      01 - Pipeline - sf__opportunity.sum_of_bookings_value: "#202c3a"
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
       03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
       04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
@@ -985,6 +1029,9 @@
     - label: Total Bookings Value
       orientation: left
       series:
+      - id: 01 - Prospect
+        name: Prospect
+        axisId: sf__opportunity.sum_of_bookings_value
       - id: 02 - Pipeline
         name: Pipeline
         axisId: sf__opportunity.sum_of_bookings_value
@@ -1033,13 +1080,13 @@
     fill_fields:
     - sf__opportunity.close_fiscal_quarter
     filters:
-      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost,02 - Pipeline,03
+      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost,01 - Prospect,02 - Pipeline,03
         - Upside,04 - Forecast,05 - Commit
-      sf__opportunity.close_date: 3 years
+      sf__opportunity.close_fiscal_quarter: 8 fiscal quarters
       sf__opportunity.type: Renewal
     sorts:
     - sf__opportunity.stage_name
-    - sf__opportunity.close_fiscal_quarter desc
+    - sf__opportunity.close_fiscal_quarter
     limit: 500
     stacking: normal
     show_value_labels: false
@@ -1056,7 +1103,7 @@
     y_axis_tick_density_custom: 5
     show_x_axis_label: true
     show_x_axis_ticks: true
-    x_axis_scale: auto
+    x_axis_scale: ordinal
     y_axis_scale_mode: linear
     ordering: none
     show_null_labels: false
@@ -1067,11 +1114,9 @@
     point_style: none
     interpolation: linear
     series_colors:
-      New - sf__opportunity.sum_of_bookings_value: "#435978"
-      Renewal - sf__opportunity.sum_of_bookings_value: "#4281c3"
-      Upgrade / Upsell - sf__opportunity.sum_of_bookings_value: "#70b3fc"
       06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
       07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
       03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
       04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
@@ -1082,6 +1127,7 @@
     series_labels:
       06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
       07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
       03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
       04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
@@ -1105,6 +1151,7 @@
     x_axis_reversed: false
     y_axis_reversed: false
     hidden_series:
+    - 01 - Prospect
     - 02 - Pipeline
     - 03 - Upside
     - 04 - Forecast
@@ -1128,7 +1175,7 @@
     fill_fields:
     - sf__opportunity.close_fiscal_quarter
     filters:
-      sf__opportunity.stage_name: 02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+      sf__opportunity.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
         - Closed Won,07 - Closed Lost
       sf__opportunity.close_quarter: 1 quarter ago for 6 quarters
       sf__opportunity.type: New
@@ -1138,7 +1185,7 @@
     - sf__opportunity.close_fiscal_quarter
     query_timezone: America/Los_Angeles
     stacking: normal
-    hidden_series: []
+    hidden_series: [01 - Prospect]
     colors:
     - 'palette: Default'
     show_value_labels: false
@@ -1148,14 +1195,7 @@
     y_axis_gridlines: false
     show_view_names: false
     series_labels:
-      '0': Lost
-      100 or Above: Won
-      02 - Pipeline - sf__opportunity.total_revenue: Pipeline
-      03 - Upside - sf__opportunity.total_revenue: Upside
-      04 - Forecast - sf__opportunity.total_revenue: Forecast
-      05 - Commit - sf__opportunity.total_revenue: Commit
-      06 - Closed Won - sf__opportunity.total_revenue: Closed Won
-      07 - Closed Lost - sf__opportunity.total_revenue: Closed Lost
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
       03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
       04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
@@ -1171,17 +1211,11 @@
     show_x_axis_label: true
     x_axis_label: Close Quarter
     show_x_axis_ticks: true
-    x_axis_datetime_label: "%b %y"
     x_axis_scale: ordinal
     ordering: none
     show_null_labels: false
     series_colors:
-      06 - Closed Won - sf__opportunity.total_revenue: "#5eb297"
-      05 - Commit - sf__opportunity.total_revenue: "#9ae3cc"
-      07 - Closed Lost - sf__opportunity.total_revenue: "#d75c44"
-      04 - Forecast - sf__opportunity.total_revenue: "#70b3fc"
-      03 - Upside - sf__opportunity.total_revenue: "#4281c3"
-      02 - Pipeline - sf__opportunity.total_revenue: "#435978"
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
       03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
       04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
@@ -1246,12 +1280,13 @@
     fill_fields:
     - sf__opportunity.close_fiscal_quarter
     filters:
-      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost,02 - Pipeline,03
+      sf__opportunity.stage_name: 01 - Prospect,06 - Closed Won,07 - Closed Lost,02 - Pipeline,03
         - Upside,04 - Forecast,05 - Commit
-      sf__opportunity.close_date: 3 years
+      sf__opportunity.close_fiscal_quarter: 8 fiscal quarters
       sf__opportunity.type: New
     sorts:
     - sf__opportunity.stage_name
+    - sf__opportunity.close_fiscal_quarter
     limit: 500
     stacking: normal
     show_value_labels: false
@@ -1268,7 +1303,7 @@
     y_axis_tick_density_custom: 5
     show_x_axis_label: true
     show_x_axis_ticks: true
-    x_axis_scale: auto
+    x_axis_scale: ordinal
     y_axis_scale_mode: linear
     ordering: none
     show_null_labels: false
@@ -1279,11 +1314,9 @@
     point_style: none
     interpolation: linear
     series_colors:
-      New - sf__opportunity.sum_of_bookings_value: "#435978"
-      Renewal - sf__opportunity.sum_of_bookings_value: "#4281c3"
-      Upgrade / Upsell - sf__opportunity.sum_of_bookings_value: "#70b3fc"
       06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
       07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
       03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
       04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
@@ -1294,6 +1327,7 @@
     series_labels:
       06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
       07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
+      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
       02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
       03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
       04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
@@ -1317,6 +1351,7 @@
     x_axis_reversed: false
     y_axis_reversed: false
     hidden_series:
+    - 01 - Prospect
     - 02 - Pipeline
     - 03 - Upside
     - 04 - Forecast
@@ -1325,17 +1360,20 @@
     col: 12
     width: 12
     height: 8
+
   - name: Current Customer Table
     title: Current Customer Table
-    model: company_usage
-    explore: usage__map
+    model: salesforce
+    explore: sf__account
     type: table
     fields:
     - sf__account.account_name_link
     - sf__account.dms
-    - sf__account.annual_recurring_revenue
+    - owner.name
+    - sf__account.created_date
     - sf__account.renewal_date
-    - usage__node.count
+    - sf__account.seats_licensed
+    - sf__account.annual_recurring_revenue
     filters:
       sf__account.type: Customer
     sorts:
@@ -1360,64 +1398,3 @@
     col: 12
     width: 12
     height: 10
-
-  - title: Average ACV
-    name: Average ACV
-    model: salesforce
-    explore: sf__account
-    type: single_value
-    fields:
-    - sf__account.name
-    - sf__account.annual_recurring_revenue
-    filters:
-      sf__account.type: Customer
-    sorts:
-    - sf__account.name
-    limit: 500
-    dynamic_fields:
-    - table_calculation: average_acv
-      label: Average ACV
-      expression: sum(${sf__account.annual_recurring_revenue})/count(${sf__account.annual_recurring_revenue})
-      value_format:
-      value_format_name: usd_0
-      _kind_hint: dimension
-      _type_hint: number
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_fields:
-    - sf__account.name
-    - sf__account.annual_recurring_revenue
-    row: 2
-    col: 16
-    width: 8
-    height: 2

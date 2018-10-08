@@ -160,8 +160,14 @@ view: sf__opportunity {
   }
 
   dimension: sql_date {
-    label: "SQL Date"
+    label: "Pipeline Date"
     type: date
+    sql: ${TABLE}.pipeline_date_c ;;
+  }
+
+  dimension_group: pipeline_date {
+    type: time
+    timeframes: [time, date, week, month, fiscal_quarter]
     sql: ${TABLE}.pipeline_date_c ;;
   }
 

@@ -837,7 +837,6 @@
     - sf__lead.created_fiscal_quarter
     filters:
       sf__lead.created_date: 4 quarters
-      sf__lead.lead_source: Home Page Banner#,Kollective,Kollective Website,Home Page Banner,Kontiki Website,Website,Web Form,Web,LinkedIn,Advertisement
     sorts:
     - sf__lead.created_fiscal_quarter
     limit: 500

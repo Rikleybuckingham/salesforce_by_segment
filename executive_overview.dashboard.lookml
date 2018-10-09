@@ -908,8 +908,6 @@
     fill_fields:
     - sf__lead.created_fiscal_quarter
     filters:
-      sf__lead.lead_source: Home Page Banner#,Kollective,Kollective Website,Home
-        Page Banner,Kontiki Website,Website,Web Form,Web,LinkedIn,Advertisement
       sf__lead.created_fiscal_quarter: 4 fiscal quarters
     sorts:
     - sf__lead.created_fiscal_quarter

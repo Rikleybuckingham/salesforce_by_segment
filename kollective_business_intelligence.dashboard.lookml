@@ -14,29 +14,192 @@
       height: 6
       width: 4
 
-    - title: Pipeline Forecast
-      name: Pipeline Forecast
+    - title: Current Customers
+      name: Current Customers
+      model: salesforce
+      explore: sf__account
+      type: single_value
+      fields:
+      - sf__account.name
+      - owner.name
+      - sf__account.seats_licensed
+      - sf__account.annual_recurring_revenue
+      - sf__account.renewal_date
+      filters:
+        sf__account.type: Customer
+      sorts:
+      - sf__account.name
+      limit: 1000
+      column_limit: 50
+      dynamic_fields:
+      - table_calculation: count
+        label: Count
+        expression: count(${sf__account.name})
+        value_format:
+        value_format_name: decimal_0
+        _kind_hint: dimension
+        _type_hint: number
+      font_size: medium
+      text_color: "#49719a"
+      hidden_fields:
+      - sf__account.name
+      - sf__account.seats_licensed
+      - sf__account.renewal_date
+      - sf__account.annual_recurring_revenue
+      - owner.name
+      single_value_title: Current Customers
+      row: 0
+      col: 4
+      width: 5
+      height: 2
+
+    - title: Total ARR
+      name: Total ARR
+      model: salesforce
+      explore: sf__account
+      type: single_value
+      fields:
+      - sf__account.name
+      - sf__account.annual_recurring_revenue
+      filters:
+        sf__account.type: Customer
+      sorts:
+      - sf__account.name
+      limit: 500
+      dynamic_fields:
+      - table_calculation: arr_sum
+        label: ARR Sum
+        expression: sum(${sf__account.annual_recurring_revenue})
+        value_format:
+        value_format_name: usd_0
+        _kind_hint: dimension
+        _type_hint: number
+      custom_color_enabled: false
+      custom_color: forestgreen
+      show_single_value_title: true
+      show_comparison: false
+      comparison_type: value
+      comparison_reverse_colors: false
+      show_comparison_label: true
+      stacking: ''
+      show_value_labels: false
+      label_density: 25
+      legend_position: center
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: true
+      limit_displayed_rows: false
+      y_axis_combined: true
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      x_axis_scale: auto
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      hidden_fields:
+      - sf__account.name
+      - sf__account.annual_recurring_revenue
+      row: 3
+      col: 4
+      width: 5
+      height: 2
+
+    - title: Average ACV
+      name: Average ACV
+      model: salesforce
+      explore: sf__account
+      type: single_value
+      fields:
+      - sf__account.name
+      - sf__account.annual_recurring_revenue
+      filters:
+        sf__account.type: Customer
+      sorts:
+      - sf__account.name
+      limit: 500
+      dynamic_fields:
+      - table_calculation: average_acv
+        label: Average ACV
+        expression: sum(${sf__account.annual_recurring_revenue})/count(${sf__account.annual_recurring_revenue})
+        value_format:
+        value_format_name: usd_0
+        _kind_hint: dimension
+        _type_hint: number
+      custom_color_enabled: false
+      custom_color: forestgreen
+      show_single_value_title: true
+      show_comparison: false
+      comparison_type: value
+      comparison_reverse_colors: false
+      show_comparison_label: true
+      stacking: ''
+      show_value_labels: false
+      label_density: 25
+      legend_position: center
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: true
+      limit_displayed_rows: false
+      y_axis_combined: true
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      x_axis_scale: auto
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      hidden_fields:
+      - sf__account.name
+      - sf__account.annual_recurring_revenue
+      row: 5
+      col: 4
+      width: 5
+      height: 2
+
+    - title: New Pipeline Forecast
+      name: New Pipeline Forecast
       model: salesforce
       explore: sf__opportunity
       type: looker_column
       fields:
-      - sf__opportunity.close_month
-      - sf__opportunity.total_revenue
+      - sf__opportunity.close_fiscal_quarter
+      - sf__opportunity.sum_of_bookings_value
       - sf__opportunity.stage_name
       pivots:
       - sf__opportunity.stage_name
       fill_fields:
-      - sf__opportunity.close_month
+      - sf__opportunity.close_fiscal_quarter
       filters:
-        sf__opportunity.close_month: 9 months ago for 12 months
-        sf__opportunity.stage_name: 02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+        sf__opportunity.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
           - Closed Won,07 - Closed Lost
+        sf__opportunity.close_quarter: 1 quarter ago for 6 quarters
+        sf__opportunity.type: New
+        sf__opportunity.close_fiscal_quarter: 1 quarter ago for 6 quarters
       sorts:
-      - sf__opportunity.close_month
-      - sf__opportunity.stage_name
+      - sf__opportunity.stage_name 0
+      - sf__opportunity.close_fiscal_quarter
       query_timezone: America/Los_Angeles
       stacking: normal
-      hidden_series: []
+      hidden_series: [01 - Prospect]
       colors:
       - 'palette: Default'
       show_value_labels: false
@@ -46,14 +209,13 @@
       y_axis_gridlines: false
       show_view_names: false
       series_labels:
-        '0': Lost
-        100 or Above: Won
-        02 - Pipeline - sf__opportunity.total_revenue: Pipeline
-        03 - Upside - sf__opportunity.total_revenue: Upside
-        04 - Forecast - sf__opportunity.total_revenue: Forecast
-        05 - Commit - sf__opportunity.total_revenue: Commit
-        06 - Closed Won - sf__opportunity.total_revenue: Closed Won
-        07 - Closed Lost - sf__opportunity.total_revenue: Closed Lost
+        01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
+        02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
+        03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
+        04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
+        05 - Commit - sf__opportunity.sum_of_bookings_value: Commit
+        06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
+        07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
       y_axis_combined: true
       show_y_axis_labels: true
       show_y_axis_ticks: true
@@ -61,89 +223,61 @@
       - Amount in Pipeline
       y_axis_tick_density: default
       show_x_axis_label: true
-      x_axis_label: Opportunities Close Month
+      x_axis_label: Close Quarter
       show_x_axis_ticks: true
-      x_axis_datetime_label: "%b %y"
       x_axis_scale: ordinal
       ordering: none
       show_null_labels: false
       series_colors:
-        06 - Closed Won - sf__opportunity.total_revenue: "#5eb297"
-        05 - Commit - sf__opportunity.total_revenue: "#9ae3cc"
-        07 - Closed Lost - sf__opportunity.total_revenue: "#d75c44"
-        04 - Forecast - sf__opportunity.total_revenue: "#70b3fc"
-        03 - Upside - sf__opportunity.total_revenue: "#4281c3"
-        02 - Pipeline - sf__opportunity.total_revenue: "#435978"
+        01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
+        02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
+        03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
+        04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
+        05 - Commit - sf__opportunity.sum_of_bookings_value: "#9ae3cc"
+        06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
+        07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
       limit_displayed_rows: false
       y_axis_tick_density_custom: 5
       y_axis_scale_mode: linear
       show_totals_labels: false
       show_silhouette: false
       totals_color: "#808080"
+      y_axes:
+      - label: Total Bookings Value
+        orientation: left
+        series:
+        - id: 02 - Pipeline
+          name: Pipeline
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 03 - Upside
+          name: Upside
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 04 - Forecast
+          name: Forecast
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 05 - Commit
+          name: Commit
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 06 - Closed Won
+          name: Won
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 07 - Closed Lost
+          name: Lost
+          axisId: sf__opportunity.sum_of_bookings_value
+        showLabels: true
+        showValues: true
+        unpinAxis: false
+        tickDensity: default
+        tickDensityCustom: 5
+        type: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      note_state: collapsed
+      note_display: above
+      note_text: ''
       row: 0
-      col: 4
-      width: 10
-      height: 6
-
-    - title: YTD Lead to Win Funnel
-      name: This Year Lead to Win Funnel
-      model: salesforce
-      explore: sf__lead
-      type: looker_column
-      fields:
-      - sf__lead.count
-      - sf__lead.net_mql_count
-      - sf__lead.converted_to_opportunity_count
-      - sf__opportunity.count_sql
-      - sf__opportunity.count_won
-      filters:
-        sf__lead.created_date: this year
-      sorts:
-      - sf__lead.count desc
-      limit: 500
-      stacking: ''
-      colors:
-      - 'palette: Default'
-      show_value_labels: true
-      label_density: 10
-      label_color: []
-      legend_position: center
-      x_axis_gridlines: false
-      y_axis_gridlines: true
-      show_view_names: false
-      series_labels:
-        sf__lead.count: Leads
-        sf__opportunity.count_new_business: Opportunities
-        sf__opportunity.count_new_business_won: Won Opportunities
-        sf__lead.net_mql_count: MQLs
-        sf__lead.converted_to_opportunity_count: Opportunities
-        sf__opportunity.count_sql: SQLs
-        sf__opportunity.count_won: Won Opportunities
-      y_axis_combined: true
-      show_y_axis_labels: true
-      show_y_axis_ticks: true
-      y_axis_tick_density: default
-      show_x_axis_label: true
-      show_x_axis_ticks: true
-      x_axis_scale: auto
-      show_null_labels: false
-      show_dropoff: true
-      series_colors:
-        sf__opportunity.count_won: "#5eb297"
-        sf__opportunity.count_sql: "#9ae3cc"
-        sf__lead.count: "#435978"
-        sf__lead.net_mql_count: "#4281c3"
-        sf__lead.converted_to_opportunity_count: "#70b3fc"
-      limit_displayed_rows: false
-      y_axis_tick_density_custom: 5
-      y_axis_scale_mode: linear
-      ordering: none
-      show_totals_labels: false
-      show_silhouette: false
-      totals_color: "#808080"
-      row: 0
-      col: 14
-      width: 10
+      col: 9
+      width: 15
       height: 6
 
     - name: divider_1
@@ -498,23 +632,28 @@
       height: 6
       width: 4
 
-    - title: Leads by Acquisition Program QTD
-      name: Leads by Acquisition Program
+
+    - title: Leads to Opportunties
+      name: Leads to Opportunties
       model: salesforce
       explore: sf__lead
       type: looker_column
       fields:
       - sf__lead.count
-      - sf__lead.acquisition_program
+      - sf__lead.currently_active_leads_count
       - sf__lead.net_mql_count
-      sorts:
-      - sf__lead.count desc
+      - sf__lead.converted_to_opportunity_count
+      - sf__lead.created_fiscal_quarter
+      fill_fields:
+      - sf__lead.created_fiscal_quarter
       filters:
-        sf__lead.created_date: this quarter
+        sf__lead.created_date: 4 quarters
+      sorts:
+      - sf__lead.created_fiscal_quarter
       limit: 500
       stacking: ''
-      show_value_labels: false
-      label_density: 25
+      show_value_labels: true
+      label_density: 3
       legend_position: center
       x_axis_gridlines: false
       y_axis_gridlines: true
@@ -529,113 +668,96 @@
       show_x_axis_ticks: true
       x_axis_scale: auto
       y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
       ordering: none
       show_null_labels: false
       show_totals_labels: false
       show_silhouette: false
       totals_color: "#808080"
-      series_colors:
-        sf__lead.count: "#4281c3"
-        sf__lead.net_mql_count: "#70b3fc"
-        sf__opportunity.count: "#9ae3cc"
-        sf__opportunity.count_won: "#5eb297"
+      show_null_points: true
+      point_style: none
+      interpolation: linear
+      colors:
+      - 'palette: Default'
+      label_color: []
       series_labels:
-        sf__lead.net_mql_count: MQLs
         sf__lead.count: Leads
-      y_axes:
-      - label: Lead Count
-        maxValue:
-        minValue:
-        orientation: left
-        showLabels: true
-        showValues: true
-        tickDensity: default
-        tickDensityCustom: 5
-        type: linear
-        unpinAxis: false
-        valueFormat:
-        series:
-        - id: sf__lead.count
-          name: Leads
-          axisId: sf__lead.count
-      - label: ''
-        maxValue:
-        minValue:
-        orientation: right
-        showLabels: true
-        showValues: true
-        tickDensity: default
-        tickDensityCustom:
-        type: linear
-        unpinAxis: false
-        valueFormat:
-        series:
-        - id: sf__lead.net_mql_count
-          name: MQLs
-          axisId: sf__lead.net_mql_count
+        sf__opportunity.count_new_business: Opportunities
+        sf__opportunity.count_new_business_won: Won Opportunities
+        sf__lead.net_mql_count: MQLs
+        sf__lead.converted_to_opportunity_count: Opportunities
+        sf__opportunity.count_sql: SQLs
+        sf__opportunity.count_won: Won Opportunities
+        sf__lead.currently_active_leads_count: Active Leads
+      show_dropoff: false
+      series_colors:
+        sf__opportunity.count_won: "#5eb297"
+        sf__opportunity.count_sql: "#9ae3cc"
+        sf__lead.count: "#435978"
+        sf__lead.net_mql_count: "#70b3fc"
+        sf__lead.converted_to_opportunity_count: "#9ae3cc"
+        sf__lead.currently_active_leads_count: "#4281c3"
+      series_types: {}
+      hidden_series: []
       row: 16
       col: 4
       width: 10
       height: 6
 
-    - title: Opportunities by Channel Partner QTD
-      name: Opportunities by Channel Partner
+    - title: Leads by Source QTD
+      name: Leads by Source QTD
       model: salesforce
-      explore: sf__opportunity
+      explore: sf__lead
       type: looker_column
       fields:
-      - sf__opportunity.channel_partner
-      - sf__opportunity.count
-      - sf__opportunity.count_won
-      sorts:
-      - sf__opportunity.count desc
+      - sf__lead.count
+      - sf__lead.lead_source
       filters:
-        sf__opportunity.created_date: this quarter
+        sf__lead.created_fiscal_quarter: this fiscal quarter
+      sorts:
+      - sf__lead.count desc
       limit: 500
       stacking: ''
-      show_value_labels: false
-      label_density: 25
+      colors:
+      - 'palette: Default'
+      show_value_labels: true
+      label_density: 10
+      label_color: []
       legend_position: center
       x_axis_gridlines: false
       y_axis_gridlines: true
       show_view_names: false
-      limit_displayed_rows: false
+      series_labels:
+        sf__lead.count: Leads
+        sf__opportunity.count_new_business: Opportunities
+        sf__opportunity.count_new_business_won: Won Opportunities
+        sf__lead.net_mql_count: MQLs
+        sf__lead.converted_to_opportunity_count: Opportunities
+        sf__opportunity.count_sql: SQLs
+        sf__opportunity.count_won: Won Opportunities
       y_axis_combined: true
-      show_y_axis_labels: true
+      show_y_axis_labels: false
       show_y_axis_ticks: true
       y_axis_tick_density: default
-      y_axis_tick_density_custom: 5
       show_x_axis_label: true
       show_x_axis_ticks: true
       x_axis_scale: auto
+      show_null_labels: false
+      show_dropoff: false
+      series_colors:
+        sf__opportunity.count_won: "#5eb297"
+        sf__opportunity.count_sql: "#9ae3cc"
+        sf__lead.count: "#559be6"
+        sf__lead.net_mql_count: "#4281c3"
+        sf__lead.converted_to_opportunity_count: "#70b3fc"
+      limit_displayed_rows: false
+      y_axis_tick_density_custom: 5
       y_axis_scale_mode: linear
       ordering: none
-      show_null_labels: false
       show_totals_labels: false
       show_silhouette: false
       totals_color: "#808080"
-      series_colors:
-        sf__opportunity.count: "#4281c3"
-        sf__opportunity.count_won: "#5eb297"
-      y_axes:
-      - label: Opportunity Count
-        maxValue:
-        minValue:
-        orientation: left
-        showLabels: true
-        showValues: true
-        tickDensity: default
-        tickDensityCustom: 5
-        type: linear
-        unpinAxis: false
-        valueFormat:
-        series:
-        - id: sf__opportunity.count
-          name: Sf Opportunities
-          axisId: sf__opportunity.count
-        - id: sf__opportunity.count_won
-          name: Count Won
-          axisId: sf__opportunity.count_won
       row: 16
       col: 14
       width: 10
@@ -704,16 +826,17 @@
       width: 5
       height: 3
 
-    - title: Won Renewals YTD
+    - title: Won Renewals QTD
       name: won_renewals
       model: salesforce
       explore: sf__opportunity
       type: single_value
       fields:
-      - sf__opportunity.count_won
+      - sf__opportunity.count
       filters:
         sf__opportunity.type: Renewal
-        sf__opportunity.close_date: this year
+        sf__opportunity.close_fiscal_quarter: this fiscal quarter
+        sf__opportunity.is_won: yes
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -745,70 +868,11 @@
       show_silhouette: false
       totals_color: "#808080"
       series_types: {}
-      single_value_title: Renewal's Won YTD
+      single_value_title: Renewal's Won QTD
       row: 27
       col: 4
       width: 5
       height: 3
-
-    - title: Renewal Pipeline
-      name: current_pipeline
-      model: salesforce
-      explore: sf__opportunity
-      type: looker_column
-      fields:
-      - sf__opportunity.close_month
-      - sf__opportunity.sum_of_bookings_value
-      - sf__opportunity.stage_name
-      pivots:
-      - sf__opportunity.stage_name
-      fill_fields:
-      - sf__opportunity.close_month
-      filters:
-        sf__opportunity.close_date: 9 months ago for 12 months
-        sf__opportunity.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
-        sf__opportunity.type: Renewal
-      sorts:
-      - sf__opportunity.close_month
-      - sf__opportunity.stage_name 0
-      limit: 500
-      stacking: normal
-      show_value_labels: false
-      label_density: 25
-      legend_position: center
-      x_axis_gridlines: false
-      y_axis_gridlines: true
-      show_view_names: false
-      limit_displayed_rows: false
-      y_axis_combined: true
-      show_y_axis_labels: true
-      show_y_axis_ticks: true
-      y_axis_tick_density: default
-      y_axis_tick_density_custom: 5
-      show_x_axis_label: true
-      show_x_axis_ticks: true
-      x_axis_scale: auto
-      y_axis_scale_mode: linear
-      ordering: none
-      show_null_labels: false
-      show_totals_labels: false
-      show_silhouette: false
-      totals_color: "#808080"
-      show_null_points: true
-      point_style: none
-      interpolation: linear
-      series_types: {}
-      column_group_spacing_ratio:
-      series_colors:
-        03 - Upside: "#70b3fc"
-        04 - Forecast: "#4281c3"
-        05 - Commit: "#9ae3cc"
-        06 - Closed Won: "#5eb297"
-        07 - Closed Lost: "#d75c44"
-      row: 24
-      col: 14
-      width: 10
-      height: 6
 
     - title: Average Deal Size YTD
       name: average_deal_size
@@ -904,3 +968,110 @@
       col: 9
       width: 5
       height: 3
+
+    - title: Renewal Forecast
+      name: Renewal Forecast
+      model: salesforce
+      explore: sf__opportunity
+      type: looker_column
+      fields:
+      - sf__opportunity.stage_name
+      - sf__opportunity.sum_of_bookings_value
+      - sf__opportunity.close_fiscal_quarter
+      pivots:
+      - sf__opportunity.stage_name
+      fill_fields:
+      - sf__opportunity.close_fiscal_quarter
+      filters:
+        sf__opportunity.close_fiscal_quarter: 1 quarter ago for 6 quarters
+        sf__opportunity.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+          - Closed Won,07 - Closed Lost
+        sf__opportunity.type: Renewal
+      sorts:
+      - sf__opportunity.stage_name 0
+      - sf__opportunity.close_fiscal_quarter
+      query_timezone: America/Los_Angeles
+      stacking: normal
+      hidden_series: [01 - Prospect]
+      colors:
+      - 'palette: Default'
+      show_value_labels: false
+      label_density: 21
+      legend_position: center
+      x_axis_gridlines: false
+      y_axis_gridlines: false
+      show_view_names: false
+      series_labels:
+        01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
+        02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
+        03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
+        04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
+        05 - Commit - sf__opportunity.sum_of_bookings_value: Commit
+        06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
+        07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
+      y_axis_combined: true
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_labels:
+      - Amount in Pipeline
+      y_axis_tick_density: default
+      show_x_axis_label: true
+      x_axis_label: Close Quarter
+      show_x_axis_ticks: true
+      x_axis_scale: ordinal
+      ordering: none
+      show_null_labels: false
+      series_colors:
+        01 - Pipeline - sf__opportunity.sum_of_bookings_value: "#202c3a"
+        02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
+        03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
+        04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
+        05 - Commit - sf__opportunity.sum_of_bookings_value: "#9ae3cc"
+        06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
+        07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
+      limit_displayed_rows: false
+      y_axis_tick_density_custom: 5
+      y_axis_scale_mode: linear
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      y_axes:
+      - label: Total Bookings Value
+        orientation: left
+        series:
+        - id: 01 - Prospect
+          name: Prospect
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 02 - Pipeline
+          name: Pipeline
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 03 - Upside
+          name: Upside
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 04 - Forecast
+          name: Forecast
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 05 - Commit
+          name: Commit
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 06 - Closed Won
+          name: Won
+          axisId: sf__opportunity.sum_of_bookings_value
+        - id: 07 - Closed Lost
+          name: Lost
+          axisId: sf__opportunity.sum_of_bookings_value
+        showLabels: true
+        showValues: true
+        unpinAxis: false
+        tickDensity: default
+        tickDensityCustom: 5
+        type: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      note_state: collapsed
+      note_display: above
+      note_text: ''
+      row: 24
+      col: 14
+      width: 10
+      height: 6

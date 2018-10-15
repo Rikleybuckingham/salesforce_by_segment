@@ -982,7 +982,7 @@
       sf__opportunity.count_sql: SQLs
       sf__opportunity.count_won: Won Opportunities
     y_axis_combined: true
-    show_y_axis_labels: true
+    show_y_axis_labels: false
     show_y_axis_ticks: true
     y_axis_tick_density: default
     show_x_axis_label: true

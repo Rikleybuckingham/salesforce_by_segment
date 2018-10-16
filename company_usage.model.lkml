@@ -1,4 +1,4 @@
-connection: "redshift_admin"
+connection: "aws-postgresql"
 
 # include all views in this project
 include: "*.view"
@@ -7,7 +7,7 @@ include: "*.view"
 explore: usage__map{
   label: "Usage Data"
   join: usage__delivery {
-    sql_on: ${usage__map.composite_id}=${usage__delivery.composite_id} ;;
+    sql_on: ${usage__map.company_id} = ${usage__delivery.company_id} AND  ${usage__map.dms} = ${usage__delivery.dms} ;;
     relationship: one_to_many
     type: left_outer
     view_label: "Delivery"
@@ -40,4 +40,11 @@ explore: usage__map{
     type: left_outer
     view_label: "Opportunity"
   }
+}
+explore: usage__zipcode {
+
+}
+
+explore: usage__location {
+
 }

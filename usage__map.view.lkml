@@ -1,5 +1,5 @@
 view: usage__map {
-  sql_table_name: public.company_id_map ;;
+  sql_table_name: public.companies_salesforce_accounts ;;
   suggestions: no
 
 # Create Filters
@@ -11,14 +11,14 @@ view: usage__map {
     sql: ${TABLE}.company_id ;;
   }
 
-  dimension: company_name {
+  dimension: account_name {
     type: string
-    sql: ${TABLE}.company_name ;;
+    sql: ${TABLE}.account_name ;;
   }
 
   dimension: dms {
     type: string
-    sql: ${TABLE}.dms ;;
+    sql: ${TABLE}.source_env ;;
   }
 
   dimension: salesforce_id {
@@ -28,14 +28,18 @@ view: usage__map {
 
   dimension: composite_id {
     type: string
-    sql: ${TABLE}.company_id || '-' || lower(${TABLE}.dms) ;;
+    sql: ${TABLE}.company_id || '-' || lower(${TABLE}.source_env) ;;
     hidden: yes
   }
 
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
+  }
 # Create Measures
 
   measure: count {
     type: count
-    drill_fields: [company_name]
+    drill_fields: [account_name]
   }
 }

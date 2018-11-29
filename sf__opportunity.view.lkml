@@ -23,7 +23,7 @@ view: sf__opportunity {
 
   dimension: bookings_value {
     type: number
-    sql: ${TABLE}.bookings_value_c ;;
+    sql: cast(coalesce(${TABLE}.bookings_value_c, '0') as float) ;;
   }
 
   dimension: channel_partner {
@@ -78,7 +78,7 @@ view: sf__opportunity {
 
   dimension: days_open {
     type: number
-    sql: datediff(days, ${created_raw}, coalesce(${close_raw}, current_date) ) ;;
+    sql: coalesce(${close_raw}, current_date)-${created_raw} ;;
   }
 
   dimension: id {
@@ -165,7 +165,7 @@ view: sf__opportunity {
     sql: ${TABLE}.pipeline_date_c ;;
   }
 
-  dimension_group: pipeline_date {
+  dimension_group: pipeline {
     type: time
     timeframes: [time, date, week, month, fiscal_quarter]
     sql: ${TABLE}.pipeline_date_c ;;
@@ -196,7 +196,7 @@ view: sf__opportunity {
   measure: average_active_velocity {
     label: "SQL Velocity"
     type: average
-    sql: datediff(days, ${created_date}, ${TABLE}.pipeline_date_c) ;;
+    sql: ${pipeline_date}-${created_date} ;;
     value_format: "#"
   }
 
@@ -216,7 +216,7 @@ view: sf__opportunity {
     label: "Lost Opportunity Velocity"
     type: average
     drill_fields: [detail*]
-    sql: datediff(days, ${sql_date}}, ${close_date}) ;;
+    sql: ${close_date}-${sql_date}} ;;
     value_format: "#"
     filters: {
       field: is_lost
@@ -250,7 +250,7 @@ view: sf__opportunity {
     label: "Won Opportunity Velocity"
     type: average
     drill_fields: [detail*]
-    sql: datediff(days, ${TABLE}.pipeline_date_c, ${close_date}) ;;
+    sql: ${close_date}-${pipeline_date} ;;
     value_format: "#"
     filters: {
       field: is_won

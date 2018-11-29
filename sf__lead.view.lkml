@@ -12,7 +12,6 @@ view: sf__lead {
 
   dimension_group: acquisition_date {
     type: time
-    hidden: yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.mkto_71_acquisition_date_c ;;
   }
@@ -66,7 +65,7 @@ view: sf__lead {
     sql: ${TABLE}.created_date ;;
   }
 
-  dimension_group: interesting_moment_timestamp {
+  dimension_group: last_interesting_moment {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.mkto_si_last_interesting_moment_date_c ;;
@@ -105,9 +104,8 @@ view: sf__lead {
     sql: ${TABLE}.last_referenced_date ;;
   }
 
-  dimension_group: last_status_updated_timestamp {
+  dimension_group: last_status_updated {
     type: time
-    hidden: yes
     timeframes: [time, date, week, month]
     sql: ${TABLE}.statushistory_last_status_updated_c ;;
   }
@@ -129,20 +127,15 @@ view: sf__lead {
     sql: ${TABLE}.lead_source ;;
   }
 
-  dimension_group: marketing_qualified_timestamp {
+  dimension_group: mql {
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.marketing_qualified_date_c ;;
   }
 
-  dimension: mql_date {
-    type: date
-    sql: ${TABLE}.marketing_qualified_date_c ;;
-  }
-
   dimension: mql_velocity {
     type: number
-    sql: datediff(days, ${created_date}, ${mql_date}) ;;
+    sql: ${mql_date}-${created_date} ;;
   }
 
   dimension: owner_id {
@@ -167,17 +160,18 @@ view: sf__lead {
   measure: average_mql_velocity {
     label: "Average MQL Velocity"
     type: average
-    sql: datediff(days, ${created_date}, ${mql_date}) ;;
+    sql: ${mql_velocity} ;;
     filters: {
       field: mql_velocity
       value: ">0"
     }
+    value_format_name: decimal_0
   }
 
   measure: average_opportunity_velocity {
     label: "Average Opportunity Velocity"
     type: average
-    sql: datediff(days, ${mql_date}, ${converted_date}) ;;
+    sql: ${converted_date}-${mql_date} ;;
     filters: {
       field: converted_opportunity_id
       value: "-null"
@@ -211,7 +205,7 @@ view: sf__lead {
   measure:  currently_active_leads_count{
     type: count
     filters: {
-      field: interesting_moment_timestamp_date
+      field: last_interesting_moment_date
       value: "30 days"
     }
   }
@@ -219,7 +213,7 @@ view: sf__lead {
   measure: days_mql_open{
     label: "Days MQL Open"
     type: average
-    sql: datediff(days, ${mql_date}, getdate()) ;;
+    sql: current_timestamp-${mql_date} ;;
     filters: {
       field: mql_date
       value: "-null"

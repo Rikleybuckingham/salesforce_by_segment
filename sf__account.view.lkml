@@ -8,6 +8,16 @@ view: sf__account {
     sql: replace({% parameter account_id_filter %}, '-', '') = ${id} ;;
   }
 
+  filter: company_id_filter {
+    type: number
+    sql: {% condition company_id_filter %} ${usage__map.company_id} {% endcondition %} ;;
+  }
+
+  filter: dms_filter {
+    type: string
+    sql: {% condition dms_filter %} ${usage__map.dms} {% endcondition %} ;;
+  }
+
 # Create Dimensions
 
   dimension: account_name_link { # This is used if you want to click the account name to go to Company Insights Dashboard
@@ -17,7 +27,7 @@ view: sf__account {
     hidden: no
     link: {
       label: "Company Insights Dashboard"
-      url: "salesforce/company_insights?account_id_filter={{ id._value | url_encode}}"
+      url: "salesforce/company_insights?account_id_filter={{ id._value | url_encode }}&company_id_filter={{ usage__map.company_id._value | url_encode }}&dms_filter={{ usage__map.dms._value | url_encode }}"
     }
   }
 
@@ -32,11 +42,13 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: annual_recurring_revenue {
     type: number
     sql: ${TABLE}.arr_c ;;
+    value_format_name: usd_0
   }
 
   dimension: clientless_streaming {
@@ -50,6 +62,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension_group: created {
@@ -74,6 +87,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: id {
@@ -121,6 +135,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: media_center {
@@ -134,6 +149,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: media_center_live_streaming {
@@ -147,6 +163,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: name {
@@ -165,6 +182,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: owner_id {
@@ -194,6 +212,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: seats_licensed {
@@ -212,6 +231,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: skype_meeting_broadcast {
@@ -225,6 +245,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension_group: system_modstamp {
@@ -249,6 +270,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
   dimension: webcaster {
@@ -262,6 +284,7 @@ view: sf__account {
         label: "No"
       }
     }
+    group_label: "Products"
   }
 
 # Create Measures

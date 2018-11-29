@@ -481,7 +481,7 @@
     fields: [sf__lead.company, lead_owners.name, sf__lead.acquisition_program, sf__lead.lead_source,
       sf__lead.status, sf__lead.mql_date]
     filters:
-      sf__lead.marketing_qualified_timestamp_date: NOT NULL
+      sf__lead.mql_date: NOT NULL
       sf__lead.status: New,Qualified,Working
     sorts: [sf__lead.mql_date desc]
     limit: 500

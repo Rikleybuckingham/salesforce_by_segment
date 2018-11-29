@@ -18,7 +18,7 @@ view: usage__map {
 
   dimension: dms {
     type: string
-    sql: ${TABLE}.source_env ;;
+    sql: lower(${TABLE}.source_env) ;;
   }
 
   dimension: salesforce_id {

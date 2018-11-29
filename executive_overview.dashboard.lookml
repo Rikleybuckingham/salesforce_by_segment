@@ -1360,19 +1360,19 @@
 
   - name: Current Customer Table
     title: Current Customer Table
-    model: salesforce
-    explore: sf__account
+    model: company_usage
+    explore: usage__map
     type: table
     fields:
     - sf__account.account_name_link
     - sf__account.dms
-    - owner.name
     - sf__account.created_date
     - sf__account.renewal_date
     - sf__account.seats_licensed
     - sf__account.annual_recurring_revenue
     filters:
       sf__account.type: Customer
+      usage__map.type: User
     sorts:
     - sf__account.account_name_link
     limit: 500

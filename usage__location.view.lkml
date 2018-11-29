@@ -3,7 +3,8 @@ view: usage__location {
     sql: select
           latitude,
           longitude,
-          content_moid
+          content_moid,
+          type
       from
           delivery, lateral (
               select
@@ -15,11 +16,26 @@ view: usage__location {
                   delivery.external_ip::ip4 <<= network) as geo
                 where
                  {% condition content_moid_filter %} delivery.content_moid {% endcondition %}
+                and {% condition company_id_filter %} delivery.company_id {% endcondition %}
+                and {% condition source_env_filter %} delivery.source_env {% endcondition %}
+                and {% condition type_filter %} delivery.type {% endcondition %}
        ;;
+  }
+
+  filter: company_id_filter {
+    type: number
   }
 
   filter: content_moid_filter {
     type: string
+  }
+
+  filter: source_env_filter {
+    type: string
+  }
+
+  filter: type_filter {
+    type: number
   }
 
   measure: count {

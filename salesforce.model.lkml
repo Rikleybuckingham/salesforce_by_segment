@@ -1,7 +1,8 @@
-connection: "segment_sources"
+connection: "aws-postgresql"
 
 # include Salesforce views
 include: "sf__*.view"
+include: "usage__map.view"
 
 # include the dashboards
 include: "*.dashboard"
@@ -33,6 +34,13 @@ explore: sf__account {
     sql_on: ${sf__account.id} = ${sf__lead.converted_account_id} ;;
     relationship: one_to_many
     view_label: "Leads"
+  }
+
+  join: usage__map {
+    type: left_outer
+    sql_on: ${sf__account.id} = ${usage__map.salesforce_id} AND ${sf__account.dms} = ${usage__map.dms} ;;
+    relationship: one_to_one
+    view_label: "IDs"
   }
 }
 
@@ -73,6 +81,12 @@ explore: sf__lead {
     relationship: many_to_one
     view_label: "Opportunity Owners"
   }
+
+  join: usage__map {
+    sql_on: ${sf__lead.converted_account_id} = ${usage__map.salesforce_id} ;;
+    relationship: many_to_one
+    view_label: "IDs"
+  }
 }
 
 # Create Opportunities Explore
@@ -96,5 +110,11 @@ explore: sf__opportunity {
     from: sf__user
     sql_on: ${sf__opportunity.owner_id} = ${opportunity_owners.id} ;;
     relationship: many_to_one
+  }
+
+  join: usage__map {
+    sql_on: ${sf__opportunity.account_id} = ${usage__map.salesforce_id} ;;
+    relationship: many_to_one
+    view_label: "IDs"
   }
 }

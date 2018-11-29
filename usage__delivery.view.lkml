@@ -116,10 +116,22 @@ view: usage__delivery {
   }
 
   dimension: type {
-    type: number
-    sql: ${TABLE}.type ;;
+    type: string
+    case: {
+      when: {
+        sql: ${TABLE}.type = 0 or ${TABLE}.type = 1 or ${TABLE}.type = 3;;
+        label: "VoD"
+      }
+      when: {
+        sql: ${TABLE}.type = 2 ;;
+        label: "Live"
+      }
+      when: {
+        sql: ${TABLE}.type = 4 ;;
+        label: "SCCM"
+      }
+    }
   }
-
   dimension: wan_bytes {
     type: number
     sql: ${TABLE}.wan_bytes ;;
@@ -143,10 +155,22 @@ view: usage__delivery {
     sql: ${TABLE}.origin_bytes ;;
     }
 
+  measure: origin_gb_sum {
+    label: "Origin GB Sum"
+    type: sum
+    sql: ${origin_bytes} * 1e-9 ;;
+  }
+
   measure: peer_bytes_sum {
     label: "Peer Bytes Sum"
     type: sum
     sql: ${peer_bytes} ;;
+  }
+
+  measure: peer_gb_sum {
+    label: "Peer GB Sum"
+    type: sum
+    sql: ${peer_bytes} * 1e-9 ;;
   }
 
   measure: peering_percentage {

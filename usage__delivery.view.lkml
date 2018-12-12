@@ -16,9 +16,9 @@ view: usage__delivery {
     sql: ${TABLE}.content_moid ;;
   }
 
-  dimension: composite_id {
+  dimension: content_title {
     type: string
-    sql: ${TABLE}.company_id || '-' || ${TABLE}.source_env ;;
+    sql: ${TABLE}.content_title ;;
   }
 
   dimension: date {
@@ -106,8 +106,25 @@ view: usage__delivery {
   }
 
   dimension: status {
-    type: number
-    sql: ${TABLE}.status ;;
+    type: string
+    case: {
+      when: {
+        label: "In Progress"
+        sql: ${TABLE}.status = 0 ;;
+      }
+      when: {
+        label: "Completed"
+        sql: ${TABLE}.status = 1 ;;
+      }
+      when: {
+        label: "Failed"
+        sql: ${TABLE}.status = 2 ;;
+      }
+      when: {
+        label: "Canceled"
+        sql: ${TABLE}.status = 3 ;;
+      }
+    }
   }
 
   dimension: total_bytes {
@@ -147,30 +164,46 @@ view: usage__delivery {
   measure: count {
     label: "Delivery Count"
     type: count
+    drill_fields: [delivery_details*]
   }
 
+  measure: first_start_time {
+    label: "First Start Time"
+    type: date_time
+    sql: min(${TABLE}.start_time) ;;
+  }
+
+  measure: last_start_time {
+    label: "Last Start Time"
+    type: date_time
+    sql: max(${TABLE}.start_time) ;;
+  }
   measure: origin_bytes_sum {
     label: "Origin Bytes Sum"
     type: sum
     sql: ${TABLE}.origin_bytes ;;
+    drill_fields: [delivery_details*]
     }
 
   measure: origin_gb_sum {
     label: "Origin GB Sum"
     type: sum
     sql: ${origin_bytes} * 1e-9 ;;
+    drill_fields: [delivery_details*]
   }
 
   measure: peer_bytes_sum {
     label: "Peer Bytes Sum"
     type: sum
     sql: ${peer_bytes} ;;
+    drill_fields: [delivery_details*]
   }
 
   measure: peer_gb_sum {
     label: "Peer GB Sum"
     type: sum
     sql: ${peer_bytes} * 1e-9 ;;
+    drill_fields: [delivery_details*]
   }
 
   measure: peering_percentage {
@@ -182,6 +215,7 @@ view: usage__delivery {
     label: "Total Bytes Sum"
     type: sum
     sql: ${total_bytes};;
+    drill_fields: [delivery_details*]
   }
 
   measure: total_gb {
@@ -189,6 +223,7 @@ view: usage__delivery {
     type:  sum
     sql: ${total_bytes} * 1e-9  ;;
     value_format: "#,##0"
+    drill_fields: [delivery_details*]
   }
 
   measure: unique_agent_count {
@@ -199,12 +234,21 @@ view: usage__delivery {
       field: short_node_id
       value: "-EMPTY"
     }
+    drill_fields: [delivery_details*]
   }
 
   measure: unique_content {
     label: "Unique Content Count"
     type:  count_distinct
     sql: ${content_moid} ;;
+    drill_fields: [content_details*]
   }
 
+  set: content_details {
+    fields: [content_title, content_moid, unique_agent_count, count]
+  }
+
+  set: delivery_details {
+    fields: [short_node_id, content_title, status, lan_bytes, wan_bytes, peer_bytes, origin_bytes, start_time]
+  }
 }

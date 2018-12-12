@@ -147,15 +147,13 @@
     width: 6
     height: 3
 
-  - title: Renewal Date
-    name: Renewal Date
+  - title: Account Owner
+    name: account_owner
     model: salesforce
     explore: sf__account
     type: single_value
     fields:
-    - sf__account.renewal_date
-    fill_fields:
-    - sf__account.renewal_date
+    - owner.name
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -652,13 +650,13 @@
     series_types: {}
     listen:
       account_id_filter: sf__account.id
-    row:
-    col:
+    row: 25
+    col: 0
     width: 24
     height: 2
 
-  - title: Open Opportunities
-    name: Open Opportunities
+  - title:  Current Opportunities
+    name: current_opportunities
     model: salesforce
     explore: sf__opportunity
     type: table
@@ -667,11 +665,12 @@
     - sf__opportunity.bookings_value
     - sf__opportunity.type
     - sf__opportunity.stage_name
+    - opportunity_owners.name
     - sf__opportunity.channel_partner
     - sf__opportunity.contract_term_months
     - sf__opportunity.close_date
     filters:
-      sf__opportunity.is_closed: 'No'
+      sf__opportunity.close_date: after 0 minutes ago
     limit: 500
     show_view_names: false
     show_row_numbers: true
@@ -708,10 +707,79 @@
     series_types: {}
     listen:
       account_id_filter: sf__account.id
-    row:
-    col:
+    row: 27
+    col: 0
     width: 24
     height: 4
+
+  - name: live_events
+    title: Live Events
+    model: company_usage
+    explore: usage__delivery
+    type: table
+    fields: [usage__delivery.content_title, usage__delivery.content_moid, usage__delivery.count, usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum, usage__delivery.first_start_time,
+      usage__delivery.last_start_time]
+    hidden_fields: [usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum]
+    filters:
+      usage__delivery.type: Live
+    sorts: [usage__delivery.last_start_time desc]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    table_theme: gray
+    limit_displayed_rows: false
+    dynamic_fields:
+    - table_calculation: peering_percentage
+      label: Peering Percentage
+      expression: "${usage__delivery.peer_bytes_sum}/(${usage__delivery.peer_bytes_sum}+${usage__delivery.origin_bytes_sum})"
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      _type_hint: number
+    listen:
+      company_id_filter: usage__delivery.company_id
+      usage_date_filter: usage__delivery.start_date
+      dms_filter: usage__delivery.dms
+    row: 31
+    col: 0
+    width: 12
+    height: 8
+
+  - name: vod_content
+    title: VoD Content
+    model: company_usage
+    explore: usage__delivery
+    type: table
+    fields: [usage__delivery.content_title, usage__delivery.content_moid, usage__delivery.count, usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum, usage__delivery.first_start_time,
+      usage__delivery.last_start_time]
+    hidden_fields: [usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum]
+    filters:
+      usage__delivery.type: VoD
+    sorts: [usage__delivery.last_start_time desc]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    table_theme: gray
+    limit_displayed_rows: false
+    dynamic_fields:
+    - table_calculation: peering_percentage
+      label: Peering Percentage
+      expression: "${usage__delivery.peer_bytes_sum}/(${usage__delivery.peer_bytes_sum}+${usage__delivery.origin_bytes_sum})"
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      _type_hint: number
+    listen:
+      company_id_filter: usage__delivery.company_id
+      usage_date_filter: usage__delivery.start_date
+      dms_filter: usage__delivery.dms
+    row: 31
+    col: 12
+    width: 12
+    height: 8
+
 
   filters:
   - name: account_id_filter

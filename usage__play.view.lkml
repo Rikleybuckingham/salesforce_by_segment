@@ -40,12 +40,6 @@ view: usage__play {
     sql: ${TABLE}.company_id ;;
   }
 
-  dimension: composite_id {
-    type: string
-    sql: ${TABLE}.company_id || '-' || lower(${TABLE}.source_env) ;;
-    hidden: yes
-  }
-
   dimension: content_moid {
     type: string
     sql: ${TABLE}.content_moid ;;

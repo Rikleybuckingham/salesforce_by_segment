@@ -24,6 +24,7 @@ view: sf__opportunity {
   dimension: bookings_value {
     type: number
     sql: cast(coalesce(${TABLE}.bookings_value_c, '0') as float) ;;
+    value_format_name: usd_0
   }
 
   dimension: channel_partner {

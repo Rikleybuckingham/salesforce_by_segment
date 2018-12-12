@@ -25,12 +25,6 @@ view: usage__node {
     sql: ${TABLE}.company_id ;;
   }
 
-  dimension: composite_id {
-    type: string
-    sql: ${TABLE}.company_id || '-' || lower(${TABLE}.source_env) ;;
-    hidden: yes
-  }
-
   dimension: delivery_count {
     type: number
     sql: ${TABLE}.delivery_count ;;

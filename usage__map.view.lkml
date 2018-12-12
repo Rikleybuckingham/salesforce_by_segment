@@ -26,12 +26,6 @@ view: usage__map {
     sql: ${TABLE}.salesforce_id ;;
   }
 
-  dimension: composite_id {
-    type: string
-    sql: ${TABLE}.company_id || '-' || lower(${TABLE}.source_env) ;;
-    hidden: yes
-  }
-
   dimension: type {
     type: string
     sql: ${TABLE}.type ;;

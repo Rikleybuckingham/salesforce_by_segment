@@ -12,6 +12,7 @@
     fields:
     - sf__account.account_name_link
     - sf__opportunity.opportunity_name
+    - sf__opportunity.stage_name
     - opportunity_owners.name
     - sf__opportunity.channel_partner
     - sf__opportunity.bookings_value
@@ -23,6 +24,7 @@
       sf__opportunity.type: Renewal
       sf__opportunity.close_date: after 0 minutes ago
       opportunity_owners.name: ''
+      sf__opportunity.stage_name: 01 - Prospect, 02 - Pipeline, 03 - Upside, 04 - Forecast, 05 - Commit, 06 - Closed Won, 07 - Closed Lost
     sorts:
     - sf__opportunity.close_date
     limit: 500
@@ -72,7 +74,7 @@
     row: 10
     col: 0
     width: 24
-    height: 7
+    height: 6
 
   - title: Open Renewals
     name: open_renewals
@@ -83,6 +85,7 @@
     - sf__opportunity.count_open
     filters:
       sf__opportunity.type: Renewal
+      sf__opportunity.stage_name: 01 - Prospect, 02 - Pipeline, 03 - Upside, 04 - Forecast, 05 - Commit, 06 - Closed Won, 07 - Closed Lost
     limit: 500
     custom_color_enabled: false
     custom_color: "#224f8b"
@@ -120,7 +123,7 @@
     row: 0
     col: 5
     width: 5
-    height: 3
+    height: 2
 
   - title: Won Renewals
     name: won_renewals
@@ -168,7 +171,7 @@
     row: 0
     col: 10
     width: 4
-    height: 3
+    height: 2
 
   - title: Current Pipeline
     name: current_pipeline
@@ -184,8 +187,8 @@
     fill_fields:
     - sf__opportunity.close_month
     filters:
-      sf__opportunity.close_date: 3 months ago for 6 months
-      sf__opportunity.stage_name: "-09-Duplicate Remove,-08 - Disqualified"
+      sf__opportunity.close_date: 1 months ago for 6 months
+      sf__opportunity.stage_name: 01 - Prospect, 02 - Pipeline, 03 - Upside, 04 - Forecast, 05 - Commit, 06 - Closed Won, 07 - Closed Lost
       sf__opportunity.type: Renewal
     sorts:
     - sf__opportunity.close_month
@@ -223,12 +226,67 @@
       04 - Forecast: "#4281c3"
       05 - Commit: "#9ae3cc"
       06 - Closed Won: "#5eb297"
+      07 - Closed Lost: "#ed765f"
     listen:
       CSM: opportunity_owners.name
-    row: 3
+    row: 2
     col: 0
-    width: 24
-    height: 7
+    width: 12
+    height: 8
+
+  - name: csm_pipelines
+    title: Quarterly Pipeline by CSM
+    model: salesforce
+    explore: sf__opportunity
+    type: looker_bar
+    fields: [sf__opportunity.sum_of_bookings_value, opportunity_owners.name, sf__opportunity.stage_name]
+    pivots: [sf__opportunity.stage_name]
+    filters:
+      sf__opportunity.close_date: this quarter
+      sf__opportunity.stage_name: 01 - Prospect, 02 - Pipeline, 03 - Upside, 04 - Forecast, 05 - Commit, 06 - Closed Won, 07 - Closed Lost
+      sf__opportunity.type: Renewal
+      opportunity_owners.name: ''
+    sorts: [sf__opportunity.sum_of_bookings_value desc 0, sf__opportunity.stage_name]
+    limit: 500
+    column_limit: 50
+    stacking: normal
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: true
+    point_style: none
+    interpolation: linear
+    series_types: {}
+    series_colors:
+      03 - Upside: "#70b3fc"
+      04 - Forecast: "#4281c3"
+      05 - Commit: "#9ae3cc"
+      06 - Closed Won: "#5eb297"
+      07 - Closed Lost: "#ed765f"
+    row: 2
+    col: 12
+    width: 12
+    height: 8
 
   - title: Average Deal Size
     name: average_deal_size
@@ -277,7 +335,7 @@
     row: 0
     col: 19
     width: 5
-    height: 3
+    height: 2
 
   - title: Renewal Win Percentage
     name: renewal_win_percentage
@@ -325,7 +383,7 @@
     row: 0
     col: 14
     width: 5
-    height: 3
+    height: 2
 
   - title: Quarterly Pipeline Revenue
     name: quarterly_pipeline_revenue
@@ -374,7 +432,7 @@
     row: 0
     col: 0
     width: 5
-    height: 3
+    height: 2
 
   filters:
 

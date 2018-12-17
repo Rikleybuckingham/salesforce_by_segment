@@ -4,6 +4,15 @@ view: usage__delivery {
 
 # Create Filters
 
+  filter: company_id_filter {
+    type: number
+    sql: ${TABLE}.company_id ;;
+  }
+
+  filter: source_env_filter {
+    type: string
+    sql: ${TABLE}.source_env ;;
+  }
 # Create Dimensions
 
   dimension: company_id {

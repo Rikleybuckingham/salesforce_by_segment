@@ -440,15 +440,14 @@
     width: 12
     height: 8
 
-  - title: Monthly GB by Type
-    name: monthly_gb_by_type
+  - title: Monthly Active Agents
+    name: Monthly Active Agents
     model: company_usage
     explore: usage__delivery
     type: looker_area
     fields:
     - usage__delivery.start_month
-    - usage__delivery.origin_gb_sum
-    - usage__delivery.peer_gb_sum
+    - usage__delivery.unique_agent_count
     fill_fields:
     - usage__delivery.start_month
     sorts:
@@ -480,12 +479,8 @@
     show_silhouette: false
     totals_color: "#808080"
     series_colors:
-      usage__delivery.origin_gb_sum: "#4281c3"
-      usage__delivery.peer_gb_sum: "#70b3fc"
+      usage__delivery.unique_agent_count: "#559be6"
     series_types: {}
-    y_axes: [{label: Total GB, orientation: left, series: [{id: usage__delivery.origin_gb_sum, name: Usage Delivery Origin GB Sum, axisId: usage__delivery.origin_gb_sum},
-      {id: usage__delivery.peer_gb_sum, name: Usage Delivery Peer GB Sum, axisId: usage__delivery.peer_gb_sum}],
-      showLabels: true, showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     listen:
       company_id_filter: usage__delivery.company_id
       usage_date_filter: usage__delivery.start_date
@@ -545,14 +540,15 @@
     width: 12
     height: 8
 
-  - title: Monthly Active Agents
-    name: Monthly Active Agents
+  - title: Monthly GB by Type
+    name: monthly_gb_by_type
     model: company_usage
     explore: usage__delivery
     type: looker_area
     fields:
     - usage__delivery.start_month
-    - usage__delivery.unique_agent_count
+    - usage__delivery.origin_gb_sum
+    - usage__delivery.peer_gb_sum
     fill_fields:
     - usage__delivery.start_month
     sorts:
@@ -584,8 +580,12 @@
     show_silhouette: false
     totals_color: "#808080"
     series_colors:
-      usage__delivery.unique_agent_count: "#559be6"
+      usage__delivery.origin_gb_sum: "#4281c3"
+      usage__delivery.peer_gb_sum: "#70b3fc"
     series_types: {}
+    y_axes: [{label: Total GB, orientation: left, series: [{id: usage__delivery.origin_gb_sum, name: Usage Delivery Origin GB Sum, axisId: usage__delivery.origin_gb_sum},
+      {id: usage__delivery.peer_gb_sum, name: Usage Delivery Peer GB Sum, axisId: usage__delivery.peer_gb_sum}],
+      showLabels: true, showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     listen:
       company_id_filter: usage__delivery.company_id
       usage_date_filter: usage__delivery.start_date

@@ -261,7 +261,7 @@ view: sf__opportunity {
 
   measure: count {
     type: count
-    drill_fields: [id, stage_name, accounts.id]
+    drill_fields: [id, opportunity_name, type, stage_name, user.name, bookings_value, created_date, close_date]
   }
 
   measure: count_closed {

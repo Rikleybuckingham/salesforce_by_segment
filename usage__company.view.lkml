@@ -7,11 +7,6 @@ view: usage__company {
     sql: ${TABLE}.company_id ;;
   }
 
-  dimension: __deleted {
-    type: yesno
-    sql: ${TABLE}.__deleted ;;
-  }
-
   dimension_group: inserted {
     type: time
     timeframes: [

@@ -183,6 +183,45 @@ view: usage__node {
 
 # Create Measures
 
+  measure: 12_month_agent_count {
+    type: count_distinct
+    sql: ${short_node_id} ;;
+    filters: {
+      field: end_date
+      value: "12 months"
+    }
+    filters: {
+      field: short_node_id
+      value: "-EMPTY"
+    }
+  }
+
+  measure: 3_month_agent_count {
+    type: count_distinct
+    sql: ${short_node_id} ;;
+    filters: {
+      field: end_date
+      value: "3 months"
+    }
+    filters: {
+      field: short_node_id
+      value: "-EMPTY"
+    }
+  }
+
+  measure: 1_month_agent_count {
+    type: count_distinct
+    sql: ${short_node_id} ;;
+    filters: {
+      field: end_date
+      value: "1 months"
+    }
+    filters: {
+      field: short_node_id
+      value: "-EMPTY"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [short_node_id, netman_name, arena_name, machine_name]

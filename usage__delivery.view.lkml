@@ -198,6 +198,7 @@ view: usage__delivery {
     label: "Origin GB Sum"
     type: sum
     sql: ${origin_bytes} * 1e-9 ;;
+    value_format_name: decimal_0
     drill_fields: [delivery_details*]
   }
 
@@ -212,12 +213,14 @@ view: usage__delivery {
     label: "Peer GB Sum"
     type: sum
     sql: ${peer_bytes} * 1e-9 ;;
+    value_format_name: decimal_0
     drill_fields: [delivery_details*]
   }
 
   measure: peering_percentage {
     type: number
     sql: ${peer_bytes_sum} / ${total_bytes_sum} ;;
+    value_format_name: percent_2
   }
 
   measure: total_bytes_sum {
@@ -254,7 +257,7 @@ view: usage__delivery {
   }
 
   set: content_details {
-    fields: [content_title, content_moid, unique_agent_count, count]
+    fields: [content_title, content_moid, unique_agent_count, count, first_start_time, last_start_time, peering_percentage]
   }
 
   set: delivery_details {

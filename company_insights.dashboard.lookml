@@ -194,14 +194,16 @@
     width: 6
     height: 3
 
-  - title: Content Count
-    name: Content Count
+  - title: Live Event Count
+    name: Live Event Count
     model: company_usage
     explore: usage__delivery
     type: single_value
     fields:
     - usage__delivery.unique_content
     limit: 500
+    filters:
+      usage__delivery.type: 'Live'
     custom_color_enabled: false
     custom_color: forestgreen
     show_single_value_title: true
@@ -232,14 +234,64 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    single_value_title: Content Count
+    single_value_title: Live Event Count
     listen:
       company_id_filter: usage__delivery.company_id
       usage_date_filter: usage__delivery.start_date
       dms_filter: usage__delivery.dms
     row: 6
     col: 0
-    width: 6
+    width: 4
+    height: 3
+
+  - title: VoD Count
+    name: VoD Count
+    model: company_usage
+    explore: usage__delivery
+    type: single_value
+    fields:
+    - usage__delivery.unique_content
+    limit: 500
+    filters:
+      usage__delivery.type: 'VoD'
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    single_value_title: VoD Count
+    listen:
+      company_id_filter: usage__delivery.company_id
+      usage_date_filter: usage__delivery.start_date
+      dms_filter: usage__delivery.dms
+    row: 6
+    col: 4
+    width: 4
     height: 3
 
   - title: Delivery Count
@@ -286,8 +338,8 @@
       usage_date_filter: usage__delivery.start_date
       dms_filter: usage__delivery.dms
     row: 6
-    col: 6
-    width: 6
+    col: 8
+    width: 4
     height: 3
 
   - title: Agent Count
@@ -335,16 +387,15 @@
       dms_filter: usage__delivery.dms
     row: 6
     col: 12
-    width: 6
+    width: 4
     height: 3
-
-  - title: Total GB
-    name: Total GB
+  - title: Total Peer GB
+    name: Total Peer GB
     model: company_usage
     explore: usage__delivery
     type: single_value
     fields:
-    - usage__delivery.total_gb
+    - usage__delivery.peer_gb_sum
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -376,14 +427,62 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    single_value_title: Total GB
+    single_value_title: Total Peer GB
     listen:
       company_id_filter: usage__delivery.company_id
       usage_date_filter: usage__delivery.start_date
       dms_filter: usage__delivery.dms
     row: 6
-    col: 18
-    width: 6
+    col: 16
+    width: 4
+    height: 3
+
+  - title: Total Origin GB
+    name: Total Origin GB
+    model: company_usage
+    explore: usage__delivery
+    type: single_value
+    fields:
+    - usage__delivery.origin_gb_sum
+    limit: 500
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    single_value_title: Total Origin GB
+    listen:
+      company_id_filter: usage__delivery.company_id
+      usage_date_filter: usage__delivery.start_date
+      dms_filter: usage__delivery.dms
+    row: 6
+    col: 20
+    width: 4
     height: 3
 
   - name: monthly_content
@@ -711,75 +810,6 @@
     col: 0
     width: 24
     height: 4
-
-  - name: live_events
-    title: Live Events
-    model: company_usage
-    explore: usage__delivery
-    type: table
-    fields: [usage__delivery.content_title, usage__delivery.content_moid, usage__delivery.count, usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum, usage__delivery.first_start_time,
-      usage__delivery.last_start_time]
-    hidden_fields: [usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum]
-    filters:
-      usage__delivery.type: Live
-    sorts: [usage__delivery.last_start_time desc]
-    limit: 500
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    table_theme: gray
-    limit_displayed_rows: false
-    dynamic_fields:
-    - table_calculation: peering_percentage
-      label: Peering Percentage
-      expression: "${usage__delivery.peer_bytes_sum}/(${usage__delivery.peer_bytes_sum}+${usage__delivery.origin_bytes_sum})"
-      value_format:
-      value_format_name: percent_0
-      _kind_hint: measure
-      _type_hint: number
-    listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
-    row: 31
-    col: 0
-    width: 12
-    height: 8
-
-  - name: vod_content
-    title: VoD Content
-    model: company_usage
-    explore: usage__delivery
-    type: table
-    fields: [usage__delivery.content_title, usage__delivery.content_moid, usage__delivery.count, usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum, usage__delivery.first_start_time,
-      usage__delivery.last_start_time]
-    hidden_fields: [usage__delivery.origin_bytes_sum, usage__delivery.peer_bytes_sum]
-    filters:
-      usage__delivery.type: VoD
-    sorts: [usage__delivery.last_start_time desc]
-    limit: 500
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    table_theme: gray
-    limit_displayed_rows: false
-    dynamic_fields:
-    - table_calculation: peering_percentage
-      label: Peering Percentage
-      expression: "${usage__delivery.peer_bytes_sum}/(${usage__delivery.peer_bytes_sum}+${usage__delivery.origin_bytes_sum})"
-      value_format:
-      value_format_name: percent_0
-      _kind_hint: measure
-      _type_hint: number
-    listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
-    row: 31
-    col: 12
-    width: 12
-    height: 8
-
 
   filters:
   - name: account_id_filter

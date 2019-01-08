@@ -1,5 +1,5 @@
-- dashboard: kollective_customer_stats
-  title: Kollective Customer Stats
+- dashboard: customer_stats
+  title: Customer Stats
   layout: newspaper
 
   elements:

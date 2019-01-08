@@ -4,7 +4,9 @@ view: usage__location {
           latitude,
           longitude,
           content_moid,
-          type
+          type,
+          source_env,
+          start_time
       from
           delivery, lateral (
               select
@@ -19,11 +21,16 @@ view: usage__location {
                 and {% condition company_id_filter %} delivery.company_id {% endcondition %}
                 and {% condition source_env_filter %} delivery.source_env {% endcondition %}
                 and {% condition type_filter %} delivery.type {% endcondition %}
+                and {% condition date_filter %} delivery.start_time {% endcondition %}
        ;;
   }
 
   filter: company_id_filter {
     type: number
+  }
+
+  filter: date_filter {
+    type: date_time
   }
 
   filter: content_moid_filter {
@@ -72,6 +79,11 @@ view: usage__location {
   dimension: dms {
     type: string
     sql: ${TABLE}.source_env ;;
+  }
+
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
   }
 
   set: detail {

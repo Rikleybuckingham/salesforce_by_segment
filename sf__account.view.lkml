@@ -27,7 +27,7 @@ view: sf__account {
     hidden: no
     link: {
       label: "Company Insights Dashboard"
-      url: "salesforce/company_insights?account_id_filter={{ id._value | url_encode }}&company_id_filter={{ usage__map.company_id._value | url_encode }}&dms_filter={{ usage__map.dms._value | url_encode }}"
+      url: "https://looker.data.kollective.com/dashboards/salesforce/company_insights?account_id_filter={{ id._value | url_encode }}&company_id_filter={{ usage__map.company_id._value | url_encode }}&dms_filter={{ usage__map.dms._value | url_encode }}"
     }
   }
 

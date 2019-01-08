@@ -321,6 +321,7 @@ view: sf__opportunity {
     type: sum
     sql: ${bookings_value} ;;
     value_format: "$#,##0"
+    drill_fields: [detail*]
   }
 
   measure: total_pipeline_revenue {
@@ -348,12 +349,6 @@ view: sf__opportunity {
 # Sets
 
   set: detail {
-    fields: [id,
-      #    - company
-      #    - name
-      #    - title
-      #    - phone
-      #    - email
-      is_won, owner_id]
+    fields: [sf__account.account_name, opportunity_name, opportunity_owners.name, type, stage_name, channel_partner, bookings_value, annual_contract_value, created_date, close_date]
   }
 }

@@ -389,6 +389,7 @@
     col: 12
     width: 4
     height: 3
+
   - title: Total Peer GB
     name: Total Peer GB
     model: company_usage
@@ -485,18 +486,16 @@
     width: 4
     height: 3
 
-  - name: monthly_content
-    title: Monthly Content
+  - name: monthly_live_events
+    title: Monthly Live Events
     model: company_usage
     explore: usage__delivery
     type: looker_area
-    fields: [usage__delivery.unique_content, usage__delivery.type, usage__delivery.start_month]
-    pivots: [usage__delivery.type]
-    fill_fields: [usage__delivery.start_month]
+    fields: [usage__delivery.unique_content, usage__delivery.start_month]
     filters:
-      usage__delivery.company_id: '4004'
-      usage__delivery.start_date: 6 months
-    sorts: [usage__delivery.start_month desc, usage__delivery.type]
+      usage__delivery.type: 'Live'
+    fill_fields: [usage__delivery.start_month]
+    sorts: [usage__delivery.start_month desc]
     limit: 500
     query_timezone: America/Los_Angeles
     stacking: ''
@@ -528,14 +527,64 @@
     show_null_labels: false
     series_types: {}
     series_colors:
-      VoD - 0 - usage__delivery.unique_content: "#4281c3"
-      Live - 1 - usage__delivery.unique_content: "#70b3fc"
+      usage__delivery.unique_content: "#559be6"
     listen:
       company_id_filter: usage__delivery.company_id
       usage_date_filter: usage__delivery.start_date
       dms_filter: usage__delivery.dms
     row: 9
     col: 0
+    width: 12
+    height: 8
+
+  - name: monthly_vod
+    title: Monthly VoD
+    model: company_usage
+    explore: usage__delivery
+    type: looker_area
+    fields: [usage__delivery.unique_content, usage__delivery.start_month]
+    filters:
+      usage__delivery.type: 'VoD'
+    fill_fields: [usage__delivery.start_month]
+    sorts: [usage__delivery.start_month desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    show_null_points: true
+    point_style: none
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    ordering: none
+    show_null_labels: false
+    series_types: {}
+    series_colors:
+      usage__delivery.unique_content: "#559be6"
+    listen:
+      company_id_filter: usage__delivery.company_id
+      usage_date_filter: usage__delivery.start_date
+      dms_filter: usage__delivery.dms
+    row: 9
+    col: 12
     width: 12
     height: 8
 
@@ -579,56 +628,6 @@
     totals_color: "#808080"
     series_colors:
       usage__delivery.unique_agent_count: "#559be6"
-    series_types: {}
-    listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
-    row: 9
-    col: 12
-    width: 12
-    height: 8
-
-  - title: Monthly Deliveries
-    name: Monthly Deliveries
-    model: company_usage
-    explore: usage__delivery
-    type: looker_area
-    fields:
-    - usage__delivery.start_month
-    - usage__delivery.count
-    fill_fields:
-    - usage__delivery.start_month
-    sorts:
-    - usage__delivery.start_month desc
-    limit: 500
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    show_null_points: true
-    point_style: none
-    interpolation: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_colors:
-      usage__delivery.count: "#559be6"
     series_types: {}
     listen:
       company_id_filter: usage__delivery.company_id

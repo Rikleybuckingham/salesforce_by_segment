@@ -513,7 +513,7 @@
     filters:
       sf__opportunity.type: New
       sf__opportunity.is_closed: 'Yes'
-      sf__opportunity.close_date: 1 years
+      sf__opportunity.close_date: 4 Fiscal Quarters
     sorts:
     - sf__opportunity.close_fiscal_quarter
     limit: 500
@@ -583,7 +583,7 @@
     label_density: 21
     legend_position: center
     x_axis_gridlines: false
-    y_axis_gridlines: false
+    y_axis_gridlines: true
     show_view_names: false
     series_labels:
       01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
@@ -836,7 +836,7 @@
     fill_fields:
     - sf__lead.created_fiscal_quarter
     filters:
-      sf__lead.created_date: 4 quarters
+      sf__lead.created_date: 8 quarters
     sorts:
     - sf__lead.created_fiscal_quarter
     limit: 500
@@ -907,7 +907,7 @@
     fill_fields:
     - sf__lead.created_fiscal_quarter
     filters:
-      sf__lead.created_fiscal_quarter: 4 fiscal quarters
+      sf__lead.created_fiscal_quarter: 8 fiscal quarters
     sorts:
     - sf__lead.created_fiscal_quarter
     limit: 500
@@ -1100,7 +1100,7 @@
     label_density: 21
     legend_position: center
     x_axis_gridlines: false
-    y_axis_gridlines: false
+    y_axis_gridlines: true
     show_view_names: false
     series_labels:
       01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect

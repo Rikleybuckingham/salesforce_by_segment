@@ -158,6 +158,7 @@ view: usage__delivery {
       }
     }
   }
+
   dimension: wan_bytes {
     type: number
     sql: ${TABLE}.wan_bytes ;;
@@ -191,7 +192,6 @@ view: usage__delivery {
     label: "Origin Bytes Sum"
     type: sum
     sql: ${TABLE}.origin_bytes ;;
-    drill_fields: [delivery_details*]
     }
 
   measure: origin_gb_sum {
@@ -199,14 +199,12 @@ view: usage__delivery {
     type: sum
     sql: ${origin_bytes} * 1e-9 ;;
     value_format_name: decimal_0
-    drill_fields: [delivery_details*]
   }
 
   measure: peer_bytes_sum {
     label: "Peer Bytes Sum"
     type: sum
     sql: ${peer_bytes} ;;
-    drill_fields: [delivery_details*]
   }
 
   measure: peer_gb_sum {
@@ -214,7 +212,6 @@ view: usage__delivery {
     type: sum
     sql: ${peer_bytes} * 1e-9 ;;
     value_format_name: decimal_0
-    drill_fields: [delivery_details*]
   }
 
   measure: peering_percentage {
@@ -227,7 +224,6 @@ view: usage__delivery {
     label: "Total Bytes Sum"
     type: sum
     sql: ${total_bytes};;
-    drill_fields: [delivery_details*]
   }
 
   measure: total_gb {
@@ -235,7 +231,6 @@ view: usage__delivery {
     type:  sum
     sql: ${total_bytes} * 1e-9  ;;
     value_format: "#,##0"
-    drill_fields: [delivery_details*]
   }
 
   measure: unique_agent_count {
@@ -246,14 +241,18 @@ view: usage__delivery {
       field: short_node_id
       value: "-EMPTY"
     }
-    drill_fields: [delivery_details*]
+  }
+
+  measure: unique_company_count{
+    label: "Company Count"
+    type: count_distinct
+    sql: ${company_id} ;;
   }
 
   measure: unique_content {
     label: "Unique Content Count"
     type:  count_distinct
     sql: ${content_moid} ;;
-    drill_fields: [content_details*]
   }
 
   set: content_details {

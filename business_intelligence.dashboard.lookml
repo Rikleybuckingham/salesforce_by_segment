@@ -206,7 +206,7 @@
       label_density: 21
       legend_position: center
       x_axis_gridlines: false
-      y_axis_gridlines: false
+      y_axis_gridlines: true
       show_view_names: false
       series_labels:
         01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
@@ -999,7 +999,7 @@
       label_density: 21
       legend_position: center
       x_axis_gridlines: false
-      y_axis_gridlines: false
+      y_axis_gridlines: true
       show_view_names: false
       series_labels:
         01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect

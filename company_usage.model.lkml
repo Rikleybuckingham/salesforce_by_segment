@@ -52,9 +52,8 @@ explore: usage__delivery {
   view_label: "Delivery"
 
   join: usage__company {
-    sql_on: ${usage__company.company_id} = ${usage__delivery.company_id} ;;
-    relationship: many_to_many
-    type: left_outer
+    sql_on: ${usage__delivery.company_id} = ${usage__company.company_id} and ${usage__delivery.dms} = ${usage__company.source_env} ;;
+    relationship: many_to_one
     view_label: "Company"
   }
 }

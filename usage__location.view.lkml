@@ -1,6 +1,7 @@
 view: usage__location {
   derived_table: {
     sql: select
+          content_title,
           latitude,
           longitude,
           content_moid,
@@ -22,6 +23,7 @@ view: usage__location {
                 and {% condition source_env_filter %} delivery.source_env {% endcondition %}
                 and {% condition type_filter %} delivery.type {% endcondition %}
                 and {% condition date_filter %} delivery.start_time {% endcondition %}
+                and {% condition title_filter %} delivery.content_title {% endcondition %}
        ;;
   }
 
@@ -38,6 +40,10 @@ view: usage__location {
   }
 
   filter: source_env_filter {
+    type: string
+  }
+
+  filter: title_filter {
     type: string
   }
 
@@ -58,6 +64,11 @@ view: usage__location {
   dimension: content_moid {
     type: string
     sql: ${TABLE}.content_moid ;;
+  }
+
+  dimension: title {
+    type: string
+    sql: ${TABLE}.content_title ;;
   }
 
   dimension: latitude {

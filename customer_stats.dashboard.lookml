@@ -326,7 +326,7 @@
       row: 15
       col: 0
       width: 24
-      height: 5
+      height: 6
 
     - title: Peer vs Origin Bytes
       name: Peer vs Origin Bytes

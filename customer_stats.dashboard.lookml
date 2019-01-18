@@ -60,9 +60,9 @@
       explore: usage__delivery
       type: single_value
       fields:
-      - usage__delivery.unique_content
+        - usage__delivery.unique_content
       filters:
-      usage__delivery.type: Live
+        usage__delivery.type: Live
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -111,7 +111,7 @@
       explore: usage__delivery
       type: single_value
       fields:
-      - usage__delivery.count
+        - usage__delivery.count
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -211,7 +211,7 @@
       fields:
       - usage__delivery.unique_content
       filters:
-      usage__delivery.type: VoD
+        usage__delivery.type: VoD
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen

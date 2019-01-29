@@ -90,3 +90,26 @@ explore: usage__play {
 explore: usage__location {
   hidden: yes
 }
+
+explore: zodiac__k_manager_param {
+  label: "Agent Prefs"
+  view_label: "K Manager Param"
+
+  join: usage__company {
+    sql_on: ${usage__company.company_id} = ${zodiac__k_manager.company_id} ;;
+    view_label: "Company"
+    relationship: many_to_one
+  }
+
+  join:  zodiac__field_info{
+    sql_on: ${zodiac__field_info.id} = ${zodiac__k_manager_param.field_info_id} ;;
+    view_label: "Field Info"
+    relationship: many_to_one
+  }
+
+  join: zodiac__k_manager {
+    sql_on: ${zodiac__k_manager.id} = ${zodiac__k_manager_param.k_manager_id} ;;
+    view_label: "K Manager"
+    relationship: many_to_one
+  }
+}

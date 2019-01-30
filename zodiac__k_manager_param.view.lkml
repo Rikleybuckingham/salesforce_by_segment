@@ -31,6 +31,17 @@ view: zodiac__k_manager_param {
     sql: ${TABLE}.inserted_at ;;
   }
 
+  dimension: is_default {
+    type: string
+    case: {
+      when: {
+        label: "Yes"
+        sql: ${value}=${zodiac__field_info.def_value} ;;
+      }
+      else: "No"
+    }
+  }
+
   dimension: k_manager_id {
     type: number
     sql: ${TABLE}.k_manager_id ;;

@@ -96,7 +96,7 @@ explore: zodiac__k_manager_param {
   view_label: "K Manager Param"
 
   join: usage__company {
-    sql_on: ${usage__company.company_id} = ${zodiac__k_manager.company_id} ;;
+    sql_on: ${usage__company.company_id} = ${zodiac__k_manager.company_id} and ${usage__company.source_env} = ${zodiac__k_manager.source_env};;
     view_label: "Company"
     relationship: many_to_one
   }

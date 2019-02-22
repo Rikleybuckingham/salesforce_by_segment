@@ -78,7 +78,7 @@ view: usage__location {
 
   measure: peering {
     type: number
-    sql: ${peer_gb_sum} / ${gb_sum} ;;
+    sql: CASE WHEN ${gb_sum} != 0 THEN ${peer_gb_sum} / ${gb_sum} else ${gb_sum} END;;
     value_format_name: percent_2
     drill_fields: [detail*]
   }
@@ -140,6 +140,6 @@ view: usage__location {
   }
 
   set: detail {
-    fields: [location, title, count, peer_gb_sum, origin_gb_sum, gb_sum]
+    fields: [location, title, count, peer_gb_sum, origin_gb_sum, peering]
   }
 }

@@ -7,7 +7,10 @@ view: usage__location {
           content_moid,
           type,
           source_env,
-          start_time
+          start_time,
+          total_bytes,
+          peer_bytes,
+          origin_bytes
       from
           delivery, lateral (
               select
@@ -56,6 +59,30 @@ view: usage__location {
     drill_fields: [detail*]
   }
 
+  measure: gb_sum {
+    type: sum
+    sql: ${TABLE}.total_bytes / 1e9 ;;
+    value_format_name: decimal_2
+    drill_fields: [detail*]
+  }
+
+  measure: origin_gb_sum {
+    type: sum
+    sql: ${TABLE}.origin_bytes / 1e9 ;;
+  }
+
+  measure: peer_gb_sum {
+    type: sum
+    sql: ${TABLE}.peer_bytes / 1e9 ;;
+  }
+
+  measure: peering {
+    type: number
+    sql: ${peer_gb_sum} / ${gb_sum} ;;
+    value_format_name: percent_2
+    drill_fields: [detail*]
+  }
+
   dimension: company_id {
     type: number
     sql: ${TABLE}.company_id ;;
@@ -92,12 +119,27 @@ view: usage__location {
     sql: ${TABLE}.source_env ;;
   }
 
+  dimension: origin_bytes{
+    type: number
+    sql: ${TABLE}.origin_bytes ;;
+  }
+
+  dimension: peer_bytes {
+    type: number
+    sql: ${TABLE}.peer_bytes ;;
+  }
+
+  dimension: total_bytes {
+    type: number
+    sql: ${TABLE}.total_bytes ;;
+  }
+
   dimension: type {
     type: string
     sql: ${TABLE}.type ;;
   }
 
   set: detail {
-    fields: [count, location]
+    fields: [location, title, count, peer_gb_sum, origin_gb_sum, gb_sum]
   }
 }

@@ -255,6 +255,33 @@ view: usage__delivery {
     sql: ${content_moid} ;;
   }
 
+  measure: 1_month_ago_agents {
+    label: "Last Month Agent Count"
+    type: count_distinct
+    sql: ${short_node_id} ;;
+    filters: {
+      field: start_date
+      value: "1 month ago"
+    }
+  }
+
+  measure: 2_month_ago_agents {
+    label: "Two Months Ago Agent Count"
+    type: count_distinct
+    sql: ${short_node_id} ;;
+    filters: {
+      field: start_date
+      value: "2 months ago"
+    }
+  }
+
+  measure: monthly_percent_difference{
+    label: "Month Over Month Agent Percent"
+    type: number
+    sql: (${1_month_ago_agents} / ${2_month_ago_agents}) ;;
+    value_format_name: decimal_4
+  }
+
   set: content_details {
     fields: [content_title, content_moid, unique_agent_count, count, first_start_time, last_start_time, peering_percentage]
   }

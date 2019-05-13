@@ -278,8 +278,8 @@ view: usage__delivery {
   measure: monthly_percent_difference{
     label: "Month Over Month Agent Percent"
     type: number
-    sql: (${1_month_ago_agents} / ${2_month_ago_agents}) ;;
-    value_format_name: decimal_4
+    sql: cast(${1_month_ago_agents} as float) / cast(${2_month_ago_agents} as float) ;;
+    value_format_name: percent_1
   }
 
   set: content_details {

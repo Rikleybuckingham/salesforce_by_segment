@@ -1,6 +1,6 @@
 - dashboard: customer_stats
   title: Customer Stats
-  refresh: 60 seconds
+  refresh: 180 seconds
   layout: newspaper
 
   elements:

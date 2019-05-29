@@ -15,6 +15,14 @@ view: usage__delivery {
   }
 # Create Dimensions
 
+  dimension: locality {
+    label: "Locality"
+    type: string
+    sql: ${TABLE}.arena_name ;;
+
+    description: "A manually assigned agent group name consisting of one or more IP subnet ranges."
+  }
+
   dimension: company_id {
     type: number
     sql: ${TABLE}.company_id ;;
@@ -28,6 +36,10 @@ view: usage__delivery {
   dimension: content_title {
     type: string
     sql: ${TABLE}.content_title ;;
+    link: {
+      label: "Content Details"
+      url: "/dashboards/salesforce::content_details?content_moid_filter={{ content_moid._value | url_encode }}&company_id_filter={{ company_id._value | url_encode }}&source_env_filter={{ dms._value | url_encode }}"
+      }
   }
 
   dimension: date {
@@ -35,10 +47,10 @@ view: usage__delivery {
     sql: ${TABLE}.date ;;
   }
 
-  dimension: delivery_id {
+  dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.delivery_id ;;
+    sql: ${TABLE}.id ;;
   }
 
   dimension: dms {
@@ -58,6 +70,11 @@ view: usage__delivery {
       year
     ]
     sql: ${TABLE}.end_time ;;
+  }
+
+  dimension: external_ip {
+    type: string
+    sql: ${TABLE}.external_ip ;;
   }
 
   dimension: lan_bytes {
@@ -98,6 +115,7 @@ view: usage__delivery {
   dimension: short_node_id {
     type: string
     sql: ${TABLE}.short_node_id ;;
+    label: "Agent ID"
   }
 
   dimension_group: start {
@@ -183,6 +201,11 @@ view: usage__delivery {
     sql: min(${TABLE}.start_time) ;;
   }
 
+  measure: lan_bytes_sum {
+    type: sum
+    sql: ${TABLE}.lan_bytes ;;
+  }
+
   measure: last_start_time {
     label: "Last Start Time"
     type: date_time
@@ -198,7 +221,7 @@ view: usage__delivery {
     label: "Origin GB Sum"
     type: sum
     sql: ${origin_bytes} * 1e-9 ;;
-    value_format_name: decimal_0
+    value_format_name: decimal_2
   }
 
   measure: peer_bytes_sum {
@@ -216,7 +239,7 @@ view: usage__delivery {
 
   measure: peering_percentage {
     type: number
-    sql: ${peer_bytes_sum} / ${total_bytes_sum} ;;
+    sql: ${peer_bytes_sum} / NULLIF(${total_bytes_sum},0) ;;
     value_format_name: percent_2
   }
 
@@ -253,6 +276,11 @@ view: usage__delivery {
     label: "Unique Content Count"
     type:  count_distinct
     sql: ${content_moid} ;;
+  }
+
+  measure: wan_bytes_sum {
+    type: sum
+    sql: ${TABLE}.wan_bytes ;;
   }
 
   measure: 1_month_ago_agents {

@@ -425,8 +425,8 @@
       - "#4281c3"
       - "#559be6"
       - "#70b3fc"
-      map_marker_radius_min:
-      map_marker_radius_max:
+      map_marker_radius_min: 2
+      map_marker_radius_max: 20
       map_marker_radius_fixed: 2
       series_types: {}
       listen:

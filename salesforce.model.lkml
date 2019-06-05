@@ -3,6 +3,7 @@ connection: "aws-postgresql"
 # include Salesforce views
 include: "sf__*.view"
 include: "usage__map.view"
+include: "accounts.view"
 
 # include the dashboards
 include: "*.dashboard"
@@ -116,5 +117,17 @@ explore: sf__opportunity {
     sql_on: ${sf__opportunity.account_id} = ${usage__map.salesforce_id} ;;
     relationship: many_to_one
     view_label: "IDs"
+  }
+}
+
+#Create Contracts Explore
+explore: sf__contracts {
+  label: "Contracts"
+  sql_always_where: NOT ${sf__contracts.is_deleted} ;;
+
+  join: accounts {
+    type: full_outer
+    relationship: many_to_one
+    sql_on: ${sf__contracts.account_id} = ${accounts.id} ;;
   }
 }

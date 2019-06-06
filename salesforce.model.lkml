@@ -4,6 +4,7 @@ connection: "aws-postgresql"
 include: "sf__*.view"
 include: "usage__map.view"
 include: "accounts.view"
+include: "opportunities.view"
 
 # include the dashboards
 include: "*.dashboard"
@@ -129,5 +130,11 @@ explore: sf__contracts {
     type: full_outer
     relationship: many_to_one
     sql_on: ${sf__contracts.account_id} = ${accounts.id} ;;
+  }
+
+  join: opportunities {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${sf__contracts.id} = ${opportunities.contract_id} ;;
   }
 }

@@ -96,14 +96,14 @@ view: subscriptions {
   dimension: sbqq_bundle_c {
     type: yesno
     sql: ${TABLE}.sbqq_bundle_c ;;
-    label: "Bundle y/n"
+    label: "Bundle"
     group_label: "SBQQ"
   }
 
   dimension: sbqq_bundled_c {
     type: yesno
     sql: ${TABLE}.sbqq_bundled_c ;;
-    label: "Bundled y/n"
+    label: "Bundled"
     group_label: "SBQQ"
   }
 
@@ -189,7 +189,7 @@ view: subscriptions {
   dimension: sbqq_has_consumption_schedule_c {
     type: yesno
     sql: ${TABLE}.sbqq_has_consumption_schedule_c ;;
-    label: "Has Consumption Schedule y/n"
+    label: "Has Consumption Schedule"
     group_label: "SBQQ"
   }
 

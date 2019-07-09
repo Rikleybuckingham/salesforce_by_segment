@@ -5,6 +5,7 @@ include: "sf__*.view"
 include: "usage__map.view"
 include: "accounts.view"
 include: "opportunities.view"
+include: "subscriptions.view"
 
 # include the dashboards
 include: "*.dashboard"
@@ -137,4 +138,11 @@ explore: sf__contracts {
     relationship: one_to_one
     sql_on: ${sf__contracts.id} = ${opportunities.contract_id} ;;
   }
+}
+
+#Create Subscriptions Explore
+explore: subscriptions {
+  label: "Subscriptions"
+  group_label: "CPQ"
+  sql_always_where: NOT ${subscriptions.is_deleted} ;;
 }

@@ -182,8 +182,7 @@ view: subscriptions {
       year
     ]
     sql: ${TABLE}.sbqq_end_date_c ;;
-    label: "End Date"
-    group_label: "SBQQ"
+    label: "End"
   }
 
   dimension: sbqq_has_consumption_schedule_c {
@@ -338,8 +337,7 @@ view: subscriptions {
       year
     ]
     sql: ${TABLE}.sbqq_renewed_date_c ;;
-    label: "Renewed Date"
-    group_label: "SBQQ"
+    label: "Renewed"
   }
 
   dimension: sbqq_required_by_id_c {
@@ -382,8 +380,7 @@ view: subscriptions {
       year
     ]
     sql: ${TABLE}.sbqq_start_date_c ;;
-    label: "Start Date"
-    group_label: "SBQQ"
+    label: "Start"
   }
 
   dimension_group: sbqq_subscription_end_date_c {
@@ -398,8 +395,7 @@ view: subscriptions {
       year
     ]
     sql: ${TABLE}.sbqq_subscription_end_date_c ;;
-    label: "Subscription End Date"
-    group_label: "SBQQ"
+    label: "Subscription End"
   }
 
   dimension_group: sbqq_subscription_start_date_c {
@@ -414,8 +410,7 @@ view: subscriptions {
       year
     ]
     sql: ${TABLE}.sbqq_subscription_start_date_c ;;
-    label: "Subscription Start Date"
-    group_label: "SBQQ"
+    label: "Subscription Start"
   }
 
   dimension: sbqq_subscription_type_c {

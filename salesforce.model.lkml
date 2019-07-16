@@ -125,6 +125,7 @@ explore: sf__opportunity {
 #Create Contracts Explore
 explore: sf__contracts {
   label: "Contracts"
+  group_label: "CPQ"
   sql_always_where: NOT ${sf__contracts.is_deleted} ;;
 
   join: accounts {
@@ -145,4 +146,10 @@ explore: subscriptions {
   label: "Subscriptions"
   group_label: "CPQ"
   sql_always_where: NOT ${subscriptions.is_deleted} ;;
+
+  join: accounts {
+    sql_on: ${subscriptions.sbqq_account_c} = ${accounts.id} ;;
+    type: full_outer
+    relationship: many_to_one
+  }
 }

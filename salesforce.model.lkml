@@ -6,6 +6,7 @@ include: "usage__map.view"
 include: "accounts.view"
 include: "opportunities.view"
 include: "subscriptions.view"
+include: "quotes.view"
 
 # include the dashboards
 include: "*.dashboard"
@@ -149,6 +150,19 @@ explore: subscriptions {
 
   join: accounts {
     sql_on: ${subscriptions.sbqq_account_c} = ${accounts.id} ;;
+    type: full_outer
+    relationship: many_to_one
+  }
+}
+
+#Create Quotes Explore
+explore: quotes {
+  label: "Quotes"
+  group_label: "CPQ"
+  sql_always_where: NOT ${quotes.is_deleted} ;;
+
+  join: accounts {
+    sql_on: ${quotes.sbqq_account_c}=${accounts.id} ;;
     type: full_outer
     relationship: many_to_one
   }

@@ -7,6 +7,7 @@ include: "accounts.view"
 include: "opportunities.view"
 include: "subscriptions.view"
 include: "quotes.view"
+include: "quote_lines.view"
 
 # include the dashboards
 include: "*.dashboard"
@@ -166,4 +167,11 @@ explore: quotes {
     type: full_outer
     relationship: many_to_one
   }
+}
+
+#Create Quote Lines Explore
+explore: quote_lines {
+  label: "Quote Lines"
+  group_label: "CPQ"
+  sql_always_where: NOT ${quote_lines.is_deleted} ;;
 }

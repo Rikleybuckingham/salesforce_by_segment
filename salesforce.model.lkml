@@ -124,22 +124,35 @@ explore: sf__opportunity {
   }
 }
 
-#Create Contracts Explore
-explore: sf__contracts {
-  label: "Contracts"
+#Create CPQ Explore
+explore: accounts {
+  label: "Customer Accounts"
+  view_label: "Customer Accounts"
   group_label: "CPQ"
-  sql_always_where: NOT ${sf__contracts.is_deleted} ;;
+  sql_always_where: ${accounts.type}='Customer' ;;
 
-  join: accounts {
-    type: full_outer
-    relationship: many_to_one
-    sql_on: ${sf__contracts.account_id} = ${accounts.id} ;;
+  join: sf__contracts {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${accounts.id} = ${sf__contracts.account_id} ;;
+  }
+
+  join: quotes {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${sf__contracts.sbqq_quote_c}=${quotes.id} ;;
   }
 
   join: opportunities {
     type: left_outer
     relationship: one_to_one
     sql_on: ${sf__contracts.id} = ${opportunities.contract_id} ;;
+  }
+
+  join: subscriptions {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${sf__contracts.id}=${subscriptions.sbqq_contract_c} ;;
   }
 }
 

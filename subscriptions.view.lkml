@@ -200,7 +200,7 @@ view: subscriptions {
   }
 
   dimension: sbqq_net_price_c {
-    type: string
+    type: number
     sql: ${TABLE}.sbqq_net_price_c ;;
     label: "Net Price"
     group_label: "SBQQ"

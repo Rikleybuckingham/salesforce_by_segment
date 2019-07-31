@@ -12,6 +12,13 @@ view: subscriptions {
     sql: ${TABLE}.created_by_id ;;
   }
 
+  dimension: arr {
+    label: "ARR"
+    type: number
+    sql: CAST(${sbqq_net_price_c} AS FLOAT) / NULLIF(${sbqq_prorate_multiplier_c}, 0) ;;
+    value_format_name: usd_0
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -179,6 +186,7 @@ view: subscriptions {
       week,
       month,
       quarter,
+      fiscal_quarter,
       year
     ]
     sql: ${TABLE}.sbqq_end_date_c ;;
@@ -377,6 +385,7 @@ view: subscriptions {
       week,
       month,
       quarter,
+      fiscal_quarter,
       year
     ]
     sql: ${TABLE}.sbqq_start_date_c ;;
@@ -396,6 +405,7 @@ view: subscriptions {
     ]
     sql: ${TABLE}.sbqq_subscription_end_date_c ;;
     label: "Subscription End"
+    hidden: yes
   }
 
   dimension_group: sbqq_subscription_start_date_c {
@@ -411,6 +421,7 @@ view: subscriptions {
     ]
     sql: ${TABLE}.sbqq_subscription_start_date_c ;;
     label: "Subscription Start"
+    hidden: yes
   }
 
   dimension: sbqq_subscription_type_c {
@@ -453,6 +464,13 @@ view: subscriptions {
       year
     ]
     sql: ${TABLE}.uuid_ts ;;
+  }
+
+  measure: total_arr {
+    label: "Total ARR"
+    type: sum
+    sql: ${arr} ;;
+    value_format_name: usd_0
   }
 
   measure: count {

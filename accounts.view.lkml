@@ -1336,6 +1336,11 @@ view: accounts {
 
   measure: count {
     type: count
-    drill_fields: [ia_crm_sfdc_account_id_c, name]
+    drill_fields: [
+      name,
+      environment_c,
+      renewal_date_c_date,
+      subscriptions.total_arr
+      ]
   }
 }

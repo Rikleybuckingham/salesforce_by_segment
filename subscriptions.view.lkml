@@ -471,10 +471,25 @@ view: subscriptions {
     type: sum
     sql: ${arr} ;;
     value_format_name: usd_0
+    drill_fields: [details*]
   }
 
   measure: count {
     type: count
     drill_fields: [id, name]
+  }
+
+  set: details {
+    fields: [
+      sf__contracts.name,
+      subscriptions.sbqq_product_name_c,
+      subscriptions.name,
+      subscriptions.sbqq_quantity_c,
+      subscriptions.sbqq_list_price_c,
+      subscriptions.sbqq_prorate_multiplier_c,
+      sbqq_start_date_c_date,
+      sbqq_end_date_c_date,
+      subscriptions.total_arr
+    ]
   }
 }

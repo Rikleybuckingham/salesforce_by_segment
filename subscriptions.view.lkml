@@ -481,6 +481,7 @@ view: subscriptions {
 
   set: details {
     fields: [
+      accounts.name,
       sf__contracts.name,
       subscriptions.sbqq_product_name_c,
       subscriptions.name,

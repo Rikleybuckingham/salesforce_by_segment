@@ -149,6 +149,13 @@ explore: accounts {
     sql_on: ${sf__contracts.id} = ${opportunities.contract_id} ;;
   }
 
+  join: owner {
+    from: sf__user
+    sql_on: ${accounts.owner_id} = ${owner.id} ;;
+    relationship: many_to_one
+    view_label: "Account Owner"
+  }
+
   join: subscriptions {
     type: left_outer
     relationship: one_to_many

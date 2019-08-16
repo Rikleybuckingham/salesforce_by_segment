@@ -1,4 +1,4 @@
-view: sf__account {
+view: sf_accounts {
   sql_table_name: salesforce.accounts ;;
 
 # Create Filters

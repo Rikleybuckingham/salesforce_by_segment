@@ -1,4 +1,4 @@
-view: sf__contracts {
+view: sf_contracts {
   sql_table_name: salesforce.contracts ;;
 
   dimension: ia_crm_sfdc_contract_id_c {

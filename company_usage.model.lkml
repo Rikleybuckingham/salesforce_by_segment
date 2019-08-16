@@ -29,15 +29,15 @@ explore: usage__map{
     view_label: "Play"
   }
 
-  join: sf__account {
-    sql_on: ${usage__map.salesforce_id}=${sf__account.id} ;;
+  join: sf_accounts {
+    sql_on: ${usage__map.salesforce_id}=${sf_accounts.id} ;;
     relationship: many_to_one
     type: inner
     view_label: "Account"
   }
 
-  join: sf__opportunity {
-    sql_on: ${usage__map.salesforce_id}=${sf__opportunity.account_id} ;;
+  join: sf_opportunities {
+    sql_on: ${usage__map.salesforce_id}=${sf_opportunities.account_id} ;;
     relationship: many_to_many
     type: inner
     view_label: "Opportunity"

@@ -1,4 +1,4 @@
-view: sf__products {
+view: sf_products {
   sql_table_name: salesforce.products ;;
 
   dimension: product_id_c {

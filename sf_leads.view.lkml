@@ -1,4 +1,4 @@
-view: sf__lead {
+view: sf_leads {
   sql_table_name: salesforce.leads ;;
 
 # Create Filters

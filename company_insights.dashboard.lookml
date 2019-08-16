@@ -7,12 +7,12 @@
   - title: Company
     name: Company
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
-    - sf__account.name
+    - sf_accounts.name
     sorts:
-    - sf__account.name
+    - sf_accounts.name
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -47,7 +47,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__account.id
+      account_id_filter: sf_accounts.id
     row: 0
     col: 0
     width: 6
@@ -56,10 +56,10 @@
   - title: ARR
     name: ARR
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.annual_recurring_revenue
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -94,7 +94,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__account.id
+      account_id_filter: sf_accounts.id
     row: 0
     col: 6
     width: 6
@@ -103,10 +103,10 @@
   - title: Seats Licensed
     name: Seats Licensed
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
-    - sf__account.seats_licensed
+    - sf_accounts.seats_licensed
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -141,7 +141,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__account.id
+      account_id_filter: sf_accounts.id
     row: 0
     col: 12
     width: 6
@@ -150,7 +150,7 @@
   - title: Account Owner
     name: account_owner
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
     - owner.name
@@ -188,7 +188,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__account.id
+      account_id_filter: sf_accounts.id
     row: 0
     col: 18
     width: 6
@@ -696,22 +696,22 @@
   - title: Products
     name: Products
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: table
     fields:
-    - sf__account.admin_center
-    - sf__account.clientless_streaming
-    - sf__account.ecdn
-    - sf__account.live
-    - sf__account.media_center
-    - sf__account.media_center_live_streaming
-    - sf__account.network_readiness_tester
-    - sf__account.saml
-    - sf__account.share_point
-    - sf__account.skype_meeting_broadcast
-    - sf__account.webcaster
+    - sf_accounts.admin_center
+    - sf_accounts.clientless_streaming
+    - sf_accounts.ecdn
+    - sf_accounts.live
+    - sf_accounts.media_center
+    - sf_accounts.media_center_live_streaming
+    - sf_accounts.network_readiness_tester
+    - sf_accounts.saml
+    - sf_accounts.share_point
+    - sf_accounts.skype_meeting_broadcast
+    - sf_accounts.webcaster
     sorts:
-    - sf__account.admin_center
+    - sf_accounts.admin_center
     limit: 500
     show_view_names: false
     show_row_numbers: false
@@ -747,7 +747,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__account.id
+      account_id_filter: sf_accounts.id
     row: 25
     col: 0
     width: 24
@@ -756,19 +756,19 @@
   - title:  Current Opportunities
     name: current_opportunities
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: table
     fields:
-    - sf__opportunity.opportunity_name
-    - sf__opportunity.bookings_value
-    - sf__opportunity.type
-    - sf__opportunity.stage_name
+    - sf_opportunities.opportunity_name
+    - sf_opportunities.bookings_value
+    - sf_opportunities.type
+    - sf_opportunities.stage_name
     - opportunity_owners.name
-    - sf__opportunity.channel_partner
-    - sf__opportunity.contract_term_months
-    - sf__opportunity.close_date
+    - sf_opportunities.channel_partner
+    - sf_opportunities.contract_term_months
+    - sf_opportunities.close_date
     filters:
-      sf__opportunity.close_date: after 0 minutes ago
+      sf_opportunities.close_date: after 0 minutes ago
     limit: 500
     show_view_names: false
     show_row_numbers: true
@@ -804,7 +804,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      account_id_filter: sf__account.id
+      account_id_filter: sf_accounts.id
     row: 27
     col: 0
     width: 24

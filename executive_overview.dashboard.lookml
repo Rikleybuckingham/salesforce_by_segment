@@ -15,24 +15,24 @@
   - title: Current Customers
     name: Current Customers
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
-    - sf__account.name
+    - sf_accounts.name
     - owner.name
-    - sf__account.seats_licensed
-    - sf__account.annual_recurring_revenue
-    - sf__account.renewal_date
+    - sf_accounts.seats_licensed
+    - sf_accounts.annual_recurring_revenue
+    - sf_accounts.renewal_date
     filters:
-      sf__account.type: Customer
+      sf_accounts.type: Customer
     sorts:
-    - sf__account.name
+    - sf_accounts.name
     limit: 1000
     column_limit: 50
     dynamic_fields:
     - table_calculation: count
       label: Count
-      expression: count(${sf__account.name})
+      expression: count(${sf_accounts.name})
       value_format:
       value_format_name: decimal_0
       _kind_hint: dimension
@@ -40,10 +40,10 @@
     font_size: medium
     text_color: "#49719a"
     hidden_fields:
-    - sf__account.name
-    - sf__account.seats_licensed
-    - sf__account.renewal_date
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.name
+    - sf_accounts.seats_licensed
+    - sf_accounts.renewal_date
+    - sf_accounts.annual_recurring_revenue
     - owner.name
     single_value_title: Current Customers
     row: 2
@@ -54,20 +54,20 @@
   - title: Total ARR
     name: Total ARR
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
-    - sf__account.name
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.name
+    - sf_accounts.annual_recurring_revenue
     filters:
-      sf__account.type: Customer
+      sf_accounts.type: Customer
     sorts:
-    - sf__account.name
+    - sf_accounts.name
     limit: 500
     dynamic_fields:
     - table_calculation: arr_sum
       label: ARR Sum
-      expression: sum(${sf__account.annual_recurring_revenue})
+      expression: sum(${sf_accounts.annual_recurring_revenue})
       value_format:
       value_format_name: usd_0
       _kind_hint: dimension
@@ -105,8 +105,8 @@
     totals_color: "#808080"
     series_types: {}
     hidden_fields:
-    - sf__account.name
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.name
+    - sf_accounts.annual_recurring_revenue
     row: 2
     col: 8
     width: 8
@@ -115,20 +115,20 @@
   - title: Average ACV
     name: Average ACV
     model: salesforce
-    explore: sf__account
+    explore: sf_accounts
     type: single_value
     fields:
-    - sf__account.name
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.name
+    - sf_accounts.annual_recurring_revenue
     filters:
-      sf__account.type: Customer
+      sf_accounts.type: Customer
     sorts:
-    - sf__account.name
+    - sf_accounts.name
     limit: 500
     dynamic_fields:
     - table_calculation: average_acv
       label: Average ACV
-      expression: sum(${sf__account.annual_recurring_revenue})/count(${sf__account.annual_recurring_revenue})
+      expression: sum(${sf_accounts.annual_recurring_revenue})/count(${sf_accounts.annual_recurring_revenue})
       value_format:
       value_format_name: usd_0
       _kind_hint: dimension
@@ -166,8 +166,8 @@
     totals_color: "#808080"
     series_types: {}
     hidden_fields:
-    - sf__account.name
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.name
+    - sf_accounts.annual_recurring_revenue
     row: 2
     col: 16
     width: 8
@@ -176,27 +176,27 @@
   - title: Churn Rate
     name: Churn Rate
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_line
     fields:
-    - sf__opportunity.count
-    - sf__opportunity.count_won
-    - sf__opportunity.count_lost
-    - sf__opportunity.close_year
+    - sf_opportunities.count
+    - sf_opportunities.count_won
+    - sf_opportunities.count_lost
+    - sf_opportunities.close_year
     fill_fields:
-    - sf__opportunity.close_year
+    - sf_opportunities.close_year
     filters:
-      sf__opportunity.type: Renewal
-      sf__opportunity.is_closed: 'Yes'
-      sf__opportunity.close_year: 4 years
+      sf_opportunities.type: Renewal
+      sf_opportunities.is_closed: 'Yes'
+      sf_opportunities.close_year: 4 years
     sorts:
-    - sf__opportunity.close_year desc
+    - sf_opportunities.close_year desc
     limit: 500
     dynamic_fields:
     - table_calculation: churn_rate
       label: Churn Rate
-      expression: "${sf__opportunity.count_lost}/(${sf__opportunity.count_won}\
-        \ + ${sf__opportunity.count_lost})"
+      expression: "${sf_opportunities.count_lost}/(${sf_opportunities.count_won}\
+        \ + ${sf_opportunities.count_lost})"
       value_format:
       value_format_name: percent_0
       _kind_hint: measure
@@ -236,9 +236,9 @@
     show_silhouette: false
     totals_color: "#808080"
     hidden_fields:
-    - sf__opportunity.count_lost
-    - sf__opportunity.count_won
-    - sf__opportunity.count
+    - sf_opportunities.count_lost
+    - sf_opportunities.count_won
+    - sf_opportunities.count
     series_types: {}
     y_axes:
     - label:
@@ -256,9 +256,9 @@
     - label: Number of Renewals
       orientation: right
       series:
-      - id: sf__opportunity.count
+      - id: sf_opportunities.count
         name: Opportunities Count
-        axisId: sf__opportunity.count
+        axisId: sf_opportunities.count
       showLabels: true
       showValues: true
       unpinAxis: false
@@ -266,9 +266,9 @@
       tickDensityCustom: 5
       type: linear
     series_colors:
-      sf__opportunity.count_won: "#559be6"
+      sf_opportunities.count_won: "#559be6"
       win_percent: "#7accb2"
-      sf__opportunity.count: "#559be6"
+      sf_opportunities.count: "#559be6"
       churn_rate: "#559be6"
     row: 4
     col: 0
@@ -278,29 +278,29 @@
   - title: Yearly Net Growth
     name: Yearly Net Growth
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_line
     fields:
-    - sf__opportunity.close_year
-    - sf__opportunity.type
-    - sf__opportunity.count_lost
-    - sf__opportunity.count_won
+    - sf_opportunities.close_year
+    - sf_opportunities.type
+    - sf_opportunities.count_lost
+    - sf_opportunities.count_won
     pivots:
-    - sf__opportunity.type
+    - sf_opportunities.type
     fill_fields:
-    - sf__opportunity.close_year
+    - sf_opportunities.close_year
     filters:
-      sf__opportunity.is_closed: 'Yes'
-      sf__opportunity.close_date: 4 years
-      sf__opportunity.type: Renewal,New
+      sf_opportunities.is_closed: 'Yes'
+      sf_opportunities.close_date: 4 years
+      sf_opportunities.type: Renewal,New
     sorts:
-    - sf__opportunity.close_year desc
-    - sf__opportunity.type
+    - sf_opportunities.close_year desc
+    - sf_opportunities.type
     limit: 500
     dynamic_fields:
     - table_calculation: net_growth
       label: Net Growth
-      expression: pivot_index(${sf__opportunity.count_won},1) - pivot_index(${sf__opportunity.count_lost},2)
+      expression: pivot_index(${sf_opportunities.count_won},1) - pivot_index(${sf_opportunities.count_lost},2)
       value_format:
       value_format_name:
       _kind_hint: supermeasure
@@ -334,8 +334,8 @@
     totals_color: "#808080"
     series_types: {}
     hidden_fields:
-    - sf__opportunity.count_won
-    - sf__opportunity.count_lost
+    - sf_opportunities.count_won
+    - sf_opportunities.count_lost
     series_colors:
       net_growth: "#559be6"
     row: 4
@@ -354,31 +354,31 @@
   - title: AVG Sales Cycle
     name: AVG Sales Cycle
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: single_value
     fields:
-    - sf__account.name
-    - sf__opportunity.opportunity_name
-    - sf__opportunity.created_date
-    - sf__opportunity.close_date
+    - sf_accounts.name
+    - sf_opportunities.opportunity_name
+    - sf_opportunities.created_date
+    - sf_opportunities.close_date
     filters:
-      sf__opportunity.is_won: 'Yes'
-      sf__opportunity.close_date: 12 months
-      sf__opportunity.type: New
+      sf_opportunities.is_won: 'Yes'
+      sf_opportunities.close_date: 12 months
+      sf_opportunities.type: New
     sorts:
-    - sf__opportunity.close_date
+    - sf_opportunities.close_date
     limit: 500
     dynamic_fields:
     - table_calculation: sales_cycle_days
       label: Sales Cycle (days)
-      expression: diff_days(${sf__opportunity.created_date},${sf__opportunity.close_date})
+      expression: diff_days(${sf_opportunities.created_date},${sf_opportunities.close_date})
       value_format:
       value_format_name:
       _kind_hint: dimension
       _type_hint: number
     - table_calculation: avg_sales_cycle
       label: AVG Sales Cycle
-      expression: sum(${sales_cycle_days})/count(${sf__opportunity.close_date})
+      expression: sum(${sales_cycle_days})/count(${sf_opportunities.close_date})
       value_format:
       value_format_name: decimal_0
       _kind_hint: dimension
@@ -416,11 +416,11 @@
     totals_color: "#808080"
     series_types: {}
     hidden_fields:
-    - sf__opportunity.close_date
+    - sf_opportunities.close_date
     - sales_cycle_days
-    - sf__opportunity.created_date
-    - sf__opportunity.opportunity_name
-    - sf__account.name
+    - sf_opportunities.created_date
+    - sf_opportunities.opportunity_name
+    - sf_accounts.name
     single_value_title: AVG Sales Cycle (days) Trailing 12mos
     row: 11
     col: 0
@@ -430,27 +430,27 @@
   - title: Quarterly Bookings Sum
     name: Quarterly Bookings Sum
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: single_value
     fields:
-    - sf__account.name
-    - sf__opportunity.opportunity_name
+    - sf_accounts.name
+    - sf_opportunities.opportunity_name
     - opportunity_owners.name
-    - sf__opportunity.created_date
-    - sf__opportunity.close_date
-    - sf__opportunity.annual_contract_value
-    - sf__opportunity.bookings_value
+    - sf_opportunities.created_date
+    - sf_opportunities.close_date
+    - sf_opportunities.annual_contract_value
+    - sf_opportunities.bookings_value
     filters:
-      sf__opportunity.type: New
-      sf__opportunity.is_won: 'Yes'
-      sf__opportunity.close_fiscal_quarter: 1 fiscal quarters
+      sf_opportunities.type: New
+      sf_opportunities.is_won: 'Yes'
+      sf_opportunities.close_fiscal_quarter: 1 fiscal quarters
     sorts:
-    - sf__account.name
+    - sf_accounts.name
     limit: 500
     dynamic_fields:
     - table_calculation: sum_of_bookings
       label: Sum of Bookings
-      expression: sum(${sf__opportunity.bookings_value})
+      expression: sum(${sf_opportunities.bookings_value})
       value_format:
       value_format_name: usd_0
       _kind_hint: dimension
@@ -488,13 +488,13 @@
     totals_color: "#808080"
     series_types: {}
     hidden_fields:
-    - sf__opportunity.bookings_value
-    - sf__opportunity.annual_contract_value
-    - sf__opportunity.close_date
-    - sf__opportunity.created_date
+    - sf_opportunities.bookings_value
+    - sf_opportunities.annual_contract_value
+    - sf_opportunities.close_date
+    - sf_opportunities.created_date
     - opportunity_owners.name
-    - sf__opportunity.opportunity_name
-    - sf__account.name
+    - sf_opportunities.opportunity_name
+    - sf_accounts.name
     row: 11
     col: 6
     width: 6
@@ -503,19 +503,19 @@
   - title: Net New Customers
     name: Net New Customers
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_line
     fields:
-    - sf__opportunity.close_fiscal_quarter
-    - sf__opportunity.count_won
+    - sf_opportunities.close_fiscal_quarter
+    - sf_opportunities.count_won
     fill_fields:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     filters:
-      sf__opportunity.type: New
-      sf__opportunity.is_closed: 'Yes'
-      sf__opportunity.close_date: 4 Fiscal Quarters
+      sf_opportunities.type: New
+      sf_opportunities.is_closed: 'Yes'
+      sf_opportunities.close_date: 4 Fiscal Quarters
     sorts:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -546,7 +546,7 @@
     totals_color: "#808080"
     series_types: {}
     series_colors:
-      sf__opportunity.count_won: "#559be6"
+      sf_opportunities.count_won: "#559be6"
     row: 15
     col: 0
     width: 12
@@ -555,25 +555,25 @@
   - title: New Pipeline Forecast
     name: New Pipeline Forecast
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_column
     fields:
-    - sf__opportunity.close_fiscal_quarter
-    - sf__opportunity.sum_of_bookings_value
-    - sf__opportunity.stage_name
+    - sf_opportunities.close_fiscal_quarter
+    - sf_opportunities.sum_of_bookings_value
+    - sf_opportunities.stage_name
     pivots:
-    - sf__opportunity.stage_name
+    - sf_opportunities.stage_name
     fill_fields:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     filters:
-      sf__opportunity.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+      sf_opportunities.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
         - Closed Won,07 - Closed Lost
-      sf__opportunity.close_quarter: 1 quarter ago for 6 quarters
-      sf__opportunity.type: New
-      sf__opportunity.close_fiscal_quarter: 1 quarter ago for 6 quarters
+      sf_opportunities.close_quarter: 1 quarter ago for 6 quarters
+      sf_opportunities.type: New
+      sf_opportunities.close_fiscal_quarter: 1 quarter ago for 6 quarters
     sorts:
-    - sf__opportunity.stage_name 0
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.stage_name 0
+    - sf_opportunities.close_fiscal_quarter
     query_timezone: America/Los_Angeles
     stacking: normal
     hidden_series: [01 - Prospect]
@@ -586,13 +586,13 @@
     y_axis_gridlines: true
     show_view_names: false
     series_labels:
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
-      03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
-      05 - Commit - sf__opportunity.sum_of_bookings_value: Commit
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: Prospect
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: Pipeline
+      03 - Upside - sf_opportunities.sum_of_bookings_value: Upside
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: Forecast
+      05 - Commit - sf_opportunities.sum_of_bookings_value: Commit
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: Won
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: Lost
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
@@ -606,13 +606,13 @@
     ordering: none
     show_null_labels: false
     series_colors:
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
-      03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
-      05 - Commit - sf__opportunity.sum_of_bookings_value: "#9ae3cc"
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: "#202c3a"
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: "#435978"
+      03 - Upside - sf_opportunities.sum_of_bookings_value: "#4281c3"
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: "#559be6"
+      05 - Commit - sf_opportunities.sum_of_bookings_value: "#9ae3cc"
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: "#5eb297"
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: "#d75c44"
     limit_displayed_rows: false
     y_axis_tick_density_custom: 5
     y_axis_scale_mode: linear
@@ -625,22 +625,22 @@
       series:
       - id: 02 - Pipeline
         name: Pipeline
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 03 - Upside
         name: Upside
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 04 - Forecast
         name: Forecast
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 05 - Commit
         name: Commit
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 06 - Closed Won
         name: Won
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 07 - Closed Lost
         name: Lost
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       showLabels: true
       showValues: true
       unpinAxis: false
@@ -660,23 +660,23 @@
   - title: New Opportunities Won/Lost
     name: New Opportunities Won/Lost
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_area
     fields:
-    - sf__opportunity.count
-    - sf__opportunity.close_fiscal_quarter
-    - sf__opportunity.stage_name
+    - sf_opportunities.count
+    - sf_opportunities.close_fiscal_quarter
+    - sf_opportunities.stage_name
     pivots:
-    - sf__opportunity.stage_name
+    - sf_opportunities.stage_name
     fill_fields:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     filters:
-      sf__opportunity.close_fiscal_quarter: 8 fiscal quarters
-      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost
-      sf__opportunity.type: New
+      sf_opportunities.close_fiscal_quarter: 8 fiscal quarters
+      sf_opportunities.stage_name: 06 - Closed Won,07 - Closed Lost
+      sf_opportunities.type: New
     sorts:
-    - sf__opportunity.close_fiscal_quarter
-    - sf__opportunity.stage_name
+    - sf_opportunities.close_fiscal_quarter
+    - sf_opportunities.stage_name
     limit: 500
     column_limit: 50
     stacking: ''
@@ -705,15 +705,15 @@
     ordering: none
     show_null_labels: false
     series_colors:
-      Renewal - sf__opportunity.count: "#7accb2"
-      Upgrade / Upsell - sf__opportunity.count: "#9ae3cc"
-      New - sf__opportunity.count: "#5eb297"
-      06 - Closed Won - sf__opportunity.count: "#7accb2"
-      07 - Closed Lost - sf__opportunity.count: "#ed765f"
+      Renewal - sf_opportunities.count: "#7accb2"
+      Upgrade / Upsell - sf_opportunities.count: "#9ae3cc"
+      New - sf_opportunities.count: "#5eb297"
+      06 - Closed Won - sf_opportunities.count: "#7accb2"
+      07 - Closed Lost - sf_opportunities.count: "#ed765f"
     series_types: {}
     series_labels:
-      06 - Closed Won - sf__opportunity.count: Won
-      07 - Closed Lost - sf__opportunity.count: Lost
+      06 - Closed Won - sf_opportunities.count: Won
+      07 - Closed Lost - sf_opportunities.count: Lost
     row: 19
     col: 0
     width: 12
@@ -722,24 +722,24 @@
   - title: New Business Won/Lost by Quarter
     name: New Business Won/Lost by Quarter
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_column
     fields:
-    - sf__opportunity.sum_of_bookings_value
-    - sf__opportunity.stage_name
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.sum_of_bookings_value
+    - sf_opportunities.stage_name
+    - sf_opportunities.close_fiscal_quarter
     pivots:
-    - sf__opportunity.stage_name
+    - sf_opportunities.stage_name
     fill_fields:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     filters:
-      sf__opportunity.stage_name: 01 - Prospect,06 - Closed Won,07 - Closed Lost,02 - Pipeline,03
+      sf_opportunities.stage_name: 01 - Prospect,06 - Closed Won,07 - Closed Lost,02 - Pipeline,03
         - Upside,04 - Forecast,05 - Commit
-      sf__opportunity.close_fiscal_quarter: 8 fiscal quarters
-      sf__opportunity.type: New
+      sf_opportunities.close_fiscal_quarter: 8 fiscal quarters
+      sf_opportunities.type: New
     sorts:
-    - sf__opportunity.stage_name
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.stage_name
+    - sf_opportunities.close_fiscal_quarter
     limit: 500
     stacking: normal
     show_value_labels: false
@@ -767,34 +767,34 @@
     point_style: none
     interpolation: linear
     series_colors:
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
-      03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
-      05 - Commit - sf__opportunity.sum_of_bookings_value: "#9ae3cc"
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: "#5eb297"
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: "#d75c44"
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: "#202c3a"
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: "#435978"
+      03 - Upside - sf_opportunities.sum_of_bookings_value: "#4281c3"
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: "#559be6"
+      05 - Commit - sf_opportunities.sum_of_bookings_value: "#9ae3cc"
     series_types: {}
     column_spacing_ratio:
     column_group_spacing_ratio:
     series_labels:
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
-      03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
-      05 - Commit - sf__opportunity.sum_of_bookings_value: Commit
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: Won
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: Lost
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: Prospect
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: Pipeline
+      03 - Upside - sf_opportunities.sum_of_bookings_value: Upside
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: Forecast
+      05 - Commit - sf_opportunities.sum_of_bookings_value: Commit
     y_axes:
     - label: Total Bookings Value
       orientation: left
       series:
       - id: 06 - Closed Won
         name: Won
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 07 - Closed Lost
         name: Lost
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       showLabels: true
       showValues: true
       unpinAxis: false
@@ -825,20 +825,20 @@
   - title: Leads to Opportunties
     name: Leads to Opportunties
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: looker_column
     fields:
-    - sf__lead.count
-    - sf__lead.currently_active_leads_count
-    - sf__lead.net_mql_count
-    - sf__lead.converted_to_opportunity_count
-    - sf__lead.created_fiscal_quarter
+    - sf_leads.count
+    - sf_leads.currently_active_leads_count
+    - sf_leads.net_mql_count
+    - sf_leads.converted_to_opportunity_count
+    - sf_leads.created_fiscal_quarter
     fill_fields:
-    - sf__lead.created_fiscal_quarter
+    - sf_leads.created_fiscal_quarter
     filters:
-      sf__lead.created_date: 8 quarters
+      sf_leads.created_date: 8 quarters
     sorts:
-    - sf__lead.created_fiscal_quarter
+    - sf_leads.created_fiscal_quarter
     limit: 500
     stacking: ''
     show_value_labels: true
@@ -871,22 +871,22 @@
     - 'palette: Default'
     label_color: []
     series_labels:
-      sf__lead.count: Leads
-      sf__opportunity.count_new_business: Opportunities
-      sf__opportunity.count_new_business_won: Won Opportunities
-      sf__lead.net_mql_count: MQLs
-      sf__lead.converted_to_opportunity_count: Opportunities
-      sf__opportunity.count_sql: SQLs
-      sf__opportunity.count_won: Won Opportunities
-      sf__lead.currently_active_leads_count: Active Leads
+      sf_leads.count: Leads
+      sf_opportunities.count_new_business: Opportunities
+      sf_opportunities.count_new_business_won: Won Opportunities
+      sf_leads.net_mql_count: MQLs
+      sf_leads.converted_to_opportunity_count: Opportunities
+      sf_opportunities.count_sql: SQLs
+      sf_opportunities.count_won: Won Opportunities
+      sf_leads.currently_active_leads_count: Active Leads
     show_dropoff: false
     series_colors:
-      sf__opportunity.count_won: "#5eb297"
-      sf__opportunity.count_sql: "#9ae3cc"
-      sf__lead.count: "#435978"
-      sf__lead.net_mql_count: "#70b3fc"
-      sf__lead.converted_to_opportunity_count: "#9ae3cc"
-      sf__lead.currently_active_leads_count: "#4281c3"
+      sf_opportunities.count_won: "#5eb297"
+      sf_opportunities.count_sql: "#9ae3cc"
+      sf_leads.count: "#435978"
+      sf_leads.net_mql_count: "#70b3fc"
+      sf_leads.converted_to_opportunity_count: "#9ae3cc"
+      sf_leads.currently_active_leads_count: "#4281c3"
     series_types: {}
     hidden_series: []
     row: 29
@@ -897,19 +897,19 @@
   - title: Opportunities to Won
     name: Opportunities to Won
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: looker_column
     fields:
-    - sf__lead.created_fiscal_quarter
-    - sf__opportunity.count
-    - sf__opportunity.count_sql
-    - sf__opportunity.count_won
+    - sf_leads.created_fiscal_quarter
+    - sf_opportunities.count
+    - sf_opportunities.count_sql
+    - sf_opportunities.count_won
     fill_fields:
-    - sf__lead.created_fiscal_quarter
+    - sf_leads.created_fiscal_quarter
     filters:
-      sf__lead.created_fiscal_quarter: 8 fiscal quarters
+      sf_leads.created_fiscal_quarter: 8 fiscal quarters
     sorts:
-    - sf__lead.created_fiscal_quarter
+    - sf_leads.created_fiscal_quarter
     limit: 500
     stacking: ''
     show_value_labels: true
@@ -936,13 +936,13 @@
     show_silhouette: false
     totals_color: "#808080"
     series_colors:
-      sf__lead.count: "#559be6"
-      sf__opportunity.count: "#435978"
-      sf__opportunity.count_sql: "#4281c3"
-      sf__opportunity.count_won: "#5eb297"
+      sf_leads.count: "#559be6"
+      sf_opportunities.count: "#435978"
+      sf_opportunities.count_sql: "#4281c3"
+      sf_opportunities.count_won: "#5eb297"
     series_labels:
-      sf__opportunity.count_sql: SQLs
-      sf__opportunity.count: Opportunities
+      sf_opportunities.count_sql: SQLs
+      sf_opportunities.count: Opportunities
     column_spacing_ratio:
     column_group_spacing_ratio:
     row: 29
@@ -953,15 +953,15 @@
   - title: Leads by Source QTD
     name: Leads by Source QTD
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: looker_column
     fields:
-    - sf__lead.count
-    - sf__lead.lead_source
+    - sf_leads.count
+    - sf_leads.lead_source
     filters:
-      sf__lead.created_fiscal_quarter: this fiscal quarter
+      sf_leads.created_fiscal_quarter: this fiscal quarter
     sorts:
-    - sf__lead.count desc
+    - sf_leads.count desc
     limit: 500
     stacking: ''
     colors:
@@ -974,13 +974,13 @@
     y_axis_gridlines: true
     show_view_names: false
     series_labels:
-      sf__lead.count: Leads
-      sf__opportunity.count_new_business: Opportunities
-      sf__opportunity.count_new_business_won: Won Opportunities
-      sf__lead.net_mql_count: MQLs
-      sf__lead.converted_to_opportunity_count: Opportunities
-      sf__opportunity.count_sql: SQLs
-      sf__opportunity.count_won: Won Opportunities
+      sf_leads.count: Leads
+      sf_opportunities.count_new_business: Opportunities
+      sf_opportunities.count_new_business_won: Won Opportunities
+      sf_leads.net_mql_count: MQLs
+      sf_leads.converted_to_opportunity_count: Opportunities
+      sf_opportunities.count_sql: SQLs
+      sf_opportunities.count_won: Won Opportunities
     y_axis_combined: true
     show_y_axis_labels: false
     show_y_axis_ticks: true
@@ -991,11 +991,11 @@
     show_null_labels: false
     show_dropoff: false
     series_colors:
-      sf__opportunity.count_won: "#5eb297"
-      sf__opportunity.count_sql: "#9ae3cc"
-      sf__lead.count: "#559be6"
-      sf__lead.net_mql_count: "#4281c3"
-      sf__lead.converted_to_opportunity_count: "#70b3fc"
+      sf_opportunities.count_won: "#5eb297"
+      sf_opportunities.count_sql: "#9ae3cc"
+      sf_leads.count: "#559be6"
+      sf_leads.net_mql_count: "#4281c3"
+      sf_leads.converted_to_opportunity_count: "#70b3fc"
     limit_displayed_rows: false
     y_axis_tick_density_custom: 5
     y_axis_scale_mode: linear
@@ -1011,17 +1011,17 @@
   - title: Opportunities by Channel Partner QTD
     name: Opportunities by Channel Partner QTD
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_column
     fields:
-    - sf__opportunity.channel_partner
-    - sf__opportunity.count
-    - sf__opportunity.count_sql
+    - sf_opportunities.channel_partner
+    - sf_opportunities.count
+    - sf_opportunities.count_sql
     filters:
-      sf__opportunity.created_fiscal_quarter: this fiscal quarter
-      sf__opportunity.type: New
+      sf_opportunities.created_fiscal_quarter: this fiscal quarter
+      sf_opportunities.type: New
     sorts:
-    - sf__opportunity.count desc
+    - sf_opportunities.count desc
     limit: 500
     stacking: ''
     show_value_labels: true
@@ -1048,13 +1048,13 @@
     show_silhouette: false
     totals_color: "#808080"
     series_labels:
-      sf__opportunity.count: Opportunities
-      sf__opportunity.count_sql: SQLs
-      sf__opportunity.count_won: Won
+      sf_opportunities.count: Opportunities
+      sf_opportunities.count_sql: SQLs
+      sf_opportunities.count_won: Won
     series_colors:
-      sf__opportunity.count_won: "#5eb297"
-      sf__opportunity.count: "#435978"
-      sf__opportunity.count_sql: "#4281c3"
+      sf_opportunities.count_won: "#5eb297"
+      sf_opportunities.count: "#435978"
+      sf_opportunities.count_sql: "#4281c3"
     hidden_series: []
     row: 37
     col: 12
@@ -1073,24 +1073,24 @@
   - title: Renewal Forecast
     name: Renewal Forecast
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_column
     fields:
-    - sf__opportunity.stage_name
-    - sf__opportunity.sum_of_bookings_value
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.stage_name
+    - sf_opportunities.sum_of_bookings_value
+    - sf_opportunities.close_fiscal_quarter
     pivots:
-    - sf__opportunity.stage_name
+    - sf_opportunities.stage_name
     fill_fields:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     filters:
-      sf__opportunity.close_fiscal_quarter: 1 quarter ago for 6 quarters
-      sf__opportunity.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
+      sf_opportunities.close_fiscal_quarter: 1 quarter ago for 6 quarters
+      sf_opportunities.stage_name: 01 - Prospect,02 - Pipeline,03 - Upside,04 - Forecast,05 - Commit,06
         - Closed Won,07 - Closed Lost
-      sf__opportunity.type: Renewal
+      sf_opportunities.type: Renewal
     sorts:
-    - sf__opportunity.stage_name 0
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.stage_name 0
+    - sf_opportunities.close_fiscal_quarter
     query_timezone: America/Los_Angeles
     stacking: normal
     hidden_series: [01 - Prospect]
@@ -1103,13 +1103,13 @@
     y_axis_gridlines: true
     show_view_names: false
     series_labels:
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
-      03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
-      05 - Commit - sf__opportunity.sum_of_bookings_value: Commit
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: Prospect
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: Pipeline
+      03 - Upside - sf_opportunities.sum_of_bookings_value: Upside
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: Forecast
+      05 - Commit - sf_opportunities.sum_of_bookings_value: Commit
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: Won
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: Lost
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
@@ -1123,13 +1123,13 @@
     ordering: none
     show_null_labels: false
     series_colors:
-      01 - Pipeline - sf__opportunity.sum_of_bookings_value: "#202c3a"
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
-      03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
-      05 - Commit - sf__opportunity.sum_of_bookings_value: "#9ae3cc"
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
+      01 - Pipeline - sf_opportunities.sum_of_bookings_value: "#202c3a"
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: "#435978"
+      03 - Upside - sf_opportunities.sum_of_bookings_value: "#4281c3"
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: "#559be6"
+      05 - Commit - sf_opportunities.sum_of_bookings_value: "#9ae3cc"
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: "#5eb297"
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: "#d75c44"
     limit_displayed_rows: false
     y_axis_tick_density_custom: 5
     y_axis_scale_mode: linear
@@ -1142,25 +1142,25 @@
       series:
       - id: 01 - Prospect
         name: Prospect
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 02 - Pipeline
         name: Pipeline
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 03 - Upside
         name: Upside
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 04 - Forecast
         name: Forecast
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 05 - Commit
         name: Commit
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 06 - Closed Won
         name: Won
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 07 - Closed Lost
         name: Lost
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       showLabels: true
       showValues: true
       unpinAxis: false
@@ -1180,24 +1180,24 @@
   - title: Renewals Won/Lost by Quarter
     name: Renewals Won/Lost by Quarter
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_column
     fields:
-    - sf__opportunity.sum_of_bookings_value
-    - sf__opportunity.stage_name
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.sum_of_bookings_value
+    - sf_opportunities.stage_name
+    - sf_opportunities.close_fiscal_quarter
     pivots:
-    - sf__opportunity.stage_name
+    - sf_opportunities.stage_name
     fill_fields:
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.close_fiscal_quarter
     filters:
-      sf__opportunity.stage_name: 06 - Closed Won,07 - Closed Lost,01 - Prospect,02 - Pipeline,03
+      sf_opportunities.stage_name: 06 - Closed Won,07 - Closed Lost,01 - Prospect,02 - Pipeline,03
         - Upside,04 - Forecast,05 - Commit
-      sf__opportunity.close_fiscal_quarter: 8 fiscal quarters
-      sf__opportunity.type: Renewal
+      sf_opportunities.close_fiscal_quarter: 8 fiscal quarters
+      sf_opportunities.type: Renewal
     sorts:
-    - sf__opportunity.stage_name
-    - sf__opportunity.close_fiscal_quarter
+    - sf_opportunities.stage_name
+    - sf_opportunities.close_fiscal_quarter
     limit: 500
     stacking: normal
     show_value_labels: false
@@ -1225,34 +1225,34 @@
     point_style: none
     interpolation: linear
     series_colors:
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: "#5eb297"
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: "#d75c44"
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: "#202c3a"
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: "#435978"
-      03 - Upside - sf__opportunity.sum_of_bookings_value: "#4281c3"
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: "#559be6"
-      05 - Commit - sf__opportunity.sum_of_bookings_value: "#9ae3cc"
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: "#5eb297"
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: "#d75c44"
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: "#202c3a"
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: "#435978"
+      03 - Upside - sf_opportunities.sum_of_bookings_value: "#4281c3"
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: "#559be6"
+      05 - Commit - sf_opportunities.sum_of_bookings_value: "#9ae3cc"
     series_types: {}
     column_spacing_ratio:
     column_group_spacing_ratio:
     series_labels:
-      06 - Closed Won - sf__opportunity.sum_of_bookings_value: Won
-      07 - Closed Lost - sf__opportunity.sum_of_bookings_value: Lost
-      01 - Prospect - sf__opportunity.sum_of_bookings_value: Prospect
-      02 - Pipeline - sf__opportunity.sum_of_bookings_value: Pipeline
-      03 - Upside - sf__opportunity.sum_of_bookings_value: Upside
-      04 - Forecast - sf__opportunity.sum_of_bookings_value: Forecast
-      05 - Commit - sf__opportunity.sum_of_bookings_value: Commit
+      06 - Closed Won - sf_opportunities.sum_of_bookings_value: Won
+      07 - Closed Lost - sf_opportunities.sum_of_bookings_value: Lost
+      01 - Prospect - sf_opportunities.sum_of_bookings_value: Prospect
+      02 - Pipeline - sf_opportunities.sum_of_bookings_value: Pipeline
+      03 - Upside - sf_opportunities.sum_of_bookings_value: Upside
+      04 - Forecast - sf_opportunities.sum_of_bookings_value: Forecast
+      05 - Commit - sf_opportunities.sum_of_bookings_value: Commit
     y_axes:
     - label: Total Bookings Value
       orientation: left
       series:
       - id: 06 - Closed Won
         name: Won
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       - id: 07 - Closed Lost
         name: Lost
-        axisId: sf__opportunity.sum_of_bookings_value
+        axisId: sf_opportunities.sum_of_bookings_value
       showLabels: true
       showValues: true
       unpinAxis: false
@@ -1275,30 +1275,30 @@
   - name: Customer Running Total
     title: Customer Running Total
     model: salesforce
-    explore: sf__opportunity
+    explore: sf_opportunities
     type: looker_line
-    fields: [sf__opportunity.close_year, sf__opportunity.count_won, sf__opportunity.count_lost,
-      sf__opportunity.type]
-    pivots: [sf__opportunity.type]
-    fill_fields: [sf__opportunity.close_year]
+    fields: [sf_opportunities.close_year, sf_opportunities.count_won, sf_opportunities.count_lost,
+      sf_opportunities.type]
+    pivots: [sf_opportunities.type]
+    fill_fields: [sf_opportunities.close_year]
     filters:
-      sf__opportunity.close_year: before 0 minutes ago
-      sf__opportunity.is_closed: 'Yes'
-      sf__opportunity.type: New,Renewal
-      sf__opportunity.contract_term_months: ">=3"
-    sorts: [sf__opportunity.close_year, sf__opportunity.type 0]
+      sf_opportunities.close_year: before 0 minutes ago
+      sf_opportunities.is_closed: 'Yes'
+      sf_opportunities.type: New,Renewal
+      sf_opportunities.contract_term_months: ">=3"
+    sorts: [sf_opportunities.close_year, sf_opportunities.type 0]
     limit: 500
     dynamic_fields:
     - table_calculation: won
       label: Won
-      expression: coalesce(${sf__opportunity.count_won},0)
+      expression: coalesce(${sf_opportunities.count_won},0)
       value_format:
       value_format_name:
       _kind_hint: measure
       _type_hint: number
     - table_calculation: lost
       label: Lost
-      expression: coalesce(${sf__opportunity.count_lost},0)
+      expression: coalesce(${sf_opportunities.count_lost},0)
       value_format:
       value_format_name:
       _kind_hint: measure
@@ -1345,7 +1345,7 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
-    hidden_fields: [sf__opportunity.count_won, sf__opportunity.count_lost, won,
+    hidden_fields: [sf_opportunities.count_won, sf_opportunities.count_lost, won,
       lost, yearly_net_customer_growth]
     series_colors:
       customer_running_total: "#559be6"
@@ -1364,17 +1364,17 @@
     explore: usage__map
     type: table
     fields:
-    - sf__account.account_name_link
-    - sf__account.dms
-    - sf__account.created_date
-    - sf__account.renewal_date
-    - sf__account.seats_licensed
-    - sf__account.annual_recurring_revenue
+    - sf_accounts.account_name_link
+    - sf_accounts.dms
+    - sf_accounts.created_date
+    - sf_accounts.renewal_date
+    - sf_accounts.seats_licensed
+    - sf_accounts.annual_recurring_revenue
     filters:
-      sf__account.type: Customer
+      sf_accounts.type: Customer
       usage__map.type: User
     sorts:
-    - sf__account.account_name_link
+    - sf_accounts.account_name_link
     limit: 500
     column_limit: 50
     query_timezone: America/Los_Angeles

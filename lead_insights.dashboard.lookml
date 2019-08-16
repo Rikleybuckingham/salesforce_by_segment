@@ -7,12 +7,12 @@
   - title: Lead Name
     name: Lead Name
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.company
+    - sf_leads.company
     sorts:
-    - sf__lead.company
+    - sf_leads.company
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -65,7 +65,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 0
     col: 0
     width: 6
@@ -74,7 +74,7 @@
   - title: Lead Owner
     name: Lead Owner
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
     - lead_owners.name
@@ -110,7 +110,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 3
     col: 0
     width: 6
@@ -119,12 +119,12 @@
   - title: Lead Status
     name: Lead Status
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.status
+    - sf_leads.status
     sorts:
-    - sf__lead.status
+    - sf_leads.status
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -157,7 +157,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 0
     col: 6
     width: 6
@@ -166,12 +166,12 @@
   - title: Lead Source
     name: Lead Source
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.lead_source
+    - sf_leads.lead_source
     sorts:
-    - sf__lead.lead_source
+    - sf_leads.lead_source
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -204,7 +204,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 0
     col: 18
     width: 6
@@ -213,10 +213,10 @@
   - title: Acquisition Program
     name: Acquisition Program
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.acquisition_program
+    - sf_leads.acquisition_program
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -249,7 +249,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 0
     col: 12
     width: 6
@@ -258,12 +258,12 @@
   - title: Created Date
     name: Created Date
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.created_date
+    - sf_leads.created_date
     fill_fields:
-    - sf__lead.created_date
+    - sf_leads.created_date
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -295,13 +295,13 @@
     show_silhouette: false
     totals_color: "#808080"
     series_labels:
-      sf__lead.average_mql_velocity: Days until MQL
-      sf__lead.average_opportunity_velocity: Days until Opportunity
-      sf__opportunity.average_active_velocity: Days until Active Op.
-      sf__opportunity.average_won_velocity: Days until Won
+      sf_leads.average_mql_velocity: Days until MQL
+      sf_leads.average_opportunity_velocity: Days until Opportunity
+      sf_opportunities.average_active_velocity: Days until Active Op.
+      sf_opportunities.average_won_velocity: Days until Won
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 3
     col: 6
     width: 6
@@ -310,14 +310,14 @@
   - title: Last Activity Date
     name: Last Activity Date
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.last_interesting_moment_date
+    - sf_leads.last_interesting_moment_date
     fill_fields:
-    - sf__lead.last_interesting_moment_date
+    - sf_leads.last_interesting_moment_date
     sorts:
-    - sf__lead.last_interesting_moment_date desc
+    - sf_leads.last_interesting_moment_date desc
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -350,7 +350,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 3
     col: 12
     width: 6
@@ -359,10 +359,10 @@
   - title: Days MQL Open
     name: Days MQL Open
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.days_mql_open
+    - sf_leads.days_mql_open
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -395,7 +395,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 6
     col: 12
     width: 12
@@ -404,10 +404,10 @@
   - title: MQL Velocity
     name: MQL Velocity
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.mql_velocity
+    - sf_leads.mql_velocity
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -440,7 +440,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 6
     col: 0
     width: 12
@@ -449,14 +449,14 @@
   - title: MQL Date
     name: MQL Date
     model: salesforce
-    explore: sf__lead
+    explore: sf_leads
     type: single_value
     fields:
-    - sf__lead.mql_date
+    - sf_leads.mql_date
     fill_fields:
-    - sf__lead.mql_date
+    - sf_leads.mql_date
     sorts:
-    - sf__lead.mql_date desc
+    - sf_leads.mql_date desc
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -489,7 +489,7 @@
     totals_color: "#808080"
     series_types: {}
     listen:
-      lead_id_filter: sf__lead.lead_id
+      lead_id_filter: sf_leads.lead_id
     row: 3
     col: 18
     width: 6

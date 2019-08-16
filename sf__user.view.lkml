@@ -1,4 +1,4 @@
-view: sf__user {
+view: sf_user {
   sql_table_name: salesforce.users ;;
 
 # Create Filters

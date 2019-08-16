@@ -1,4 +1,4 @@
-view: sf__price_books {
+view: sf_price_books {
   sql_table_name: salesforce.price_books ;;
 
   dimension: id {

@@ -1,4 +1,4 @@
-view: sf__opportunity {
+view: sf_opportunities {
   sql_table_name: salesforce.opportunities ;;
 
 # Create Filters
@@ -282,7 +282,7 @@ view: sf__opportunity {
       field: is_won
       value: "No"
     }
-    drill_fields: [sf__opportunity.id, sd__account.id]
+    drill_fields: [sf_opportunities.id, sd__account.id]
   }
 
   measure: count_open {
@@ -308,7 +308,7 @@ view: sf__opportunity {
       field: is_won
       value: "Yes"
     }
-    drill_fields: [sf__opportunity.id, sf__account.id]
+    drill_fields: [sf_opportunities.id, sf_accounts.id]
   }
 
   measure: open_percentage {
@@ -349,6 +349,6 @@ view: sf__opportunity {
 # Sets
 
   set: detail {
-    fields: [sf__account.account_name, opportunity_name, opportunity_owners.name, type, stage_name, channel_partner, bookings_value, annual_contract_value, created_date, close_date]
+    fields: [sf_accounts.account_name, opportunity_name, opportunity_owners.name, type, stage_name, channel_partner, bookings_value, annual_contract_value, created_date, close_date]
   }
 }

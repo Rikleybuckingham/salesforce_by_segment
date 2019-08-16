@@ -1,4 +1,4 @@
-view: usage__transfer {
+view: usage_transfer {
   sql_table_name: public.transfer ;;
   suggestions: no
 

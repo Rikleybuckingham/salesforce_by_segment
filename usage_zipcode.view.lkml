@@ -1,4 +1,4 @@
-view: usage__zipcode {
+view: usage_zipcode {
   derived_table: {
     sql: select
           get_postal_code_for_ip (d.external_ip) as zipcode,

@@ -1,4 +1,4 @@
-view: usage__map {
+view: usage_map {
   sql_table_name: public.companies_salesforce_accounts ;;
   suggestions: no
 

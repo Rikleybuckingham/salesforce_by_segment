@@ -1,4 +1,4 @@
-view: usage__company {
+view: usage_company {
   sql_table_name: public.company ;;
 
   dimension: company_id {

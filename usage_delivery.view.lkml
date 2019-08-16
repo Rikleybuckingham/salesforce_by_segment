@@ -1,4 +1,4 @@
-view: usage__delivery {
+view: usage_delivery {
   sql_table_name: public.delivery ;;
   suggestions: no
 

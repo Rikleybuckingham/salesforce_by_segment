@@ -2,7 +2,7 @@ connection: "aws-postgresql"
 
 # include Salesforce views
 include: "sf_*.view"
-include: "usage__map.view"
+include: "usage_map.view"
 include: "accounts.view"
 include: "opportunities.view"
 include: "subscriptions.view"
@@ -41,9 +41,9 @@ explore: sf_accounts {
     view_label: "Leads"
   }
 
-  join: usage__map {
+  join: usage_map {
     type: left_outer
-    sql_on: ${sf_accounts.id} = ${usage__map.salesforce_id} AND ${sf_accounts.dms} = ${usage__map.dms} ;;
+    sql_on: ${sf_accounts.id} = ${usage_map.salesforce_id} AND ${sf_accounts.dms} = ${usage_map.dms} ;;
     relationship: one_to_one
     view_label: "IDs"
   }
@@ -87,8 +87,8 @@ explore: sf_leads {
     view_label: "Opportunity Owners"
   }
 
-  join: usage__map {
-    sql_on: ${sf_leads.converted_account_id} = ${usage__map.salesforce_id} ;;
+  join: usage_map {
+    sql_on: ${sf_leads.converted_account_id} = ${usage_map.salesforce_id} ;;
     relationship: many_to_one
     view_label: "IDs"
   }
@@ -117,8 +117,8 @@ explore: sf_opportunities {
     relationship: many_to_one
   }
 
-  join: usage__map {
-    sql_on: ${sf_opportunities.account_id} = ${usage__map.salesforce_id} ;;
+  join: usage_map {
+    sql_on: ${sf_opportunities.account_id} = ${usage_map.salesforce_id} ;;
     relationship: many_to_one
     view_label: "IDs"
   }

@@ -8,10 +8,10 @@
     - title: Active Agents
       name: Active Agents
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: single_value
       fields:
-      - usage__delivery.unique_agent_count
+      - usage_delivery.unique_agent_count
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -46,9 +46,9 @@
       totals_color: "#808080"
       series_types: {}
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 0
       col: 0
       width: 8
@@ -57,12 +57,12 @@
     - title: Live Events
       name: Live Events
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: single_value
       fields:
-        - usage__delivery.unique_content
+        - usage_delivery.unique_content
       filters:
-        usage__delivery.type: Live
+        usage_delivery.type: Live
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -97,9 +97,9 @@
       totals_color: "#808080"
       series_types: {}
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 0
       col: 8
       width: 8
@@ -108,10 +108,10 @@
     - title: Deliveries
       name: Deliveries
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: single_value
       fields:
-        - usage__delivery.count
+        - usage_delivery.count
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -146,9 +146,9 @@
       totals_color: "#808080"
       series_types: {}
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 2
       col: 0
       width: 12
@@ -157,10 +157,10 @@
     - title: GB Saved
       name: GB Saved
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: single_value
       fields:
-      - usage__delivery.peer_gb_sum
+      - usage_delivery.peer_gb_sum
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -195,9 +195,9 @@
       totals_color: "#808080"
       series_types: {}
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 2
       col: 12
       width: 12
@@ -206,12 +206,12 @@
     - title: Videos Watched
       name: Videos Watched
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: single_value
       fields:
-      - usage__delivery.unique_content
+      - usage_delivery.unique_content
       filters:
-        usage__delivery.type: VoD
+        usage_delivery.type: VoD
       limit: 500
       custom_color_enabled: false
       custom_color: forestgreen
@@ -246,9 +246,9 @@
       totals_color: "#808080"
       series_types: {}
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 0
       col: 16
       width: 8
@@ -257,27 +257,27 @@
     - title: Top 10 Live Events
       name: Top 10 Live Events
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: table
       fields:
-        - usage__delivery.content_title
-        - usage__delivery.content_moid
-        - usage__company.name
-        - usage__delivery.dms
-        - usage__delivery.first_start_time
-        - usage__delivery.count
-        - usage__delivery.unique_agent_count
-        - usage__delivery.total_bytes_sum
-        - usage__delivery.peer_bytes_sum
+        - usage_delivery.content_title
+        - usage_delivery.content_moid
+        - usage_company.name
+        - usage_delivery.dms
+        - usage_delivery.first_start_time
+        - usage_delivery.count
+        - usage_delivery.unique_agent_count
+        - usage_delivery.total_bytes_sum
+        - usage_delivery.peer_bytes_sum
       filters:
-        usage__delivery.type: Live
+        usage_delivery.type: Live
       sorts:
-        - usage__delivery.unique_agent_count desc
+        - usage_delivery.unique_agent_count desc
       limit: 10
       dynamic_fields:
       - table_calculation: event_peering
         label: Event Peering
-        expression: "${usage__delivery.peer_bytes_sum}/${usage__delivery.total_bytes_sum}"
+        expression: "${usage_delivery.peer_bytes_sum}/${usage_delivery.total_bytes_sum}"
         value_format:
         value_format_name: percent_0
         _kind_hint: measure
@@ -316,13 +316,13 @@
       totals_color: "#808080"
       series_types: {}
       hidden_fields:
-        - usage__delivery.peer_bytes_sum
-        - usage__delivery.total_bytes_sum
-        - usage__delivery.content_moid
+        - usage_delivery.peer_bytes_sum
+        - usage_delivery.total_bytes_sum
+        - usage_delivery.content_moid
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 15
       col: 0
       width: 24
@@ -331,11 +331,11 @@
     - title: Peer vs Origin Bytes
       name: Peer vs Origin Bytes
       model: company_usage
-      explore: usage__delivery
+      explore: usage_delivery
       type: looker_donut_multiples
       fields:
-        - usage__delivery.peer_bytes_sum
-        - usage__delivery.origin_bytes_sum
+        - usage_delivery.peer_bytes_sum
+        - usage_delivery.origin_bytes_sum
       limit: 500
       show_value_labels: true
       font_size: 12
@@ -366,13 +366,13 @@
       totals_color: "#808080"
       series_types: {}
       series_colors:
-        usage__delivery.peer_bytes_sum: "#4281c3"
-        usage__delivery.origin_bytes_sum: "#70b3fc"
+        usage_delivery.peer_bytes_sum: "#4281c3"
+        usage_delivery.origin_bytes_sum: "#70b3fc"
       hide_legend: false
       listen:
-        Time Period: usage__delivery.start_date
-        Source Environment: usage__delivery.dms
-        Event Title: usage__delivery.content_title
+        Time Period: usage_delivery.start_date
+        Source Environment: usage_delivery.dms
+        Event Title: usage_delivery.content_title
       row: 4
       col: 16
       width: 8
@@ -381,17 +381,17 @@
     - name: Deliveries by Location
       title: Deliveries by Location
       model: company_usage
-      explore: usage__location
+      explore: usage_location
       type: looker_map
       fields:
-      - usage__location.location
-      - usage__location.count
+      - usage_location.location
+      - usage_location.count
       filters:
-      usage__location.company_id_filter: ''
-      usage__location.content_moid_filter: ''
-      usage__location.type_filter: ''
+      usage_location.company_id_filter: ''
+      usage_location.content_moid_filter: ''
+      usage_location.type_filter: ''
       sorts:
-      - usage__location.count desc
+      - usage_location.count desc
       limit: 500
       query_timezone: America/Los_Angeles
       map_plot_mode: points
@@ -430,9 +430,9 @@
       map_marker_radius_fixed: 2
       series_types: {}
       listen:
-        Time Period: usage__location.date_filter
-        Source Environment: usage__location.source_env_filter
-        Event Title: usage__location.title
+        Time Period: usage_location.date_filter
+        Source Environment: usage_location.source_env_filter
+        Event Title: usage_location.title
       row: 4
       col: 0
       width: 16

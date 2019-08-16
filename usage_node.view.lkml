@@ -1,4 +1,4 @@
-view: usage__node {
+view: usage_node {
   sql_table_name: public.node ;;
 
 # Create Filters

@@ -10,12 +10,12 @@ view: sf_accounts {
 
   filter: company_id_filter {
     type: number
-    sql: {% condition company_id_filter %} ${usage__map.company_id} {% endcondition %} ;;
+    sql: {% condition company_id_filter %} ${usage_map.company_id} {% endcondition %} ;;
   }
 
   filter: dms_filter {
     type: string
-    sql: {% condition dms_filter %} ${usage__map.dms} {% endcondition %} ;;
+    sql: {% condition dms_filter %} ${usage_map.dms} {% endcondition %} ;;
   }
 
 # Create Dimensions
@@ -27,7 +27,7 @@ view: sf_accounts {
     hidden: no
     link: {
       label: "Company Insights Dashboard"
-      url: "https://looker.data.kollective.com/dashboards/salesforce/company_insights?account_id_filter={{ id._value | url_encode }}&company_id_filter={{ usage__map.company_id._value | url_encode }}&dms_filter={{ usage__map.dms._value | url_encode }}"
+      url: "https://looker.data.kollective.com/dashboards/salesforce/company_insights?account_id_filter={{ id._value | url_encode }}&company_id_filter={{ usage_map.company_id._value | url_encode }}&dms_filter={{ usage_map.dms._value | url_encode }}"
     }
   }
 

@@ -1,4 +1,4 @@
-view: usage__play {
+view: usage_play {
   sql_table_name: public.play ;;
 
 # Create Filters

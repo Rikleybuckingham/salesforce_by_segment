@@ -197,13 +197,13 @@
   - title: Live Event Count
     name: Live Event Count
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.unique_content
+    - usage_delivery.unique_content
     limit: 500
     filters:
-      usage__delivery.type: 'Live'
+      usage_delivery.type: 'Live'
     custom_color_enabled: false
     custom_color: forestgreen
     show_single_value_title: true
@@ -236,9 +236,9 @@
     series_types: {}
     single_value_title: Live Event Count
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 6
     col: 0
     width: 4
@@ -247,13 +247,13 @@
   - title: VoD Count
     name: VoD Count
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.unique_content
+    - usage_delivery.unique_content
     limit: 500
     filters:
-      usage__delivery.type: 'VoD'
+      usage_delivery.type: 'VoD'
     custom_color_enabled: false
     custom_color: forestgreen
     show_single_value_title: true
@@ -286,9 +286,9 @@
     series_types: {}
     single_value_title: VoD Count
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 6
     col: 4
     width: 4
@@ -297,10 +297,10 @@
   - title: Delivery Count
     name: Delivery Count
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.count
+    - usage_delivery.count
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -334,9 +334,9 @@
     series_types: {}
     single_value_title: Delivery Count
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 6
     col: 8
     width: 4
@@ -345,10 +345,10 @@
   - title: Agent Count
     name: Agent Count
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.unique_agent_count
+    - usage_delivery.unique_agent_count
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -382,9 +382,9 @@
     series_types: {}
     single_value_title: Agent Count
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 6
     col: 12
     width: 4
@@ -393,10 +393,10 @@
   - title: Total Peer GB
     name: Total Peer GB
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.peer_gb_sum
+    - usage_delivery.peer_gb_sum
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -430,9 +430,9 @@
     series_types: {}
     single_value_title: Total Peer GB
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 6
     col: 16
     width: 4
@@ -441,10 +441,10 @@
   - title: Total Origin GB
     name: Total Origin GB
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.origin_gb_sum
+    - usage_delivery.origin_gb_sum
     limit: 500
     custom_color_enabled: false
     custom_color: forestgreen
@@ -478,9 +478,9 @@
     series_types: {}
     single_value_title: Total Origin GB
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 6
     col: 20
     width: 4
@@ -489,13 +489,13 @@
   - name: monthly_live_events
     title: Monthly Live Events
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_area
-    fields: [usage__delivery.unique_content, usage__delivery.start_month]
+    fields: [usage_delivery.unique_content, usage_delivery.start_month]
     filters:
-      usage__delivery.type: 'Live'
-    fill_fields: [usage__delivery.start_month]
-    sorts: [usage__delivery.start_month desc]
+      usage_delivery.type: 'Live'
+    fill_fields: [usage_delivery.start_month]
+    sorts: [usage_delivery.start_month desc]
     limit: 500
     query_timezone: America/Los_Angeles
     stacking: ''
@@ -527,11 +527,11 @@
     show_null_labels: false
     series_types: {}
     series_colors:
-      usage__delivery.unique_content: "#559be6"
+      usage_delivery.unique_content: "#559be6"
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 9
     col: 0
     width: 12
@@ -540,13 +540,13 @@
   - name: monthly_vod
     title: Monthly VoD
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_area
-    fields: [usage__delivery.unique_content, usage__delivery.start_month]
+    fields: [usage_delivery.unique_content, usage_delivery.start_month]
     filters:
-      usage__delivery.type: 'VoD'
-    fill_fields: [usage__delivery.start_month]
-    sorts: [usage__delivery.start_month desc]
+      usage_delivery.type: 'VoD'
+    fill_fields: [usage_delivery.start_month]
+    sorts: [usage_delivery.start_month desc]
     limit: 500
     query_timezone: America/Los_Angeles
     stacking: ''
@@ -578,11 +578,11 @@
     show_null_labels: false
     series_types: {}
     series_colors:
-      usage__delivery.unique_content: "#559be6"
+      usage_delivery.unique_content: "#559be6"
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 9
     col: 12
     width: 12
@@ -591,15 +591,15 @@
   - title: Monthly Active Agents
     name: Monthly Active Agents
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_area
     fields:
-    - usage__delivery.start_month
-    - usage__delivery.unique_agent_count
+    - usage_delivery.start_month
+    - usage_delivery.unique_agent_count
     fill_fields:
-    - usage__delivery.start_month
+    - usage_delivery.start_month
     sorts:
-    - usage__delivery.start_month desc
+    - usage_delivery.start_month desc
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -627,12 +627,12 @@
     show_silhouette: false
     totals_color: "#808080"
     series_colors:
-      usage__delivery.unique_agent_count: "#559be6"
+      usage_delivery.unique_agent_count: "#559be6"
     series_types: {}
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 17
     col: 0
     width: 12
@@ -641,16 +641,16 @@
   - title: Monthly GB by Type
     name: monthly_gb_by_type
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_area
     fields:
-    - usage__delivery.start_month
-    - usage__delivery.origin_gb_sum
-    - usage__delivery.peer_gb_sum
+    - usage_delivery.start_month
+    - usage_delivery.origin_gb_sum
+    - usage_delivery.peer_gb_sum
     fill_fields:
-    - usage__delivery.start_month
+    - usage_delivery.start_month
     sorts:
-    - usage__delivery.start_month desc
+    - usage_delivery.start_month desc
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -678,16 +678,16 @@
     show_silhouette: false
     totals_color: "#808080"
     series_colors:
-      usage__delivery.origin_gb_sum: "#4281c3"
-      usage__delivery.peer_gb_sum: "#70b3fc"
+      usage_delivery.origin_gb_sum: "#4281c3"
+      usage_delivery.peer_gb_sum: "#70b3fc"
     series_types: {}
-    y_axes: [{label: Total GB, orientation: left, series: [{id: usage__delivery.origin_gb_sum, name: Usage Delivery Origin GB Sum, axisId: usage__delivery.origin_gb_sum},
-      {id: usage__delivery.peer_gb_sum, name: Usage Delivery Peer GB Sum, axisId: usage__delivery.peer_gb_sum}],
+    y_axes: [{label: Total GB, orientation: left, series: [{id: usage_delivery.origin_gb_sum, name: Usage Delivery Origin GB Sum, axisId: usage_delivery.origin_gb_sum},
+      {id: usage_delivery.peer_gb_sum, name: Usage Delivery Peer GB Sum, axisId: usage_delivery.peer_gb_sum}],
       showLabels: true, showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     listen:
-      company_id_filter: usage__delivery.company_id
-      usage_date_filter: usage__delivery.start_date
-      dms_filter: usage__delivery.dms
+      company_id_filter: usage_delivery.company_id
+      usage_date_filter: usage_delivery.start_date
+      dms_filter: usage_delivery.dms
     row: 17
     col: 12
     width: 12

@@ -78,6 +78,6 @@ view: zodiac__k_manager_param {
 
   measure: count {
     type: count
-    drill_fields: [id, usage__company.name, source_env, zodiac__field_info.def_value, value]
+    drill_fields: [id, usage_company.name, source_env, zodiac__field_info.def_value, value]
   }
 }

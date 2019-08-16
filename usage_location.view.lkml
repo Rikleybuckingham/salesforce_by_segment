@@ -1,4 +1,4 @@
-view: usage__location {
+view: usage_location {
   derived_table: {
     sql: select
           content_title,

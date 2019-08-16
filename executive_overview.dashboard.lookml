@@ -1361,7 +1361,7 @@
   - name: Current Customer Table
     title: Current Customer Table
     model: company_usage
-    explore: usage__map
+    explore: usage_map
     type: table
     fields:
     - sf_accounts.account_name_link
@@ -1372,7 +1372,7 @@
     - sf_accounts.annual_recurring_revenue
     filters:
       sf_accounts.type: Customer
-      usage__map.type: User
+      usage_map.type: User
     sorts:
     - sf_accounts.account_name_link
     limit: 500

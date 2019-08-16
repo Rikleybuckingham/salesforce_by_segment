@@ -26,12 +26,12 @@
   - name: Title
     title: Title
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.content_title
+    - usage_delivery.content_title
     sorts:
-    - usage__delivery.content_title
+    - usage_delivery.content_title
     limit: 500
     column_limit: 50
     custom_color_enabled: false
@@ -54,9 +54,9 @@
     conditional_formatting_include_nulls: false
     series_types: {}
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The title of the content'
       state: expanded
@@ -69,10 +69,10 @@
   - name: Deliveries
     title: Deliveries
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.count
+    - usage_delivery.count
     limit: 500
     column_limit: 50
     custom_color_enabled: false
@@ -95,10 +95,10 @@
     conditional_formatting_include_nulls: false
     series_types: {}
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The number of delivery records for the content'
       state: expanded
@@ -112,8 +112,8 @@
     title: Agents
     type: single_value
     model: company_usage
-    explore: usage__delivery
-    measures: [usage__delivery.unique_agent_count]
+    explore: usage_delivery
+    measures: [usage_delivery.unique_agent_count]
     limit: '500'
     column_limit: '50'
     custom_color_enabled: false
@@ -148,10 +148,10 @@
     series_types: {}
     single_value_title: Unique Agents
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The number of distinct Agent IDs with deliveries for the content'
       state: expanded
@@ -164,10 +164,10 @@
   - name: Origin GB
     title: Origin GB
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.origin_gb_sum
+    - usage_delivery.origin_gb_sum
     limit: 500
     column_limit: 50
     custom_color_enabled: false
@@ -190,10 +190,10 @@
     conditional_formatting_include_nulls: false
     series_types: {}
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The total number of origin gigabytes delivered for the content'
       state: expanded
@@ -206,10 +206,10 @@
   - name: Peer GB
     title: Peer GB
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.peer_gb_sum
+    - usage_delivery.peer_gb_sum
     limit: 500
     column_limit: 50
     custom_color_enabled: false
@@ -232,10 +232,10 @@
     conditional_formatting_include_nulls: false
     series_types: {}
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The total number of peer gigabytes delivered for the content'
       state: expanded
@@ -248,11 +248,11 @@
   - name: delivery_status
     title: Deliveries by Status
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_pie
-    fields: [usage__delivery.count, usage__delivery.status]
-    fill_fields: [usage__delivery.status]
-    sorts: [usage__delivery.count desc]
+    fields: [usage_delivery.count, usage_delivery.status]
+    fill_fields: [usage_delivery.status]
+    sorts: [usage_delivery.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     value_labels: legend
@@ -288,10 +288,10 @@
       Failed: "#d75c44"
       Canceled: "#fa8d78"
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The delivery status for the content and the corresponding delivery count'
       state: expanded
@@ -304,11 +304,11 @@
   - name: Top Localities and Peering
     title: Top Localities and Peering
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_bar
-    fields: [usage__delivery.locality, usage__delivery.peer_bytes_sum, usage__delivery.total_bytes_sum, usage__delivery.peering_percentage,
-      usage__delivery.unique_agent_count]
-    sorts: [usage__delivery.unique_agent_count desc]
+    fields: [usage_delivery.locality, usage_delivery.peer_bytes_sum, usage_delivery.total_bytes_sum, usage_delivery.peering_percentage,
+      usage_delivery.unique_agent_count]
+    sorts: [usage_delivery.unique_agent_count desc]
     limit: 10
     column_limit: 50
     dynamic_fields:
@@ -352,26 +352,26 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     series_types:
-      usage__delivery.peering_percentage: scatter
+      usage_delivery.peering_percentage: scatter
       peering_percentage: scatter
-    hidden_fields: [usage__delivery.peer_bytes_sum, usage__delivery.total_bytes_sum]
+    hidden_fields: [usage_delivery.peer_bytes_sum, usage_delivery.total_bytes_sum]
     series_colors:
-      usage__delivery.peering_percentage: "#435978"
-      usage__delivery.unique_agent_count: "#559be6"
+      usage_delivery.peering_percentage: "#435978"
+      usage_delivery.unique_agent_count: "#559be6"
     y_axes: [{label: !!null '', orientation: top, showLabels: true, showValues: true,
-        tickDensity: default, type: linear, unpinAxis: false, series: [{id: usage__delivery.unique_agent_count,
+        tickDensity: default, type: linear, unpinAxis: false, series: [{id: usage_delivery.unique_agent_count,
             name: Agent Count, __FILE: salesforce/content_details.dashboard.lookml,
-            __LINE_NUM: 354, axisId: usage__delivery.unique_agent_count}], __FILE: salesforce/content_details.dashboard.lookml,
+            __LINE_NUM: 354, axisId: usage_delivery.unique_agent_count}], __FILE: salesforce/content_details.dashboard.lookml,
         __LINE_NUM: 342}, {label: '', maxValue: 1, minValue: 0, orientation: bottom,
         showLabels: true, showValues: true, tickDensity: default, type: linear, unpinAxis: false,
-        series: [{id: usage__delivery.peering_percentage, name: Peering Percentage,
-            __FILE: salesforce/content_details.dashboard.lookml, __LINE_NUM: 368, axisId: usage__delivery.peering_percentage}],
+        series: [{id: usage_delivery.peering_percentage, name: Peering Percentage,
+            __FILE: salesforce/content_details.dashboard.lookml, __LINE_NUM: 368, axisId: usage_delivery.peering_percentage}],
         __FILE: salesforce/content_details.dashboard.lookml, __LINE_NUM: 356}]
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The number of agents and overall peering percentage for each locality'
       state: expanded
@@ -384,16 +384,16 @@
   - name: Top External IPs and Peering
     title: Top External IPs and Peering
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_bar
     fields:
-    - usage__delivery.external_ip
-    - usage__delivery.peer_bytes_sum
-    - usage__delivery.origin_bytes_sum
-    - usage__delivery.peering_percentage
-    - usage__delivery.unique_agent_count
+    - usage_delivery.external_ip
+    - usage_delivery.peer_bytes_sum
+    - usage_delivery.origin_bytes_sum
+    - usage_delivery.peering_percentage
+    - usage_delivery.unique_agent_count
     sorts:
-    - usage__delivery.unique_agent_count desc
+    - usage_delivery.unique_agent_count desc
     limit: 10
     column_limit: 50
     stacking: ''
@@ -436,13 +436,13 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     series_types:
-      usage__delivery.peering_percentage: scatter
+      usage_delivery.peering_percentage: scatter
     hidden_fields:
-    - usage__delivery.peer_bytes_sum
-    - usage__delivery.origin_bytes_sum
+    - usage_delivery.peer_bytes_sum
+    - usage_delivery.origin_bytes_sum
     series_colors:
-      usage__delivery.peering_percentage: "#435978"
-      usage__delivery.unique_agent_count: "#559be6"
+      usage_delivery.peering_percentage: "#435978"
+      usage_delivery.unique_agent_count: "#559be6"
     y_axes:
     - label: Agents
       maxValue:
@@ -456,7 +456,7 @@
       unpinAxis: false
       valueFormat:
       series:
-      - id: usage__delivery.unique_agent_count
+      - id: usage_delivery.unique_agent_count
         name: Agent Count
     - label: Peering Percent
       maxValue: 1
@@ -470,13 +470,13 @@
       unpinAxis: false
       valueFormat:
       series:
-      - id: usage__delivery.peering_percentage
+      - id: usage_delivery.peering_percentage
         name: Peering Percentage
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The number of agents and overall peering percentage for each external IP'
       state: expanded
@@ -489,17 +489,17 @@
   - name: Deliveries by Location
     title: Deliveries by Location
     model: company_usage
-    explore: usage__location
+    explore: usage_location
     type: looker_map
     fields:
-    - usage__location.location
-    - usage__location.count
+    - usage_location.location
+    - usage_location.count
     filters:
-    usage__location.company_id_filter: ''
-    usage__location.content_moid_filter: ''
-    usage__location.type_filter: ''
+    usage_location.company_id_filter: ''
+    usage_location.content_moid_filter: ''
+    usage_location.type_filter: ''
     sorts:
-    - usage__location.count desc
+    - usage_location.count desc
     limit: 500
     query_timezone: America/Los_Angeles
     map_plot_mode: points
@@ -538,10 +538,10 @@
     map_marker_radius_fixed:
     series_types: {}
     listen:
-      content_moid_filter: usage__location.content_moid_filter
-      time_filter: usage__location.date_filter
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_location.content_moid_filter
+      time_filter: usage_location.date_filter
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     row: 6
     col: 12
     width: 12
@@ -550,11 +550,11 @@
   - name: Daily Deliveries
     title: Daily Deliveries
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_column
-    fields: [usage__delivery.count, usage__delivery.start_date]
-    fill_fields: [usage__delivery.start_date]
-    sorts: [usage__delivery.start_date]
+    fields: [usage_delivery.count, usage_delivery.start_date]
+    fill_fields: [usage_delivery.start_date]
+    sorts: [usage_delivery.start_date]
     limit: 500
     column_limit: 50
     stacking: normal
@@ -587,9 +587,9 @@
     column_spacing_ratio: ''
     column_group_spacing_ratio:
     series_colors:
-      usage__delivery.count: "#559be6"
+      usage_delivery.count: "#559be6"
     series_labels:
-      usage__delivery.count: Deliveries
+      usage_delivery.count: Deliveries
       0 - Delivery Data Delivery Count: Download
       1 - Delivery Data Delivery Count: On Demand
       2 - Delivery Data Delivery Count: Live
@@ -601,10 +601,10 @@
       first_last: first
       num_rows: 0
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The number of deliveries by date'
       state: expanded
@@ -617,33 +617,33 @@
   - name: GB by Source
     title: GB by Source
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: looker_column
     fields:
-    - usage__delivery.origin_bytes_sum
-    - usage__delivery.lan_bytes_sum
-    - usage__delivery.wan_bytes_sum
-    - usage__delivery.start_date
+    - usage_delivery.origin_bytes_sum
+    - usage_delivery.lan_bytes_sum
+    - usage_delivery.wan_bytes_sum
+    - usage_delivery.start_date
     fill_fields:
-    - usage__delivery.start_date
+    - usage_delivery.start_date
     sorts:
-    - usage__delivery.start_date
+    - usage_delivery.start_date
     limit: 500
     column_limit: 50
     dynamic_fields:
     - table_calculation: origin
       label: Origin
-      expression: "${usage__delivery.origin_bytes_sum} / 1000000000"
+      expression: "${usage_delivery.origin_bytes_sum} / 1000000000"
       value_format:
       value_format_name: decimal_0
     - table_calculation: wan
       label: WAN
-      expression: "${usage__delivery.wan_bytes_sum} / 1000000000"
+      expression: "${usage_delivery.wan_bytes_sum} / 1000000000"
       value_format:
       value_format_name:
     - table_calculation: lan
       label: LAN
-      expression: "${usage__delivery.lan_bytes_sum} / 1000000000"
+      expression: "${usage_delivery.lan_bytes_sum} / 1000000000"
       value_format:
       value_format_name: decimal_0
     stacking: ''
@@ -674,22 +674,22 @@
     show_null_labels: false
     series_types: {}
     series_labels:
-      usage__delivery.lan_bytes_sum: LAN
-      usage__delivery.wan_bytes_sum: WAN
-      usage__delivery.origin_bytes_sum: Origin
+      usage_delivery.lan_bytes_sum: LAN
+      usage_delivery.wan_bytes_sum: WAN
+      usage_delivery.origin_bytes_sum: Origin
     series_colors:
       origin: "#4281c3"
       wan: "#559be6"
       lan: "#70b3fc"
     hidden_fields:
-    - usage__delivery.origin_bytes_sum
-    - usage__delivery.lan_bytes_sum
-    - usage__delivery.wan_bytes_sum
+    - usage_delivery.origin_bytes_sum
+    - usage_delivery.lan_bytes_sum
+    - usage_delivery.wan_bytes_sum
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The number of gigabytes delivered on each day broken up by Origin, WAN, and LAN'
       state: expanded
@@ -702,26 +702,26 @@
   - name: Agent Details
     title: Agent Details
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: table
-    fields: [usage__delivery.id, usage__delivery.short_node_id, usage__delivery.locality,
-      usage__delivery.external_ip, usage__delivery.status, usage__delivery.origin_bytes,
-      usage__delivery.peer_bytes, usage__delivery.total_bytes, usage__delivery.start_time,
-      usage__delivery.end_time]
-    sorts: [usage__delivery.id desc]
+    fields: [usage_delivery.id, usage_delivery.short_node_id, usage_delivery.locality,
+      usage_delivery.external_ip, usage_delivery.status, usage_delivery.origin_bytes,
+      usage_delivery.peer_bytes, usage_delivery.total_bytes, usage_delivery.start_time,
+      usage_delivery.end_time]
+    sorts: [usage_delivery.id desc]
     limit: 500
     column_limit: 50
     dynamic_fields:
     - table_calculation: total_mb
       label: Total MB
-      expression: "${usage__delivery.total_bytes}*0.000001"
+      expression: "${usage_delivery.total_bytes}*0.000001"
       value_format:
       value_format_name: decimal_1
       _kind_hint: dimension
       _type_hint: number
     - table_calculation: peering_percent
       label: Peering Percent
-      expression: "${usage__delivery.peer_bytes}/${usage__delivery.total_bytes}"
+      expression: "${usage_delivery.peer_bytes}/${usage_delivery.total_bytes}"
       value_format:
       value_format_name: percent_1
       _kind_hint: dimension
@@ -737,12 +737,12 @@
     conditional_formatting_ignored_fields: []
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    hidden_fields: [usage__delivery.total_bytes, usage__delivery.peer_bytes, usage__delivery.origin_bytes]
+    hidden_fields: [usage_delivery.total_bytes, usage_delivery.peer_bytes, usage_delivery.origin_bytes]
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The agents with delivery records of the content'
       state: expanded
@@ -755,17 +755,17 @@
   - name: Peering Efficiency KPI
     title: Peering Efficiency KPI
     model: company_usage
-    explore: usage__delivery
+    explore: usage_delivery
     type: single_value
     fields:
-    - usage__delivery.peer_bytes_sum
-    - usage__delivery.total_bytes_sum
+    - usage_delivery.peer_bytes_sum
+    - usage_delivery.total_bytes_sum
     limit: 500
     column_limit: 50
     dynamic_fields:
     - table_calculation: peering_efficiency
       label: peering efficiency
-      expression: "${usage__delivery.peer_bytes_sum}/${usage__delivery.total_bytes_sum}"
+      expression: "${usage_delivery.peer_bytes_sum}/${usage_delivery.total_bytes_sum}"
       value_format:
       value_format_name: percent_0
     custom_color_enabled: false
@@ -798,15 +798,15 @@
     show_silhouette: false
     totals_color: "#808080"
     hidden_fields:
-    - usage__delivery.peer_bytes_sum
-    - usage__delivery.total_bytes_sum
+    - usage_delivery.peer_bytes_sum
+    - usage_delivery.total_bytes_sum
     series_types: {}
     single_value_title: Peering Efficiency
     listen:
-      content_moid_filter: usage__delivery.content_moid
-      time_filter: usage__delivery.start_time
-      company_id_filter: usage__delivery.company_id
-      source_env_filter: usage__delivery.dms
+      content_moid_filter: usage_delivery.content_moid
+      time_filter: usage_delivery.start_time
+      company_id_filter: usage_delivery.company_id
+      source_env_filter: usage_delivery.dms
     note:
       text: 'The peer bytes sum divided by total bytes sum for the content'
       state: expanded

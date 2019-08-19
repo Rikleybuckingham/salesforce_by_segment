@@ -1340,7 +1340,7 @@ view: accounts {
       name,
       environment_c,
       renewal_date_c_date,
-      subscriptions.total_arr
+      sf_subscriptions.total_arr
       ]
   }
 }

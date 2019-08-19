@@ -5,7 +5,7 @@ include: "sf_*.view"
 include: "usage_map.view"
 include: "accounts.view"
 include: "opportunities.view"
-include: "subscriptions.view"
+include: "sf_subscriptions.view"
 include: "quotes.view"
 include: "quote_lines.view"
 
@@ -156,21 +156,21 @@ explore: accounts {
     view_label: "Account Owner"
   }
 
-  join: subscriptions {
+  join: sf_subscriptions {
     type: left_outer
     relationship: one_to_many
-    sql_on: ${sf_contracts.id}=${subscriptions.sbqq_contract_c} ;;
+    sql_on: ${sf_contracts.id}=${sf_subscriptions.sbqq_contract_c} ;;
   }
 }
 
 #Create Subscriptions Explore
-explore: subscriptions {
+explore: sf_subscriptions {
   label: "Subscriptions"
   group_label: "CPQ"
-  sql_always_where: NOT ${subscriptions.is_deleted} ;;
+  sql_always_where: NOT ${sf_subscriptions.is_deleted} ;;
 
   join: accounts {
-    sql_on: ${subscriptions.sbqq_account_c} = ${accounts.id} ;;
+    sql_on: ${sf_subscriptions.sbqq_account_c} = ${accounts.id} ;;
     type: full_outer
     relationship: many_to_one
   }

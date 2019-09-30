@@ -15,7 +15,7 @@ view: sf_subscriptions {
   dimension: arr {
     label: "ARR"
     type: number
-    sql: CAST(${sbqq_net_price_c} AS FLOAT) / NULLIF(${sbqq_prorate_multiplier_c}, 0) ;;
+    sql: CAST(${sbqq_net_price_usd} AS FLOAT) / NULLIF(${sbqq_prorate_multiplier_c}, 0) ;;
     value_format_name: usd_0
   }
 
@@ -211,6 +211,19 @@ view: sf_subscriptions {
     type: number
     sql: ${TABLE}.sbqq_net_price_c ;;
     label: "Net Price"
+    group_label: "SBQQ"
+  }
+
+  dimension: sbqq_net_price_usd {
+    type: number
+    sql:
+    case
+      when ${currency_iso_code} = 'EUR' then (${sbqq_net_price_c}::float)*1.09
+      when ${currency_iso_code} = 'GBR' then (${sbqq_net_price_c}::float)*1.23
+      when ${currency_iso_code} = 'JPY' then (${sbqq_net_price_c}::float)*0.0092
+      else ${sbqq_net_price_c}::float
+    end ;;
+    label: "Net Price USD"
     group_label: "SBQQ"
   }
 

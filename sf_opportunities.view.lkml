@@ -349,6 +349,6 @@ view: sf_opportunities {
 # Sets
 
   set: detail {
-    fields: [sf_accounts.account_name, opportunity_name, opportunity_owners.name, type, stage_name, channel_partner, bookings_value, annual_contract_value, created_date, close_date]
+    fields: [sf_accounts.name, opportunity_name, opportunity_owners.name, type, stage_name, channel_partner, bookings_value, annual_contract_value, created_date, close_date]
   }
 }

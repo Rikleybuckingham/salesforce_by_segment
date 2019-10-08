@@ -80,9 +80,26 @@ view: opportunities {
     sql: ${TABLE}.annual_contract_value_c ;;
   }
 
+  dimension: arr_forecast {
+    type: number
+    sql: ${bookings_value_usd}-${total_non_recurring_amount_usd} ;;
+    value_format_name: usd_0
+  }
+
   dimension: bookings_value_c {
-    type: string
-    sql: ${TABLE}.bookings_value_c ;;
+    type: number
+    sql: ${TABLE}.bookings_value_c::float ;;
+  }
+
+  dimension: bookings_value_usd {
+    type: number
+    sql:
+      case
+      when ${currency_iso_code} = 'EUR' then (${bookings_value_c}::float)*1.09
+      when ${currency_iso_code} = 'GBR' then (${bookings_value_c}::float)*1.23
+      when ${currency_iso_code} = 'JPY' then (${bookings_value_c}::float)*0.0092
+      else ${bookings_value_c}::float
+      end ;;
   }
 
   dimension: campaign_id {
@@ -167,6 +184,7 @@ view: opportunities {
       week,
       month,
       quarter,
+      fiscal_quarter,
       year
     ]
     sql: ${TABLE}.created_date ;;
@@ -191,6 +209,7 @@ view: opportunities {
       week,
       month,
       quarter,
+      fiscal_quarter,
       year
     ]
     sql: ${TABLE}.end_date_c ;;
@@ -357,6 +376,11 @@ view: opportunities {
   dimension: is_deleted {
     type: yesno
     sql: ${TABLE}.is_deleted ;;
+  }
+
+  dimension: is_lost {
+    type: yesno
+    sql: ${is_closed} AND NOT ${is_won} ;;
   }
 
   dimension: is_won {
@@ -796,7 +820,7 @@ view: opportunities {
   }
 
   dimension: set_up_amount_c {
-    type: string
+    type: number
     sql: ${TABLE}.set_up_amount_c ;;
   }
 
@@ -819,6 +843,7 @@ view: opportunities {
       week,
       month,
       quarter,
+      fiscal_quarter,
       year
     ]
     sql: ${TABLE}.start_date_c ;;
@@ -835,7 +860,7 @@ view: opportunities {
   }
 
   dimension: subscription_amount_c {
-    type: string
+    type: number
     sql: ${TABLE}.subscription_amount_c ;;
   }
 
@@ -854,17 +879,28 @@ view: opportunities {
   }
 
   dimension: total_amount_c {
-    type: string
+    type: number
     sql: ${TABLE}.total_amount_c ;;
   }
 
   dimension: total_non_recurring_amount_c {
-    type: string
-    sql: ${TABLE}.total_non_recurring_amount_c ;;
+    type: number
+    sql: ${TABLE}.total_non_recurring_amount_c::float ;;
+  }
+
+  dimension: total_non_recurring_amount_usd {
+    type: number
+    sql:
+      case
+      when ${currency_iso_code} = 'EUR' then (${total_non_recurring_amount_c}::float)*1.09
+      when ${currency_iso_code} = 'GBR' then (${total_non_recurring_amount_c}::float)*1.23
+      when ${currency_iso_code} = 'JPY' then (${total_non_recurring_amount_c}::float)*0.0092
+      else ${total_non_recurring_amount_c}::float
+      end ;;
   }
 
   dimension: total_recurring_amount_c {
-    type: string
+    type: number
     sql: ${TABLE}.total_recurring_amount_c ;;
   }
 
@@ -912,8 +948,33 @@ view: opportunities {
     sql: ${TABLE}.what_is_the_ask_from_microsoft_c ;;
   }
 
+  measure: bookings_value_sum {
+    type: sum
+    sql: ${bookings_value_c}::float ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [ia_crm_sfdc_opportunity_id_c, stage_name, name, forecast_category_name]
+  }
+
+  measure: arr_forecast_sum {
+    type: sum
+    sql: ${arr_forecast} ;;
+    value_format_name: usd_0
+    drill_fields: [name, geography_c, stage_name, created_date, close_date, arr_forecast]
+  }
+
+  measure: lost_renewal_sum {
+    type: sum
+    sql: ${total_recurring_amount_c}::float ;;
+    filters: {
+      field: is_lost
+      value: "Yes"
+    }
+    filters: {
+      field: type
+      value: "Renewal"
+    }
   }
 }

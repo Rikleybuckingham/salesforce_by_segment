@@ -129,7 +129,6 @@ explore: accounts {
   label: "Customer Accounts"
   view_label: "Customer Accounts"
   group_label: "CPQ"
-  sql_always_where: ${accounts.type}='Customer' ;;
 
   join: sf_contracts {
     type: left_outer
@@ -194,4 +193,11 @@ explore: quote_lines {
   label: "Quote Lines"
   group_label: "CPQ"
   sql_always_where: NOT ${quote_lines.is_deleted} ;;
+}
+
+#Base Explores
+explore: opportunities {
+  label: "Opportunities"
+  group_label: "Base"
+  sql_always_where: NOT ${opportunities.is_deleted} ;;
 }

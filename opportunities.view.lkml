@@ -955,26 +955,26 @@ view: opportunities {
 
   measure: count {
     type: count
-    drill_fields: [ia_crm_sfdc_opportunity_id_c, stage_name, name, forecast_category_name]
+    drill_fields: [name, geography_c, type, stage_name, created_date, close_date, arr_forecast]
   }
 
   measure: arr_forecast_sum {
     type: sum
     sql: ${arr_forecast} ;;
     value_format_name: usd_0
-    drill_fields: [name, geography_c, stage_name, created_date, close_date, arr_forecast]
+    drill_fields: [name, geography_c, type, stage_name, created_date, close_date, arr_forecast]
   }
 
-  measure: lost_renewal_sum {
+  measure: ytd_renewal_sum {
     type: sum
-    sql: ${total_recurring_amount_c}::float ;;
-    filters: {
-      field: is_lost
-      value: "Yes"
-    }
+    sql: ${arr_forecast} ;;
     filters: {
       field: type
       value: "Renewal"
     }
+    filters: {
+      field: close_date
+      value: "this year"
+      }
   }
 }

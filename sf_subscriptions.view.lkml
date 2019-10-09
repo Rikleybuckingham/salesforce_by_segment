@@ -487,6 +487,16 @@ view: sf_subscriptions {
     drill_fields: [details*]
   }
 
+  measure: ytd_renewal_arr {
+    label: "Renewal ARR YTD"
+    type: sum
+    sql: ${arr} ;;
+    filters: {
+      field: sbqq_end_date_c_date
+      value: "this year"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name]

@@ -195,6 +195,26 @@ explore: quote_lines {
   sql_always_where: NOT ${quote_lines.is_deleted} ;;
 }
 
+#Create Renewal Explore
+explore: renewals {
+  view_name: sf_contracts
+  label: "Renewals"
+  group_label: "CPQ"
+  sql_always_where:  NOT ${sf_contracts.is_deleted} ;;
+  #Join Opportunities
+  join: opportunities {
+    sql_on: ${sf_contracts.sbqq_opportunity_c}=${opportunities.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+  #Join Subscriptions
+  join: sf_subscriptions {
+    sql_on: ${sf_contracts.id}=${sf_subscriptions.sbqq_contract_c} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+}
+
 #Base Explores
 explore: opportunities {
   label: "Opportunities"
